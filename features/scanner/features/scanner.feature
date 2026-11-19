@@ -34,3 +34,21 @@ Feature: Kotakin Physical QR Code Scanner
     When the user taps the "Scan" button on the dashboard
     And the user dismisses the scanner view
     Then the user should be redirected to the "My Stash" dashboard
+
+  # ==========================================
+  # MANUAL VERIFICATION SCENARIOS
+  # ==========================================
+
+  @manual @p1 @android @AC-501-01 @REQ-KTK-501
+  Scenario: Scan physical QR code attached to a storage box
+    Given the tester launches the physical QR scanner on a real mobile device
+    When the tester points the physical camera lens towards a printed Kotakin QR code label
+    Then the application should detect and decode the QR code within 2 seconds
+    And the application should navigate automatically to the corresponding box detail view
+
+  @manual @p2 @android @AC-501-02 @REQ-KTK-501
+  Scenario: Scan damaged or dimly lit QR code with flashlight torch
+    Given the tester is in a low-light physical testing environment
+    When the tester activates the flashlight torch from the scanner interface
+    And the tester aims the camera at a partially creased or reflective QR code
+    Then the scanner should successfully resolve the box ID without crashing or freezing

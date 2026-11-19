@@ -582,6 +582,30 @@
    </Row>
    <Row ss:Height="22">
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">TC-KTK-045</Data></Cell>
+    <Cell ss:StyleID="DataCell"><Data ss:Type="String">Physical QR Code Scanner</Data></Cell>
+    <Cell ss:StyleID="DataCell"><Data ss:Type="String">@REQ-KTK-501</Data></Cell>
+    <Cell ss:StyleID="DataCell"><Data ss:Type="String">Scan physical QR code attached to a storage box</Data></Cell>
+    <Cell ss:StyleID="DataCell"><Data ss:Type="String">Positive Functional</Data></Cell>
+    <Cell ss:StyleID="DataCell"><Data ss:Type="String">P1 (Regression)</Data></Cell>
+    <Cell ss:StyleID="DataCell"><Data ss:Type="String">Manual</Data></Cell>
+    <Cell ss:StyleID="DataCell"><Data ss:Type="String">@manual @p1 @android @AC-501-01 @REQ-KTK-501</Data></Cell>
+    <Cell ss:StyleID="DataCell"><Data ss:Type="String">Given the tester launches the physical QR scanner on a real mobile device | When the tester points the physical camera lens towards a printed Kotakin QR code label | Then the application should detect and decode the QR code within 2 seconds | And the application should navigate automatically to the corresponding box detail view</Data></Cell>
+    <Cell ss:StyleID="DataCell"><Data ss:Type="String">the application should navigate automatically to the corresponding box detail view</Data></Cell>
+   </Row>
+   <Row ss:Height="22">
+    <Cell ss:StyleID="DataCell"><Data ss:Type="String">TC-KTK-046</Data></Cell>
+    <Cell ss:StyleID="DataCell"><Data ss:Type="String">Physical QR Code Scanner</Data></Cell>
+    <Cell ss:StyleID="DataCell"><Data ss:Type="String">@REQ-KTK-501</Data></Cell>
+    <Cell ss:StyleID="DataCell"><Data ss:Type="String">Scan damaged or dimly lit QR code with flashlight torch</Data></Cell>
+    <Cell ss:StyleID="DataCell"><Data ss:Type="String">Positive Functional</Data></Cell>
+    <Cell ss:StyleID="DataCell"><Data ss:Type="String">P2 (Edge Case)</Data></Cell>
+    <Cell ss:StyleID="DataCell"><Data ss:Type="String">Manual</Data></Cell>
+    <Cell ss:StyleID="DataCell"><Data ss:Type="String">@manual @p2 @android @AC-501-02 @REQ-KTK-501</Data></Cell>
+    <Cell ss:StyleID="DataCell"><Data ss:Type="String">Given the tester is in a low-light physical testing environment | When the tester activates the flashlight torch from the scanner interface | And the tester aims the camera at a partially creased or reflective QR code | Then the scanner should successfully resolve the box ID without crashing or freezing</Data></Cell>
+    <Cell ss:StyleID="DataCell"><Data ss:Type="String">the scanner should successfully resolve the box ID without crashing or freezing</Data></Cell>
+   </Row>
+   <Row ss:Height="22">
+    <Cell ss:StyleID="DataCell"><Data ss:Type="String">TC-KTK-047</Data></Cell>
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">Application Settings &amp; Localization</Data></Cell>
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">@REQ-KTK-301</Data></Cell>
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">Switch application language to Bahasa Indonesia</Data></Cell>
@@ -593,7 +617,7 @@
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">the language option &quot;Bahasa Indonesia&quot; should be selected</Data></Cell>
    </Row>
    <Row ss:Height="22">
-    <Cell ss:StyleID="DataCell"><Data ss:Type="String">TC-KTK-046</Data></Cell>
+    <Cell ss:StyleID="DataCell"><Data ss:Type="String">TC-KTK-048</Data></Cell>
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">Application Settings &amp; Localization</Data></Cell>
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">@REQ-KTK-301</Data></Cell>
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">Switch application language back to English</Data></Cell>
@@ -605,7 +629,7 @@
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">the language option &quot;English&quot; should be selected</Data></Cell>
    </Row>
    <Row ss:Height="22">
-    <Cell ss:StyleID="DataCell"><Data ss:Type="String">TC-KTK-047</Data></Cell>
+    <Cell ss:StyleID="DataCell"><Data ss:Type="String">TC-KTK-049</Data></Cell>
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">Application Settings &amp; Localization</Data></Cell>
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">@REQ-KTK-301</Data></Cell>
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">Navigate to About Kotakin screen and verify app version</Data></Cell>
@@ -617,7 +641,7 @@
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">the user should see the Settings screen header</Data></Cell>
    </Row>
    <Row ss:Height="22">
-    <Cell ss:StyleID="DataCell"><Data ss:Type="String">TC-KTK-048</Data></Cell>
+    <Cell ss:StyleID="DataCell"><Data ss:Type="String">TC-KTK-050</Data></Cell>
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">Application Settings &amp; Localization</Data></Cell>
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">@REQ-KTK-301</Data></Cell>
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">Navigate back to My Stash from Settings screen</Data></Cell>
@@ -629,7 +653,7 @@
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">the user should be redirected to the &quot;My Stash&quot; dashboard</Data></Cell>
    </Row>
    <Row ss:Height="22">
-    <Cell ss:StyleID="DataCell"><Data ss:Type="String">TC-KTK-049</Data></Cell>
+    <Cell ss:StyleID="DataCell"><Data ss:Type="String">TC-KTK-051</Data></Cell>
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">Application Settings &amp; Localization</Data></Cell>
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">@REQ-KTK-301</Data></Cell>
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">Verify Backup and Restore action buttons are accessible</Data></Cell>
@@ -639,6 +663,18 @@
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">@automated @edge-case @android</Data></Cell>
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">When the user opens the Settings screen | Then the backup action button &quot;Create zip backup&quot; should be displayed | And the restore action button &quot;Restore from zip backup&quot; should be displayed</Data></Cell>
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">the restore action button &quot;Restore from zip backup&quot; should be displayed</Data></Cell>
+   </Row>
+   <Row ss:Height="22">
+    <Cell ss:StyleID="DataCell"><Data ss:Type="String">TC-KTK-052</Data></Cell>
+    <Cell ss:StyleID="DataCell"><Data ss:Type="String">Application Settings &amp; Localization</Data></Cell>
+    <Cell ss:StyleID="DataCell"><Data ss:Type="String">@REQ-KTK-301</Data></Cell>
+    <Cell ss:StyleID="DataCell"><Data ss:Type="String">Create complete zip backup and restore across device reinstall</Data></Cell>
+    <Cell ss:StyleID="DataCell"><Data ss:Type="String">Positive Functional</Data></Cell>
+    <Cell ss:StyleID="DataCell"><Data ss:Type="String">P1 (Regression)</Data></Cell>
+    <Cell ss:StyleID="DataCell"><Data ss:Type="String">Manual</Data></Cell>
+    <Cell ss:StyleID="DataCell"><Data ss:Type="String">@manual @p1 @android @AC-301-01 @REQ-KTK-301</Data></Cell>
+    <Cell ss:StyleID="DataCell"><Data ss:Type="String">Given the tester has created at least 3 boxes with item pictures in Kotakin | When the tester taps &quot;Create zip backup&quot; and selects an external download directory | And the tester uninstalls and performs a fresh reinstall of the Kotakin APK | And the tester selects &quot;Restore from zip backup&quot; and picks the saved zip archive | Then all 3 boxes along with their item photos and counters should be completely restored</Data></Cell>
+    <Cell ss:StyleID="DataCell"><Data ss:Type="String">all 3 boxes along with their item photos and counters should be completely restored</Data></Cell>
    </Row>
   </Table>
  </Worksheet>

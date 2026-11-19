@@ -46,3 +46,15 @@ Feature: Kotakin Application Settings & Localization
     When the user opens the Settings screen
     Then the backup action button "Create zip backup" should be displayed
     And the restore action button "Restore from zip backup" should be displayed
+
+  # ==========================================
+  # MANUAL VERIFICATION SCENARIOS
+  # ==========================================
+
+  @manual @p1 @android @AC-301-01 @REQ-KTK-301
+  Scenario: Create complete zip backup and restore across device reinstall
+    Given the tester has created at least 3 boxes with item pictures in Kotakin
+    When the tester taps "Create zip backup" and selects an external download directory
+    And the tester uninstalls and performs a fresh reinstall of the Kotakin APK
+    And the tester selects "Restore from zip backup" and picks the saved zip archive
+    Then all 3 boxes along with their item photos and counters should be completely restored

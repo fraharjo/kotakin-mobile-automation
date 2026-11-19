@@ -12,6 +12,8 @@ allure-report/
 reports/allure-results/*
 !reports/allure-results/.gitkeep
 reports/allure-report/
+reports/manual-results/evidence/*
+!reports/manual-results/evidence/.gitkeep
 *.log
 
 # Large Mobile App Binaries (Option B: Excluded from Git)

@@ -7,9 +7,9 @@
 
 | Test Metric | Value | Percentage |
 | :--- | :---: | :---: |
-| **Total Test Cases** | **49** | 100% |
-| **Automated Test Cases** | **49** | 100.0% |
-| **Manual Verification Cases** | **0** | 0.0% |
+| **Total Test Cases** | **52** | 100% |
+| **Automated Test Cases** | **49** | 94.2% |
+| **Manual Verification Cases** | **3** | 5.8% |
 
 ### Test Module Distribution
 
@@ -18,8 +18,8 @@
 | **Box Creation & Management** | 26 | 🟢 100% Automated | `@REQ-KTK-201` |
 | **Item Management Inside Box** | 11 | 🟢 100% Automated | `@REQ-KTK-401` |
 | **Onboarding & Walkthrough** | 4 | 🟢 100% Automated | `@REQ-KTK-101` |
-| **Physical QR Code Scanner** | 3 | 🟢 100% Automated | `@REQ-KTK-501` |
-| **Application Settings & Localization** | 5 | 🟢 100% Automated | `@REQ-KTK-301` |
+| **Physical QR Code Scanner** | 5 | 🟢 100% Automated | `@REQ-KTK-501` |
+| **Application Settings & Localization** | 6 | 🟢 100% Automated | `@REQ-KTK-301` |
 
 ---
 
@@ -71,11 +71,14 @@
 | `@REQ-KTK-501` | - | Physical QR Code Scanner | `TC-KTK-042` | Trigger QR code scanner from dashboard | Smoke / Critical Path | P0 |
 | `@REQ-KTK-501` | - | Physical QR Code Scanner | `TC-KTK-043` | Verify camera permission requirement message when scanner is launched | Negative Validation | P1 |
 | `@REQ-KTK-501` | - | Physical QR Code Scanner | `TC-KTK-044` | Return safely to My Stash after opening scanner | Positive Functional | P1 |
-| `@REQ-KTK-301` | - | Application Settings & Localization | `TC-KTK-045` | Switch application language to Bahasa Indonesia | Smoke / Critical Path | P0 |
-| `@REQ-KTK-301` | - | Application Settings & Localization | `TC-KTK-046` | Switch application language back to English | Positive Functional | P1 |
-| `@REQ-KTK-301` | - | Application Settings & Localization | `TC-KTK-047` | Navigate to About Kotakin screen and verify app version | Positive Functional | P1 |
-| `@REQ-KTK-301` | - | Application Settings & Localization | `TC-KTK-048` | Navigate back to My Stash from Settings screen | Positive Functional | P1 |
-| `@REQ-KTK-301` | - | Application Settings & Localization | `TC-KTK-049` | Verify Backup and Restore action buttons are accessible | Positive Functional | P1 |
+| `@REQ-KTK-501` | `@AC-501-01` | Physical QR Code Scanner | `TC-KTK-045` | Scan physical QR code attached to a storage box | Positive Functional | P1 |
+| `@REQ-KTK-501` | `@AC-501-02` | Physical QR Code Scanner | `TC-KTK-046` | Scan damaged or dimly lit QR code with flashlight torch | Positive Functional | P2 |
+| `@REQ-KTK-301` | - | Application Settings & Localization | `TC-KTK-047` | Switch application language to Bahasa Indonesia | Smoke / Critical Path | P0 |
+| `@REQ-KTK-301` | - | Application Settings & Localization | `TC-KTK-048` | Switch application language back to English | Positive Functional | P1 |
+| `@REQ-KTK-301` | - | Application Settings & Localization | `TC-KTK-049` | Navigate to About Kotakin screen and verify app version | Positive Functional | P1 |
+| `@REQ-KTK-301` | - | Application Settings & Localization | `TC-KTK-050` | Navigate back to My Stash from Settings screen | Positive Functional | P1 |
+| `@REQ-KTK-301` | - | Application Settings & Localization | `TC-KTK-051` | Verify Backup and Restore action buttons are accessible | Positive Functional | P1 |
+| `@REQ-KTK-301` | `@AC-301-01` | Application Settings & Localization | `TC-KTK-052` | Create complete zip backup and restore across device reinstall | Positive Functional | P1 |
 
 ---
 
@@ -621,9 +624,33 @@
   `Then the user should be redirected to the "My Stash" dashboard`  
 - **Expected Result:** the user should be redirected to the "My Stash" dashboard
 
+#### [TC-KTK-045] Scan physical QR code attached to a storage box
+- **Requirement:** `@REQ-KTK-501`
+- **Category:** Positive Functional
+- **Priority:** P1 (Regression)
+- **Tags:** `@manual @p1 @android @AC-501-01 @REQ-KTK-501`
+- **Test Steps (Gherkin):**
+  `Given the tester launches the physical QR scanner on a real mobile device`  
+  `When the tester points the physical camera lens towards a printed Kotakin QR code label`  
+  `Then the application should detect and decode the QR code within 2 seconds`  
+  `And the application should navigate automatically to the corresponding box detail view`  
+- **Expected Result:** the application should navigate automatically to the corresponding box detail view
+
+#### [TC-KTK-046] Scan damaged or dimly lit QR code with flashlight torch
+- **Requirement:** `@REQ-KTK-501`
+- **Category:** Positive Functional
+- **Priority:** P2 (Edge Case)
+- **Tags:** `@manual @p2 @android @AC-501-02 @REQ-KTK-501`
+- **Test Steps (Gherkin):**
+  `Given the tester is in a low-light physical testing environment`  
+  `When the tester activates the flashlight torch from the scanner interface`  
+  `And the tester aims the camera at a partially creased or reflective QR code`  
+  `Then the scanner should successfully resolve the box ID without crashing or freezing`  
+- **Expected Result:** the scanner should successfully resolve the box ID without crashing or freezing
+
 ### Module: Application Settings & Localization
 
-#### [TC-KTK-045] Switch application language to Bahasa Indonesia
+#### [TC-KTK-047] Switch application language to Bahasa Indonesia
 - **Requirement:** `@REQ-KTK-301`
 - **Category:** Smoke / Critical Path
 - **Priority:** P0 (Smoke / Critical)
@@ -634,7 +661,7 @@
   `Then the language option "Bahasa Indonesia" should be selected`  
 - **Expected Result:** the language option "Bahasa Indonesia" should be selected
 
-#### [TC-KTK-046] Switch application language back to English
+#### [TC-KTK-048] Switch application language back to English
 - **Requirement:** `@REQ-KTK-301`
 - **Category:** Positive Functional
 - **Priority:** P1 (Regression)
@@ -645,7 +672,7 @@
   `Then the language option "English" should be selected`  
 - **Expected Result:** the language option "English" should be selected
 
-#### [TC-KTK-047] Navigate to About Kotakin screen and verify app version
+#### [TC-KTK-049] Navigate to About Kotakin screen and verify app version
 - **Requirement:** `@REQ-KTK-301`
 - **Category:** Positive Functional
 - **Priority:** P1 (Regression)
@@ -658,7 +685,7 @@
   `Then the user should see the Settings screen header`  
 - **Expected Result:** the user should see the Settings screen header
 
-#### [TC-KTK-048] Navigate back to My Stash from Settings screen
+#### [TC-KTK-050] Navigate back to My Stash from Settings screen
 - **Requirement:** `@REQ-KTK-301`
 - **Category:** Positive Functional
 - **Priority:** P1 (Regression)
@@ -669,7 +696,7 @@
   `Then the user should be redirected to the "My Stash" dashboard`  
 - **Expected Result:** the user should be redirected to the "My Stash" dashboard
 
-#### [TC-KTK-049] Verify Backup and Restore action buttons are accessible
+#### [TC-KTK-051] Verify Backup and Restore action buttons are accessible
 - **Requirement:** `@REQ-KTK-301`
 - **Category:** Positive Functional
 - **Priority:** P1 (Regression)
@@ -679,4 +706,17 @@
   `Then the backup action button "Create zip backup" should be displayed`  
   `And the restore action button "Restore from zip backup" should be displayed`  
 - **Expected Result:** the restore action button "Restore from zip backup" should be displayed
+
+#### [TC-KTK-052] Create complete zip backup and restore across device reinstall
+- **Requirement:** `@REQ-KTK-301`
+- **Category:** Positive Functional
+- **Priority:** P1 (Regression)
+- **Tags:** `@manual @p1 @android @AC-301-01 @REQ-KTK-301`
+- **Test Steps (Gherkin):**
+  `Given the tester has created at least 3 boxes with item pictures in Kotakin`  
+  `When the tester taps "Create zip backup" and selects an external download directory`  
+  `And the tester uninstalls and performs a fresh reinstall of the Kotakin APK`  
+  `And the tester selects "Restore from zip backup" and picks the saved zip archive`  
+  `Then all 3 boxes along with their item photos and counters should be completely restored`  
+- **Expected Result:** all 3 boxes along with their item photos and counters should be completely restored
 

@@ -14,6 +14,8 @@ interface ManualTestCase {
   status: 'NOT_EXECUTED' | 'PASSED' | 'FAILED' | 'BLOCKED';
   bugLink?: string;
   evidence: string[];
+  executedBy?: string;
+  executedAt?: string;
 }
 
 const PORT = 3000;
@@ -121,7 +123,9 @@ function createCase(
     jira: jiraTag,
     status: prev.status || 'NOT_EXECUTED',
     bugLink: prev.bugLink || '',
-    evidence: prev.evidence || []
+    evidence: prev.evidence || [],
+    executedBy: prev.executedBy || '',
+    executedAt: prev.executedAt || ''
   };
 }
 
