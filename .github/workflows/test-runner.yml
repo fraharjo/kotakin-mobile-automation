@@ -20,9 +20,16 @@ on:
           - onboarding
           - scanner
       apk_url:
-        description: 'URL Download APK (Opsional, jika ingin mengunduh dari remote)'
-        required: false
+        description: 'URL Download File APK (Wajib diisi untuk eksekusi emulator CI)'
+        required: true
         default: ''
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
 
 jobs:
   # ==========================================
@@ -35,14 +42,14 @@ jobs:
       - name: Checkout Repository
         uses: actions/checkout@v4
 
-      - name: Setup Node.js 20
+      - name: Setup Node.js 22
         uses: actions/setup-node@v4
         with:
-          node-version: 20
+          node-version: 22
           cache: 'npm'
 
       - name: Install Dependencies
-        run: npm install
+        run: npm ci
 
       - name: Verify TypeScript Compilation (Zero Errors)
         run: npm run typecheck
@@ -54,15 +61,19 @@ jobs:
     name: Android Emulator Tests
     needs: [typecheck]
     if: github.event_name == 'workflow_dispatch'
-    runs-on: macos-latest
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    env:
+      APK_URL: ${{ inputs.apk_url }}
+      TARGET_FEATURE: ${{ inputs.feature }}
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v4
 
-      - name: Setup Node.js 20
+      - name: Setup Node.js 22
         uses: actions/setup-node@v4
         with:
-          node-version: 20
+          node-version: 22
           cache: 'npm'
 
       - name: Set up Java 17
@@ -72,19 +83,24 @@ jobs:
           java-version: 17
 
       - name: Install Dependencies
-        run: npm install
+        run: npm ci
 
-      - name: Setup Kotakin APK for Testing
+      - name: Prepare APK from URL
         run: |
+          if [ -z "$APK_URL" ]; then
+            echo "::error::apk_url wajib diisi. Silakan peroleh APK resmi dari https://bmolab.web.id/kotakin"
+            exit 1
+          fi
           mkdir -p apps
-          APK_DOWNLOAD_URL="${{ github.event.inputs.apk_url }}"
-          if [ -n "$APK_DOWNLOAD_URL" ]; then
-            echo "📥 Mengunduh APK dari: $APK_DOWNLOAD_URL"
-            curl -L -o apps/kotakin.apk "$APK_DOWNLOAD_URL"
-          fi
-          if [ ! -f "apps/kotakin.apk" ]; then
-            echo "⚠️ Catatan: apps/kotakin.apk tidak ditemukan di runner CI."
-          fi
+          echo "📥 Mengunduh APK dari: $APK_URL"
+          curl -fL -o apps/kotakin.apk "$APK_URL"
+          test -s apps/kotakin.apk
+
+      - name: Enable KVM Hardware Acceleration
+        run: |
+          echo 'KERNEL=="kvm", GROUP="kvm", MODE="0666", OPTIONS+="static_node=kvm"' | sudo tee /etc/udev/rules.d/99-kvm4all.rules
+          sudo udevadm control --reload-rules
+          sudo udevadm trigger --name-match=kvm
 
       - name: Run Android Tests on Emulator
         uses: reactivecircus/android-emulator-runner@v2
@@ -92,55 +108,16 @@ jobs:
           api-level: 33
           target: google_apis
           arch: x86_64
-          script: |
-            TARGET_FEATURE="${{ github.event.inputs.feature }}"
-            if [ -n "$TARGET_FEATURE" ] && [ "$TARGET_FEATURE" != "all" ]; then
-              npm run "test:feature:$TARGET_FEATURE"
-            else
-              npm run test:android
-            fi
-        continue-on-error: true
-
-      - name: Upload Allure Results
-        uses: actions/upload-artifact@v4
-        if: always()
-        with:
-          name: allure-results
-          path: reports/allure-results
-          if-no-files-found: ignore
-
-  # ==========================================
-  # 3. GENERATE ALLURE REPORT ARTIFACT
-  # ==========================================
-  report:
-    name: Generate Allure Report
-    needs: [test-android]
-    if: github.event_name == 'workflow_dispatch' && always()
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout Repository
-        uses: actions/checkout@v4
-
-      - name: Setup Node.js 20
-        uses: actions/setup-node@v4
-        with:
-          node-version: 20
-
-      - name: Download Allure Results
-        uses: actions/download-artifact@v4
-        continue-on-error: true
-        with:
-          name: allure-results
-          path: reports/allure-results
-
-      - name: Install Dependencies
-        run: npm install
+          script: bash scripts/ci-run.sh
 
       - name: Generate Allure Report
+        if: always()
         run: npm run report:generate
 
-      - name: Upload Allure Report Artifact
+      - name: Upload Allure Report HTML Artifact
+        if: always()
         uses: actions/upload-artifact@v4
         with:
           name: allure-report-html
           path: reports/allure-report
+          if-no-files-found: ignore

@@ -291,10 +291,12 @@ npm run report:generate
 Alur integrasi berkelanjutan didefinisikan pada [.github/workflows/test-runner.yml](.github/workflows/test-runner.yml):
 
 1. **Pemeriksaan Kualitas Kode Otomatis (Setiap Push & PR):**
-   * Menjalankan kompilasi TypeScript (`npx tsc --noEmit`) pada runner Ubuntu untuk memastikan seluruh step definition dan Screen Object bebas dari kesalahan ketik atau tipe data dalam ~30 detik.
+   * Menjalankan kompilasi TypeScript (`npm run typecheck`) pada runner `ubuntu-latest` dengan Node 22 LTS untuk memastikan seluruh step definition dan Screen Object bebas dari kesalahan tipe dalam ~30 detik.
 2. **Eksekusi Android Emulator (On-Demand / Manual Trigger):**
    * Dipicu secara manual melalui tab **Actions ➡️ Kotakin Mobile E2E Automation ➡️ Run workflow**.
-   * Karena file binary APK tidak disimpan di dalam Git, job emulator menerima input parameter `apk_url` (opsional) bila ingin mengunduh APK dari server artefak privat, atau dapat menggunakan runner yang telah memiliki APK lokal.
+   * Dijalankan pada runner `ubuntu-latest` dengan akselerasi perangkat keras KVM (`reactivecircus/android-emulator-runner`).
+   * Karena file binary APK tidak disimpan di dalam Git, pengguna memasukkan parameter `apk_url` yang valid saat memicu workflow.
+   * Laporan Allure HTML otomatis digenerate dan diunggah sebagai artefak run (`allure-report-html`).
 
 ---
 
