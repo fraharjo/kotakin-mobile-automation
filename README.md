@@ -45,10 +45,11 @@ npm run test:smoke
 8. [Automated Documentation (Single Source of Truth)](#-automated-documentation-single-source-of-truth)
 9. [Interactive Reporting (Allure Report)](#-interactive-reporting-allure-report)
 10. [Continuous Integration (GitHub Actions)](#-continuous-integration-github-actions)
-11. [AI Skill Integration Guide](#-ai-skill-integration-guide)
-12. [Troubleshooting & FAQ](#-troubleshooting--faq)
-13. [How to Add New Tests](#-how-to-add-new-tests)
-14. [Credits & License](#-credits--license)
+11. [Manual QA Execution Dashboard](#-manual-qa-execution-dashboard)
+12. [AI Skill Integration Guide](#-ai-skill-integration-guide)
+13. [Troubleshooting & FAQ](#-troubleshooting--faq)
+14. [How to Add New Tests](#-how-to-add-new-tests)
+15. [Credits & License](#-credits--license)
 
 ---
 
@@ -110,14 +111,15 @@ You have a Jira ticket, a Figma design, and (optionally) your own manual test ca
 | # | Step | What you do | Output |
 | :-: | :--- | :--- | :--- |
 | 0 | **Setup (once)** | `npm install`, `cp .env.example .env`, put `kotakin.apk` in `apps/`, start an emulator (`adb devices`), run `npm run test:smoke` | Working environment |
-| 1 | **Gather inputs** | Copy the Jira description + ACs, export Figma frames as screenshots (or use a connector), export your manual test cases to CSV | Raw inputs |
-| 2 | **Write the requirement** | Copy [requirements/_template.md](requirements/_template.md) to `requirements/{feature}.md` and fill it in. Quote ACs verbatim, number them `AC-01...`. Put raw attachments (Jira text, Figma screenshots, manual test cases CSV) in `requirements/inputs/{feature}/` | PRD file |
+| 1 | **Gather inputs (Frictionless)** | Put any raw requirement files in `requirements/inputs/{feature}/` (Jira notes `.txt`, Excel `.xlsx/.csv`, Word `.docx`, PDF, Figma screenshots `.png`) | Raw inputs in folder |
+| 2 | **Requirement Normalization** | Prompt the agent: *"Design tests from requirements/inputs/{feature}"*. The agent asks questions **one by one** if ambiguous, extracts ACs, and normalizes into `requirements/{feature}.md` | Normalized PRD & Q&A |
 | 3 | **Prompt the agent** | Use the template in [docs/qa-prompt-guide.md](docs/qa-prompt-guide.md) (include your manual test cases for gap comparison) | Requirement analysis + open questions |
 | 4 | **Review the matrix** | Answer open questions, correct assumptions, approve the coverage matrix | Approved plan |
 | 5 | **Draft generated** | Agent writes `generated/{feature}/` (matrix, feature, screen, steps) | Draft files |
 | 6 | **Human gate** | Verify selectors against the real app (`adb shell uiautomator dump` or Appium Inspector), tags, step reuse | Validated draft |
 | 7 | **Promote** | Move files into `features/{feature}/`, fix imports, add `test:feature:{feature}` to `package.json` | Production suite |
-| 8 | **Run and report** | `npm run typecheck`, `npm run test:feature:{feature}`, `npm run test:smoke`, `npm run report` | Allure report |
+| 8 | **Run automated tests** | `npm run typecheck`, `npm run lint:tags`, `npm run test:feature:{feature}`, `npm run test:smoke`, `npm run report` | Allure report |
+| 8b | **Execute manual tests** | For scenarios tagged with `@manual`, run `npm run test:manual:dashboard` (Web UI to set Pass/Fail/Blocked, link Jira bugs, and attach screenshot evidence) | `reports/manual-results/` |
 | 9 | **Sync docs** | `npm run docs:generate` | Updated spec, CSV and XLSX |
 | 10 | **UX audit (optional)** | Ask the agent to use `app-quality-advisor` with screenshots or Allure results | Findings, chat draft, Jira draft |
 
@@ -321,6 +323,24 @@ npm run report:generate
 
 ---
 
+---
+
+## 📋 Manual QA Execution Dashboard
+
+Scenarios tagged with `@manual` (hardware camera scan, biometrics, SMS OTP, visual exploratory checks) are excluded from automated test runners. QA can execute and track manual verification using the built-in local dashboard:
+
+```bash
+npm run test:manual:dashboard
+```
+
+Open `http://localhost:3000` in your browser:
+* **Live SSoT Sync:** Reads all `@manual` scenarios directly from `features/**/*.feature`.
+* **Execution Statuses:** Update scenario status to 🟢 `PASSED`, 🔴 `FAILED`, 🟡 `BLOCKED`, or ⚪ `NOT_EXECUTED`.
+* **Jira Bug Linkage:** Input bug ticket links directly on failed scenarios.
+* **Evidence Upload:** Upload screenshot attachments or paste evidence from clipboard. Evidence is persisted in `reports/manual-results/evidence/`.
+* **Session Persistence:** Click **Save All Results** to export execution data to `reports/manual-results/manual-execution-results.json`.
+
+---
 ## 🤖 Continuous Integration (GitHub Actions)
 
 The continuous integration pipeline is defined in [.github/workflows/test-runner.yml](.github/workflows/test-runner.yml):

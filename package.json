@@ -23,7 +23,8 @@
     "report:generate": "allure generate ./reports/allure-results --clean -o ./reports/allure-report",
     "report:open": "allure open ./reports/allure-report",
     "report": "npm run report:generate && npm run report:open",
-    "lint:tags": "ts-node scripts/lint-tags.ts"
+    "lint:tags": "ts-node scripts/lint-tags.ts",
+    "test:manual:dashboard": "ts-node scripts/manual-dashboard/server.ts"
   },
   "keywords": [
     "webdriverio",

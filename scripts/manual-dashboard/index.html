@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Nexus Manual QA Execution Dashboard</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #0b0f19;
+      --card-bg: #111827;
+      --card-border: #1f2937;
+      --text: #f3f4f6;
+      --text-muted: #9ca3af;
+      --primary: #3b82f6;
+      --success: #10b981;
+      --danger: #ef4444;
+      --warning: #f59e0b;
+      --neutral: #6b7280;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      padding: 2rem;
+      line-height: 1.5;
+    }
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 2rem;
+      border-bottom: 1px solid var(--card-border);
+      padding-bottom: 1.5rem;
+    }
+    .header h1 { font-size: 1.75rem; font-weight: 700; display: flex; align-items: center; gap: 0.75rem; }
+    .badge-live {
+      background: rgba(16, 185, 129, 0.2);
+      color: var(--success);
+      font-size: 0.75rem;
+      padding: 0.25rem 0.6rem;
+      border-radius: 9999px;
+      font-weight: 600;
+    }
+    .metrics {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1rem;
+      margin-bottom: 2rem;
+    }
+    .metric-card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 12px;
+      padding: 1.25rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+    .metric-title { font-size: 0.875rem; color: var(--text-muted); font-weight: 500; }
+    .metric-value { font-size: 1.75rem; font-weight: 700; }
+    .filters {
+      display: flex;
+      gap: 1rem;
+      margin-bottom: 1.5rem;
+      flex-wrap: wrap;
+    }
+    .filter-btn {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      color: var(--text-muted);
+      padding: 0.5rem 1rem;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: 500;
+      transition: all 0.2s;
+    }
+    .filter-btn.active, .filter-btn:hover {
+      background: var(--primary);
+      color: white;
+      border-color: var(--primary);
+    }
+    .cases-list {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+    .case-card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 12px;
+      padding: 1.5rem;
+      transition: border-color 0.2s;
+    }
+    .case-card:hover { border-color: #374151; }
+    .case-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 1rem;
+      gap: 1rem;
+    }
+    .case-title { font-size: 1.125rem; font-weight: 600; }
+    .case-meta {
+      display: flex;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+      margin-top: 0.25rem;
+    }
+    .tag {
+      font-size: 0.75rem;
+      padding: 0.2rem 0.5rem;
+      border-radius: 6px;
+      background: #1f2937;
+      color: var(--text-muted);
+      font-weight: 500;
+    }
+    .tag-priority { background: rgba(59, 130, 246, 0.2); color: var(--primary); }
+    .tag-ac { background: rgba(245, 158, 11, 0.2); color: var(--warning); }
+    .steps-container {
+      background: rgba(0, 0, 0, 0.25);
+      border-radius: 8px;
+      padding: 1rem;
+      margin-bottom: 1.25rem;
+      font-size: 0.9rem;
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+    }
+    .step-line { margin-bottom: 0.35rem; color: #d1d5db; }
+    .step-line:last-child { margin-bottom: 0; }
+    .execution-box {
+      display: grid;
+      grid-template-columns: 200px 1fr 1fr;
+      gap: 1rem;
+      align-items: center;
+      padding-top: 1rem;
+      border-top: 1px solid var(--card-border);
+    }
+    @media (max-width: 900px) {
+      .execution-box { grid-template-columns: 1fr; }
+    }
+    select, input[type="text"] {
+      width: 100%;
+      background: #1f2937;
+      border: 1px solid #374151;
+      color: var(--text);
+      padding: 0.6rem 0.8rem;
+      border-radius: 8px;
+      font-family: inherit;
+      font-size: 0.9rem;
+    }
+    select:focus, input[type="text"]:focus {
+      outline: none;
+      border-color: var(--primary);
+    }
+    .status-badge {
+      display: inline-block;
+      padding: 0.25rem 0.75rem;
+      border-radius: 8px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      text-transform: uppercase;
+    }
+    .status-PASSED { background: rgba(16, 185, 129, 0.2); color: var(--success); }
+    .status-FAILED { background: rgba(239, 68, 68, 0.2); color: var(--danger); }
+    .status-BLOCKED { background: rgba(245, 158, 11, 0.2); color: var(--warning); }
+    .status-NOT_EXECUTED { background: rgba(107, 114, 128, 0.2); color: var(--neutral); }
+    .file-upload-label {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      cursor: pointer;
+    }
+    .file-upload-label input { display: none; }
+    .evidence-preview {
+      display: flex;
+      gap: 0.5rem;
+      margin-top: 0.5rem;
+      flex-wrap: wrap;
+    }
+    .evidence-thumb {
+      width: 48px;
+      height: 48px;
+      border-radius: 6px;
+      object-fit: cover;
+      border: 1px solid var(--card-border);
+      cursor: pointer;
+    }
+    .btn-save {
+      background: var(--primary);
+      color: white;
+      border: none;
+      padding: 0.6rem 1.25rem;
+      border-radius: 8px;
+      font-weight: 600;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .btn-save:hover { background: #2563eb; }
+    .empty-state {
+      text-align: center;
+      padding: 4rem 2rem;
+      color: var(--text-muted);
+      background: var(--card-bg);
+      border-radius: 12px;
+      border: 1px dashed var(--card-border);
+    }
+  </style>
+</head>
+<body>
+
+  <div class="header">
+    <div>
+      <h1>📋 Nexus Manual QA Execution Dashboard <span class="badge-live">LIVE SYNC</span></h1>
+      <p style="color: var(--text-muted); font-size: 0.9rem; margin-top: 0.25rem;">
+        Single Source of Truth from <code>features/**/*.feature</code> tagged with <code>@manual</code>
+      </p>
+    </div>
+    <button class="btn-save" onclick="saveAll()">💾 Save All Results</button>
+  </div>
+
+  <div class="metrics">
+    <div class="metric-card">
+      <span class="metric-title">Total Manual Cases</span>
+      <span class="metric-value" id="count-total">0</span>
+    </div>
+    <div class="metric-card">
+      <span class="metric-title">🟢 Passed</span>
+      <span class="metric-value" style="color: var(--success);" id="count-passed">0</span>
+    </div>
+    <div class="metric-card">
+      <span class="metric-title">🔴 Failed</span>
+      <span class="metric-value" style="color: var(--danger);" id="count-failed">0</span>
+    </div>
+    <div class="metric-card">
+      <span class="metric-title">🟡 Blocked</span>
+      <span class="metric-value" style="color: var(--warning);" id="count-blocked">0</span>
+    </div>
+    <div class="metric-card">
+      <span class="metric-title">⚪ Not Executed</span>
+      <span class="metric-value" style="color: var(--neutral);" id="count-untested">0</span>
+    </div>
+  </div>
+
+  <div class="filters">
+    <button class="filter-btn active" onclick="filterBy('ALL', this)">All Cases</button>
+    <button class="filter-btn" onclick="filterBy('NOT_EXECUTED', this)">Not Executed</button>
+    <button class="filter-btn" onclick="filterBy('FAILED', this)">Failed</button>
+    <button class="filter-btn" onclick="filterBy('BLOCKED', this)">Blocked</button>
+    <button class="filter-btn" onclick="filterBy('PASSED', this)">Passed</button>
+  </div>
+
+  <div class="cases-list" id="cases-container">
+    <!-- Populated by JS -->
+  </div>
+
+  <script>
+    let testCases = [];
+    let activeFilter = 'ALL';
+
+    async function loadData() {
+      try {
+        const res = await fetch('/api/manual-cases');
+        testCases = await res.json();
+        updateMetrics();
+        render();
+      } catch (err) {
+        console.error("Failed to load test cases:", err);
+      }
+    }
+
+    function updateMetrics() {
+      const total = testCases.length;
+      const passed = testCases.filter(c => c.status === 'PASSED').length;
+      const failed = testCases.filter(c => c.status === 'FAILED').length;
+      const blocked = testCases.filter(c => c.status === 'BLOCKED').length;
+      const unexecuted = testCases.filter(c => !c.status || c.status === 'NOT_EXECUTED').length;
+
+      document.getElementById('count-total').innerText = total;
+      document.getElementById('count-passed').innerText = passed;
+      document.getElementById('count-failed').innerText = failed;
+      document.getElementById('count-blocked').innerText = blocked;
+      document.getElementById('count-untested').innerText = unexecuted;
+    }
+
+    function filterBy(status, btn) {
+      activeFilter = status;
+      document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      render();
+    }
+
+    function render() {
+      const container = document.getElementById('cases-container');
+      const filtered = testCases.filter(c => {
+        if (activeFilter === 'ALL') return true;
+        const s = c.status || 'NOT_EXECUTED';
+        return s === activeFilter;
+      });
+
+      if (filtered.length === 0) {
+        container.innerHTML = `
+          <div class="empty-state">
+            <h3>No manual test cases found for filter: ${activeFilter}</h3>
+            <p style="margin-top: 0.5rem;">Mark scenarios with <code>@manual</code> in <code>features/**/*.feature</code> to execute them here.</p>
+          </div>
+        `;
+        return;
+      }
+
+      container.innerHTML = filtered.map(c => `
+        <div class="case-card" id="card-${c.id}">
+          <div class="case-header">
+            <div>
+              <div class="case-title">${c.title}</div>
+              <div class="case-meta">
+                <span class="tag">📁 ${c.module}</span>
+                <span class="tag tag-priority">${c.priority || '@p2'}</span>
+                ${c.ac ? `<span class="tag tag-ac">${c.ac}</span>` : ''}
+                ${c.jira ? `<span class="tag">${c.jira}</span>` : ''}
+              </div>
+            </div>
+            <div class="status-badge status-${c.status || 'NOT_EXECUTED'}" id="badge-${c.id}">
+              ${c.status || 'NOT_EXECUTED'}
+            </div>
+          </div>
+
+          <div class="steps-container">
+            ${c.steps.map(s => `<div class="step-line">${escapeHtml(s)}</div>`).join('')}
+          </div>
+
+          <div class="execution-box">
+            <div>
+              <label style="font-size: 0.75rem; color: var(--text-muted); display: block; margin-bottom: 0.25rem;">Execution Status</label>
+              <select onchange="onStatusChange('${c.id}', this.value)">
+                <option value="NOT_EXECUTED" ${(!c.status || c.status === 'NOT_EXECUTED') ? 'selected' : ''}>⚪ Not Executed</option>
+                <option value="PASSED" ${c.status === 'PASSED' ? 'selected' : ''}>🟢 Passed</option>
+                <option value="FAILED" ${c.status === 'FAILED' ? 'selected' : ''}>🔴 Failed</option>
+                <option value="BLOCKED" ${c.status === 'BLOCKED' ? 'selected' : ''}>🟡 Blocked</option>
+              </select>
+            </div>
+
+            <div>
+              <label style="font-size: 0.75rem; color: var(--text-muted); display: block; margin-bottom: 0.25rem;">Bug / Jira Link (if failed)</label>
+              <input type="text" placeholder="e.g. KTK-BUG-102 or Jira URL" value="${c.bugLink || ''}" onchange="onBugChange('${c.id}', this.value)" />
+            </div>
+
+            <div>
+              <label style="font-size: 0.75rem; color: var(--text-muted); display: block; margin-bottom: 0.25rem;">Attachment Evidence (Screenshot)</label>
+              <label class="file-upload-label">
+                📷 <span>Upload screenshot...</span>
+                <input type="file" accept="image/*" onchange="uploadEvidence('${c.id}', this.files[0])" />
+              </label>
+              <div class="evidence-preview" id="evidence-${c.id}">
+                ${(c.evidence || []).map(url => `<a href="${url}" target="_blank"><img class="evidence-thumb" src="${url}" title="View Evidence" /></a>`).join('')}
+              </div>
+            </div>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    function onStatusChange(id, val) {
+      const tc = testCases.find(c => c.id === id);
+      if (tc) {
+        tc.status = val;
+        const badge = document.getElementById(`badge-${id}`);
+        if (badge) {
+          badge.className = `status-badge status-${val}`;
+          badge.innerText = val;
+        }
+        updateMetrics();
+      }
+    }
+
+    function onBugChange(id, val) {
+      const tc = testCases.find(c => c.id === id);
+      if (tc) tc.bugLink = val;
+    }
+
+    async function uploadEvidence(id, file) {
+      if (!file) return;
+      const formData = new FormData();
+      formData.append('file', file);
+      formData.append('caseId', id);
+
+      try {
+        const res = await fetch('/api/upload-evidence', {
+          method: 'POST',
+          body: formData
+        });
+        const data = await res.json();
+        const tc = testCases.find(c => c.id === id);
+        if (tc) {
+          tc.evidence = tc.evidence || [];
+          tc.evidence.push(data.url);
+          render();
+        }
+      } catch (err) {
+        alert("Failed to upload evidence");
+      }
+    }
+
+    async function saveAll() {
+      try {
+        const res = await fetch('/api/save-results', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(testCases)
+        });
+        if (res.ok) {
+          alert('✅ Manual Test Execution Results & Evidences Saved Successfully!');
+        }
+      } catch (err) {
+        alert('❌ Failed to save results: ' + err.message);
+      }
+    }
+
+    function escapeHtml(str) {
+      return str.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+    }
+
+    loadData();
+  </script>
+</body>
+</html>

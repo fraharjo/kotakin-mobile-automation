@@ -6,6 +6,22 @@ Ready-to-use prompts for the AI skills in `.agents/skills/`. Replace the `[...]`
 
 ---
 
+## ⚡ Quick Frictionless Method (Any Format in `requirements/inputs/`)
+
+You don't need to manually type PRDs or tables. Simply drop any raw requirement files into `requirements/inputs/<feature-name>/`:
+- Raw Jira text (`jira_notes.txt`)
+- Excel test case drafts (`cases.xlsx` or `.csv`)
+- Figma screenshots (`screens.png`)
+- Specification document (`prd.docx` or `spec.pdf`)
+
+Then prompt:
+```text
+Hi, please create a Cucumber BDD test suite for [Android / iOS / Web] based on all the requirement materials in `requirements/inputs/[feature_name]`.
+If you find any ambiguity or need to decide between @automated vs @manual for complex scenarios, please ask me questions one by one with your recommendations.
+```
+
+---
+
 ## 1. Design tests from a requirement (`nexus-test-generator`)
 
 ```text
@@ -77,3 +93,18 @@ and propose a fix. If it looks like a real app bug, say so instead of changing t
 | Execution | `@automated` or `@manual` |
 | Platform | `@android`, `@ios`, `@web` |
 | Type | `@functional`, `@negative`, `@bva`, `@security`, `@permission`, `@lifecycle` |
+
+## 6. Manual Test Execution Dashboard (`@manual`)
+
+For scenarios that require physical hardware, camera scanning, SMS OTP, or manual exploratory judgment:
+1. Scenarios tagged with `@manual` are automatically excluded from WDIO automated runners.
+2. Launch the interactive Manual QA Execution Dashboard:
+   ```bash
+   npm run test:manual:dashboard
+   ```
+3. Open `http://localhost:3000` to:
+   - View all `@manual` test cases synchronized live from `.feature` files.
+   - Record execution status (`Passed`, `Failed`, `Blocked`, `Not Executed`).
+   - Link Jira bug tickets (e.g., `KTK-BUG-101`) on failure.
+   - Attach screenshot evidence directly from clipboard or file upload.
+   - Save session results to `reports/manual-results/manual-execution-results.json`.

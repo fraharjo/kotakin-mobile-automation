@@ -33,7 +33,14 @@ Look for **ambiguity** (vague words, undefined limits), **gaps** (no error/empty
 - **Open questions** (mark blocking ones).
 - **Assumptions** (stated plainly, never as fact).
 
-If a blocking question makes a whole AC unspecifiable, stop after Phase 3 and ask.
+### One-at-a-Time Interactive Interview (Ambiguity Resolution)
+When requirements are incomplete or ambiguous, or when deciding automation feasibility:
+- **Ask questions ONE AT A TIME** to avoid cognitive overload. Never dump a long list of questions at once.
+- Frame each question with clear context, trade-offs, and a recommended choice.
+  *Example:* "For the scenario where network connection drops mid-login:
+   Should this be `@automated` (simulated via Appium airplane mode/network throttling) or `@manual` (verified on a real device with poor signal)?
+   *(Recommended: `@manual` if physical signal transition UX is priority, or `@automated` for pure error response)*"
+- Record confirmed answers under **Assumptions & Open Questions**.
 
 ### Phase 3 - Ideate the scenario pool
 Per AC, list Positive / Negative / Edge scenarios regardless of automation feasibility. Use [references/test-design-techniques.md](references/test-design-techniques.md) (EP, BVA, decision tables, state transitions, use-case flows, error guessing, pairwise) and its quality checklist (UI states, accessibility, localization, mobile lifecycle, network, permissions/hardware, concurrency, data, security input). Use only techniques that fit the AC and name the technique per scenario.
@@ -56,7 +63,7 @@ Every scenario gets exactly one disposition:
 | Disposition | Meaning | Tag |
 | :--- | :--- | :--- |
 | Automate | Deterministic, observable, stable data possible | `@automated` |
-| Manual | Physical hardware, biometrics, external SMS/OTP, subjective visual judgment, uncontrollable environment | `@manual` |
+| Manual | Physical hardware, biometrics, external SMS/OTP, subjective visual judgment, uncontrollable environment (Executed via `npm run test:manual:dashboard`) | `@manual` |
 | Blocked | Needs an answered open question or a testability hook | none (listed in matrix) |
 | Out of scope | Real but outside this requirement | none |
 
