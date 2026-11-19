@@ -19,6 +19,10 @@ on:
           - settings
           - onboarding
           - scanner
+      apk_url:
+        description: 'URL Download APK (Opsional, jika ingin mengunduh dari remote)'
+        required: false
+        default: ''
 
 jobs:
   # ==========================================
@@ -70,10 +74,17 @@ jobs:
       - name: Install Dependencies
         run: npm install
 
-      - name: Download Kotakin APK from GitHub Releases
+      - name: Setup Kotakin APK for Testing
         run: |
           mkdir -p apps
-          curl -L -o apps/kotakin.apk https://github.com/fraharjo/kotakin-mobile-automation/releases/download/v1.0.0/kotakin.apk
+          APK_DOWNLOAD_URL="${{ github.event.inputs.apk_url }}"
+          if [ -n "$APK_DOWNLOAD_URL" ]; then
+            echo "📥 Mengunduh APK dari: $APK_DOWNLOAD_URL"
+            curl -L -o apps/kotakin.apk "$APK_DOWNLOAD_URL"
+          fi
+          if [ ! -f "apps/kotakin.apk" ]; then
+            echo "⚠️ Catatan: apps/kotakin.apk tidak ditemukan di runner CI."
+          fi
 
       - name: Run Android Tests on Emulator
         uses: reactivecircus/android-emulator-runner@v2

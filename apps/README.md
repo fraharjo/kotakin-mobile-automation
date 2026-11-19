@@ -1,39 +1,36 @@
 # Mobile Apps Directory 📱
 
-Direktori ini digunakan untuk menyimpan file binary aplikasi Android (`.apk`) yang akan diuji oleh framework automasi.
+Direktori ini digunakan untuk menyimpan file binary aplikasi Android (`kotakin.apk`) yang akan diuji oleh framework automasi.
 
 > [!NOTE]
-> File binary `.apk` sengaja diabaikan (*ignored*) dari riwayat Git (`.gitignore`) agar ukuran repository tetap ringan, cepat di-clone, dan mematuhi batas rekomendasi file GitHub (< 50 MB).
+> File binary `.apk` sengaja diabaikan (*ignored*) dari riwayat Git (`.gitignore`) agar ukuran repository tetap bersih, ringan, dan tidak menyimpan binary aplikasi pihak ketiga.
 
 ---
 
-## 📥 Unduh File APK Kotakin (Aman & Terverifikasi)
+## 📥 Sumber Resmi File APK Kotakin
 
-Untuk menjalankan pengujian otomasi, unduh file APK resmi **Kotakin** (`v1.0.0`):
+Sesuai anjuran dari pengembang resmi Kotakin (**BmoLab**), silakan dapatkan file APK langsung melalui website resmi atau program closed testing pengembang:
 
-* **Halaman Rilis:** 👉 [GitHub Releases v1.0.0](https://github.com/fraharjo/kotakin-mobile-automation/releases/tag/v1.0.0)
-* **Direct Download Link:** 👉 [Download kotakin.apk](https://github.com/fraharjo/kotakin-mobile-automation/releases/download/v1.0.0/kotakin.apk)
-* **SHA-256 Checksum:** `8498588707f80bc4698bd5ba8591ff5cb1ba84b9dee22ee9ba9b0f6fa5188994`
+* 🌐 **Website Resmi:** 👉 [https://bmolab.web.id/kotakin](https://bmolab.web.id/kotakin)
+* 🧪 **Program Testing:** 👉 [Gabung Closed Testing](https://bmolab.web.id/kotakin/join)
+* ✉️ **Kontak Developer:** `bmo.techdev@gmail.com`
 
-### Cara 1: Menggunakan Script Otomatis (Direkomendasikan)
-Script ini otomatis mengunduh APK dan memverifikasi integritas file menggunakan SHA-256 checksum:
-```bash
-npm run apk:download
-```
+---
 
-### Cara 2: Manual via Curl & Verifikasi Checksum
-```bash
-# 1. Unduh APK
-curl -L -o apps/kotakin.apk https://github.com/fraharjo/kotakin-mobile-automation/releases/download/v1.0.0/kotakin.apk
+## 📂 Cara Menempatkan APK di Project
 
-# 2. Verifikasi Checksum (macOS / Linux)
-shasum -a 256 apps/kotakin.apk
-# Pastikan output cocok dengan: 8498588707f80bc4698bd5ba8591ff5cb1ba84b9dee22ee9ba9b0f6fa5188994
-```
+1. Unduh file APK dari website pengembang di atas.
+2. Letakkan file tersebut di dalam folder `apps/` dengan nama:
+   ```text
+   apps/kotakin.apk
+   ```
+3. File ini **tidak akan ter-commit ke Git** karena sudah terdaftar di `.gitignore`.
 
 ---
 
 ## 🚀 Menjalankan Pengujian di Android Emulator
+
+Setelah `apps/kotakin.apk` diletakkan di folder ini:
 
 1. Pastikan **Android Emulator** sudah aktif (`adb devices`).
 2. Jalankan seluruh test suite otomatis:

@@ -14,7 +14,6 @@
     "test:feature:scanner": "wdio run wdio.android.conf.ts --cucumberOpts.tags=\"@feature-scanner and @automated\"",
     "test:feature:settings": "wdio run wdio.android.conf.ts --cucumberOpts.tags=\"@feature-settings and @automated\"",
     "docs:generate": "ts-node scripts/generate-docs.ts",
-    "apk:download": "bash scripts/download-apk.sh",
     "report:generate": "allure generate ./reports/allure-results --clean -o ./reports/allure-report",
     "report:open": "allure open ./reports/allure-report",
     "report": "npm run report:generate && npm run report:open"

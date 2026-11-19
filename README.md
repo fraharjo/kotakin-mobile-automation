@@ -17,7 +17,7 @@ Production-grade Mobile Test Automation Framework for **Kotakin Android App** (`
 2. [Cakupan Test Suite (Test Coverage)](#-cakupan-test-suite-test-coverage)
 3. [Struktur Direktori Project](#-struktur-direktori-project)
 4. [Prasyarat Sistem & Konfigurasi Environment](#-prasyarat-sistem--konfigurasi-environment)
-5. [Unduh File APK Kotakin (Aman & Terverifikasi)](#-unduh-file-apk-kotakin-aman--terverifikasi)
+5. [Sumber Resmi File APK Kotakin](#-sumber-resmi-file-apk-kotakin)
 6. [Menjalankan Pengujian (Flexible Run Commands)](#-menjalankan-pengujian-flexible-run-commands)
 7. [Dokumentasi Otomatis (Single Source of Truth)](#-dokumentasi-otomatis-single-source-of-truth)
 8. [Pelaporan Interaktif (Allure Report)](#-pelaporan-interaktif-allure-report)
@@ -103,7 +103,7 @@ kotakin-mobile-automation/
 ├── .github/workflows/              # GitHub Actions CI/CD Workflows
 │   └── test-runner.yml             # Dual-mode CI: Fast Typecheck on Push & Emulator on Demand
 ├── apps/                           # Lokasi penyimpanan APK (Excluded dari git)
-│   └── README.md                   # Panduan unduh APK aman & verifikasi SHA-256
+│   └── README.md                   # Sumber resmi APK & panduan penempatan file
 ├── docs/                           # Dokumentasi Pengujian (Single Source of Truth)
 │   ├── test-case-specification.md  # Spesifikasi 49 test cases lengkap + RTM dinamis
 │   ├── test-cases.xlsx             # Export format Microsoft Excel (.xlsx)
@@ -124,7 +124,6 @@ kotakin-mobile-automation/
 │   └── README.md                   # Panduan format input untuk AI Agent
 ├── reports/                        # Lokasi hasil Allure (allure-results & allure-report)
 ├── scripts/                        # Utility & Automation Scripts
-│   ├── download-apk.sh             # Script unduh APK resmi + verifikasi SHA-256
 │   └── generate-docs.ts            # Script generator dokumen otomatis dari file .feature
 ├── shared/                         # Komponen Reusable Lintas Platform
 │   ├── config/env.config.ts        # Dynamic dotenv configuration loader
@@ -171,16 +170,19 @@ npm install
 
 ---
 
-## 📥 Unduh File APK Kotakin (Aman & Terverifikasi)
+## 📥 Sumber Resmi File APK Kotakin
 
-File APK resmi telah dipin pada rilis GitHub `v1.0.0` dan diabaikan dari riwayat Git (`apps/*.apk` ada di `.gitignore`).
+Sesuai anjuran dari pengembang resmi Kotakin (**BmoLab**), binary APK tidak disimpan di dalam repositori ini. Silakan peroleh file APK langsung melalui website resmi pengembang:
 
-### Cara Cepat (Otomatis dengan Verifikasi Checksum):
-```bash
-npm run apk:download
+* 🌐 **Website Resmi:** 👉 [https://bmolab.web.id/kotakin](https://bmolab.web.id/kotakin)
+* 🧪 **Program Testing:** 👉 [Gabung Closed Testing](https://bmolab.web.id/kotakin/join)
+* ✉️ **Kontak Developer:** `bmo.techdev@gmail.com`
+
+Setelah mengunduh file APK dari website pengembang di atas, letakkan file di path:
+```text
+apps/kotakin.apk
 ```
-Script di atas akan mengunduh APK dan memvalidasi **SHA-256 Checksum**:
-`8498588707f80bc4698bd5ba8591ff5cb1ba84b9dee22ee9ba9b0f6fa5188994`
+*(File ini otomatis diabaikan oleh `.gitignore` sehingga tidak akan terunggah ke Git).*
 
 ---
 
