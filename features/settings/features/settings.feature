@@ -1,4 +1,4 @@
-@feature-settings @JIRA-KTK-301
+@feature-settings @REQ-KTK-301
 Feature: Kotakin Application Settings & Localization
   As a Kotakin user
   I want to configure application settings, localization, and backups

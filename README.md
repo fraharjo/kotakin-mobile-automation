@@ -1,74 +1,98 @@
 # Kotakin Mobile Automation Framework 🚀
 
-Production-grade Mobile Test Automation Framework for **Kotakin Android App** (`com.bmolab.kotakin`), built with **WebdriverIO v8**, **Appium 2**, **Cucumber BDD**, **TypeScript**, **Allure 2 Reports**, and **AI-Driven Quality Heuristics**.
+End-to-End Mobile Test Automation Framework untuk **Kotakin Android App** (`com.bmolab.kotakin`), dibangun menggunakan **WebdriverIO v8**, **Appium 2**, **Cucumber BDD**, **TypeScript**, dan **Allure Reports**.
 
 [![CI Status](https://github.com/fraharjo/kotakin-mobile-automation/actions/workflows/test-runner.yml/badge.svg)](https://github.com/fraharjo/kotakin-mobile-automation/actions)
-[![Android Testing](https://img.shields.io/badge/Platform-Android%20Emulator%20(API%2033)-green.svg)](https://developer.android.com/)
+[![Android](https://img.shields.io/badge/Platform-Android%20Emulator-green.svg)](https://developer.android.com/)
 [![WebdriverIO](https://img.shields.io/badge/WebdriverIO-v8-blue.svg)](https://webdriver.io/)
 [![Appium](https://img.shields.io/badge/Appium-v2-purple.svg)](https://appium.io/)
 [![Cucumber BDD](https://img.shields.io/badge/BDD-Cucumber-success.svg)](https://cucumber.io/)
 [![Allure Report](https://img.shields.io/badge/Report-Allure%202-orange.svg)](https://allurereport.org/)
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
+
+---
+
+## ⚡ Quick Start (4 Langkah Mudah)
+
+```bash
+# 1. Clone repository
+git clone https://github.com/fraharjo/kotakin-mobile-automation.git
+cd kotakin-mobile-automation
+
+# 2. Pasang dependensi & siapkan konfigurasi environment
+npm install
+cp .env.example .env
+
+# 3. Unduh APK Kotakin dari website pengembang resmi & letakkan di folder apps/
+# Link: https://bmolab.web.id/kotakin -> simpan sebagai apps/kotakin.apk
+
+# 4. Pastikan Android Emulator sudah aktif, lalu jalankan smoke test:
+adb devices  # Pastikan emulator terdeteksi (Appium otomatis di-start oleh WDIO)
+npm run test:smoke
+```
 
 ---
 
 ## 📑 Daftar Isi
-1. [Arsitektur & Siklus Hidup Pengujian (BDD + AI Skills)](#-arsitektur--siklus-hidup-pengujian-bdd--ai-skills)
-2. [Cakupan Test Suite (Test Coverage)](#-cakupan-test-suite-test-coverage)
-3. [Struktur Direktori Project](#-struktur-direktori-project)
-4. [Prasyarat Sistem & Konfigurasi Environment](#-prasyarat-sistem--konfigurasi-environment)
-5. [Sumber Resmi File APK Kotakin](#-sumber-resmi-file-apk-kotakin)
-6. [Menjalankan Pengujian (Flexible Run Commands)](#-menjalankan-pengujian-flexible-run-commands)
+1. [Arsitektur & Siklus Hidup Pengujian](#-arsitektur--siklus-hidup-pengujian-bdd--ai-skills)
+2. [Cakupan Test Suite](#-cakupan-test-suite)
+3. [Taksonomi Tag Pengujian](#-taksonomi-tag-pengujian)
+4. [Struktur Direktori Project](#-struktur-direktori-project)
+5. [Prasyarat Sistem & Konfigurasi](#-prasyarat-sistem--konfigurasi)
+6. [Menjalankan Pengujian](#-menjalankan-pengujian)
 7. [Dokumentasi Otomatis (Single Source of Truth)](#-dokumentasi-otomatis-single-source-of-truth)
 8. [Pelaporan Interaktif (Allure Report)](#-pelaporan-interaktif-allure-report)
-9. [Continuous Integration (GitHub Actions CI/CD)](#-continuous-integration-github-actions-cicd)
-10. [Panduan Penggunaan AI Skill (Authoring & UX Audit)](#-panduan-penggunaan-ai-skill-authoring--ux-audit)
+9. [Continuous Integration (GitHub Actions)](#-continuous-integration-github-actions)
+10. [Panduan Integrasi AI Skill](#-panduan-integrasi-ai-skill)
+11. [Troubleshooting & FAQ](#-troubleshooting--faq)
+12. [Cara Menambah Test Baru](#-cara-menambah-test-baru)
+13. [Credits & Lisensi](#-credits--lisensi)
 
 ---
 
 ## 🔄 Arsitektur & Siklus Hidup Pengujian (BDD + AI Skills)
 
-> [!IMPORTANT]
-> **Pemisahan Authoring vs Runtime:** AI Skills (`nexus-test-generator` dan `app-quality-advisor`) **bukan bagian dari runtime eksekusi test**. Skill adalah instruksi kontekstual untuk AI Agent pada tahap *Authoring* (perancangan skenario) dan *Post-Execution Audit* (analisis UX). WebdriverIO & Appium hanya mengeksekusi kode yang telah melalui *Human Review Gate*.
+> [!NOTE]
+> **Pemisahan Authoring vs Runtime:** AI Skills (`nexus-test-generator` dan `app-quality-advisor`) adalah panduan perancangan skenario pada tahap *Authoring*, bukan bagian dari runtime eksekusi test. WebdriverIO hanya mengeksekusi kode yang sudah disetujui lewat tahap *Human Review Gate*.
 
 ```mermaid
 flowchart TD
     subgraph STAGE_1 ["Stage 1: Input Spesifikasi"]
-        REQ["requirements/<fitur>.md<br/>(PRD / Acceptance Criteria / Figma)"]
+        REQ["requirements/{fitur}.md<br/>(PRD / Acceptance Criteria / Story)"]
     end
 
     subgraph STAGE_2 ["Stage 2: AI Authoring (nexus-test-generator)"]
         AGENT_GEN["AI Agent + nexus-test-generator"]
-        DRAFT["generated/<fitur>/<br/>• test-matrix.md<br/>• <fitur>.feature<br/>• <fitur>.screen.ts<br/>• <fitur>.steps.ts"]
+        DRAFT["generated/{fitur}/<br/>• test-matrix.md<br/>• {fitur}.feature<br/>• {fitur}.screen.ts<br/>• {fitur}.steps.ts"]
         REQ --> AGENT_GEN
         AGENT_GEN --> DRAFT
     end
 
-    subgraph STAGE_3 ["Stage 3: Human Review Gate (Quality Gate)"]
-        GATE{"Review Manusia:<br/>1. Verifikasi Asumsi & QA<br/>2. Cek Selector via ADB Dump<br/>3. Validasi Step Reuse"}
+    subgraph STAGE_3 ["Stage 3: Human Review Gate"]
+        GATE{"Review Tim QA:<br/>1. Validasi Asumsi & Selector<br/>2. Cek Penggunaan Ulang Step"}
         DRAFT --> GATE
-        PROMOTED["Promosi ke Production Suite:<br/>• features/<fitur>/features/<br/>• features/<fitur>/pages/<br/>• features/<fitur>/steps/"]
-        GATE -- "Approved" --> PROMOTED
+        PROMOTED["Promosi ke Production Suite:<br/>• features/{fitur}/features/<br/>• features/{fitur}/pages/<br/>• features/{fitur}/steps/"]
+        GATE -- "Disetujui" --> PROMOTED
         GATE -- "Revisi" --> AGENT_GEN
     end
 
-    subgraph STAGE_4 ["Stage 4: Test Execution (Runtime)"]
-        RUNNER["WebdriverIO v8 + Appium 2<br/>(Filter: @smoke / @regression / not @manual)"]
+    subgraph STAGE_4 ["Stage 4: Eksekusi Test (Runtime)"]
+        RUNNER["WebdriverIO v8 + Appium 2<br/>(Filter: @smoke / @regression)"]
         PROMOTED --> RUNNER
         RESULTS["reports/allure-results/"]
         RUNNER --> RESULTS
     end
 
-    subgraph STAGE_5 ["Stage 5: Reporting & Single Source of Truth"]
-        REPORT["Allure Report HTML Dashboard"]
-        DOCS["npm run docs:generate<br/>• test-case-specification.md<br/>• test-cases.xlsx & .csv<br/>• Dynamic RTM Matrix"]
+    subgraph STAGE_5 ["Stage 5: Pelaporan & Sinkronisasi Dokumen"]
+        REPORT["Allure Report Dashboard"]
+        DOCS["npm run docs:generate<br/>• test-case-specification.md<br/>• test-cases.xlsx & .csv"]
         RESULTS --> REPORT
         PROMOTED --> DOCS
     end
 
     subgraph STAGE_6 ["Stage 6: UX & Heuristic Audit (app-quality-advisor)"]
-        ADVISOR["AI Agent + app-quality-advisor<br/>(Evaluasi UX Heuristics & Form Friction)"]
-        FEEDBACK["Output:<br/>• Microsoft Teams / Slack Message<br/>• Rekomendasi Dev & Jira Tickets"]
+        ADVISOR["AI Agent + app-quality-advisor"]
+        FEEDBACK["Output:<br/>• Feedback Format Chat Teams/Slack<br/>• Tiket Rekomendasi Dev"]
         REPORT --> ADVISOR
         ADVISOR --> FEEDBACK
         FEEDBACK -.-> REQ
@@ -77,83 +101,107 @@ flowchart TD
 
 ---
 
-## 📊 Cakupan Test Suite (Test Coverage)
+## 📊 Cakupan Test Suite
 
 Total **49 Skenario BDD** terotomatisasi secara penuh melintasi 5 modul aplikasi Kotakin:
 
-| Modul Aplikasi | Total Skenario | Jira Key | Cakupan Pengujian |
+| Modul Aplikasi | Total Skenario | Requirement Key | Fokus Pengujian |
 | :--- | :---: | :---: | :--- |
-| **Box Creation & Management** | 21 | `@JIRA-KTK-201` | CRUD Box, BVA batas nama (1 & 50 char), Whitespace, Sanitasi script injection, Pencarian regex, Backgrounding |
-| **Item Management Inside Box** | 11 | `@JIRA-KTK-202` | Stepper quantity (+/-), Ambil foto kamera, Karakter unicode/emoji, Deskripsi panjang (250 char), Negative validation |
-| **Application Settings & Localization** | 5 | `@JIRA-KTK-203` | Dual language (EN / ID), Auto-switch label dinamis, Verifikasi versi build, Backup/Restore data |
-| **Onboarding & Walkthrough** | 4 | `@JIRA-KTK-204` | Multi-slide walkthrough, Skip guide, Navigasi kembali ke My Stash, Fresh app state reset |
-| **Physical QR Code Scanner** | 3 | `@JIRA-KTK-205` | Viewfinder scanner, Penolakan izin kamera (*permission denied*), Navigasi kembali aman |
+| **Box Creation & Management** | 26 | `@REQ-KTK-201` | Alur CRUD, batas input (1 & 50 karakter), spasi kosong, sanitasi script, pencarian regex, backgrounding |
+| **Item Management Inside Box** | 11 | `@REQ-KTK-401` | Stepper jumlah (+/-), tangkapan kamera, karakter emoji, deskripsi 250 karakter, validasi negatif |
+| **Application Settings & Localization** | 5 | `@REQ-KTK-301` | Mode dwi-bahasa (Inggris & Indonesia), versi build, cadangkan & pulihkan data |
+| **Onboarding & Walkthrough** | 4 | `@REQ-KTK-101` | Panduan slide, tombol lewati panduan, navigasi kembali, reset status aplikasi |
+| **Physical QR Code Scanner** | 3 | `@REQ-KTK-501` | Jendela bidik scanner, penolakan izin kamera, tombol kembali aman |
+
+---
+
+## 🏷️ Taksonomi Tag Pengujian
+
+Tag Gherkin digunakan untuk mengatur keterlacakan dan eksekusi pengujian:
+
+| Kategori | Tag | Deskripsi & Contoh Penggunaan |
+| :--- | :--- | :--- |
+| **Traceability** | `@REQ-KTK-xxx` | Memetakan skenario langsung ke dokumen kebutuhan fitur |
+| **Eksekusi** | `@automated` | Skenario yang siap dijalankan oleh test runner Appium |
+| | `@manual` | Skenario verifikasi manual (otomatis dikecualikan oleh test runner) |
+| **Prioritas** | `@smoke` | Alur kritis aplikasi P0, wajib lulus sebelum rilis |
+| | `@regression` | Rangkaian lengkap verifikasi fitur secara menyeluruh (P1) |
+| **Tipe Uji** | `@functional` | Verifikasi logika bisnis positif dan alur interaksi pengguna |
+| | `@negative` | Validasi penolakan input tidak sah dan form validation |
+| | `@bva` | Boundary Value Analysis (batas minimum 1 karakter, batas maksimum 50/250 karakter) |
+| | `@security` | Uji sanitasi karakter dan injeksi script |
+| | `@permission` | Pengujian penolakan dan pemberian izin kamera perangkat |
+| | `@lifecycle` | Pengujian saat aplikasi masuk background dan dibuka kembali |
+| | `@favorite` | Verifikasi toggle bookmark / favorite |
+| **Platform** | `@android` | Penanda pengujian ditujukan untuk platform Android |
 
 ---
 
 ## 📁 Struktur Direktori Project
 
-Framework ini menerapkan **Feature-First (Modular Screaming Architecture)**. Setiap modul domain (`box`, `item`, `settings`, dst.) mengelompokkan spesifikasi Gherkin, Screen Object, Step Definitions, dan PRD-nya secara kohesif:
+Framework ini mengusung arsitektur **Feature-First (Modular Domain Architecture)**:
 
 ```text
 kotakin-mobile-automation/
-├── .agents/skills/                 # AI Assistant Skills (Antigravity / Claude Code / Cursor)
-│   ├── nexus-test-generator/       # SDET Generator: Gherkin, POM stub, Step reuse
-│   └── app-quality-advisor/        # UX Heuristic Auditor: Evaluasi alur, form friction, feedback dev
-├── .github/workflows/              # GitHub Actions CI/CD Workflows
-│   └── test-runner.yml             # Dual-mode CI: Fast Typecheck on Push & Emulator on Demand
-├── apps/                           # Lokasi penyimpanan APK (Excluded dari git)
-│   └── README.md                   # Sumber resmi APK & panduan penempatan file
-├── docs/                           # Dokumentasi Pengujian (Single Source of Truth)
-│   ├── test-case-specification.md  # Spesifikasi 49 test cases lengkap + RTM dinamis
-│   ├── test-cases.xlsx             # Export format Microsoft Excel (.xlsx)
-│   └── test-cases.csv              # Export format Universal CSV (.csv)
-├── features/                       # Production Test Suites (Modular per Domain)
+├── .agents/skills/                 # AI Assistant Skills (Antigravity & Cursor)
+│   ├── nexus-test-generator/       # Generator BDD Gherkin & Screen Objects
+│   └── app-quality-advisor/        # Auditor Kualitas UX & Heuristik
+├── .claude/skills/                 # Symlink kompatibilitas untuk Claude Code
+├── .github/workflows/              # CI/CD Workflows (GitHub Actions)
+│   └── test-runner.yml             # Dual-mode pipeline (Typecheck & Emulator)
+├── apps/                           # Wadah file APK lokal (diabaikan oleh git)
+│   └── README.md                   # Petunjuk sumber resmi APK dari developer
+├── docs/                           # Dokumentasi hasil generate (Single Source of Truth)
+│   ├── test-case-specification.md  # Spesifikasi lengkap 49 skenario + RTM
+│   ├── test-cases.xlsx             # Format spreadsheet Microsoft Excel
+│   └── test-cases.csv              # Format Universal CSV
+├── features/                       # Production Test Suite aktif
 │   ├── box/
-│   │   ├── features/box.feature    # 21 Skenario BDD Box Management
-│   │   ├── pages/box.screen.ts     # Screen Object Box (Inherit BaseScreen)
-│   │   ├── steps/box.steps.ts      # Step Definitions Box
-│   │   └── requirements/box-prd.md # Requirement acuan fitur Box
-│   ├── item/                       # Modul Manajemen Item (11 Skenario)
-│   ├── onboarding/                 # Modul Walkthrough (4 Skenario)
+│   │   ├── features/box.feature    # 21 Skenario BDD fitur Box
+│   │   ├── pages/box.screen.ts     # Screen Object fitur Box
+│   │   ├── steps/box.steps.ts      # Step Definitions fitur Box
+│   │   └── requirements/box-prd.md # Dokumen spesifikasi acuan fitur Box
+│   ├── item/                       # Modul Item (11 Skenario)
+│   ├── onboarding/                 # Modul Onboarding (4 Skenario)
 │   ├── scanner/                    # Modul QR Scanner (3 Skenario)
-│   └── settings/                   # Modul Settings & i18n (5 Skenario)
-├── generated/                      # Staging Area: Draf artefak AI sebelum di-review
-│   └── README.md                   # Aturan promosi & anti-hallucination gate
-├── requirements/                   # Input Area: Dokumen PRD / AC fitur baru untuk di-generate
-│   └── README.md                   # Panduan format input untuk AI Agent
-├── reports/                        # Lokasi hasil Allure (allure-results & allure-report)
-├── scripts/                        # Utility & Automation Scripts
-│   └── generate-docs.ts            # Script generator dokumen otomatis dari file .feature
-├── shared/                         # Komponen Reusable Lintas Platform
-│   ├── config/env.config.ts        # Dynamic dotenv configuration loader
-│   ├── constants/i18n.ts           # Type-safe i18n dictionary (EN / ID)
-│   ├── pages/base.screen.ts        # Universal Locator Engine (XPath, Accessibility ID)
-│   └── steps/common.steps.ts       # Reusable step definitions (Background, Assertions)
-├── wdio.android.conf.ts            # Konfigurasi Appium & Lifecycle Hooks Android
-├── wdio.shared.conf.ts             # Shared WDIO config (Cucumber, Allure, Reporters)
-├── .env.example                    # Template konfigurasi environment lokal
-├── package.json                    # Dependensi & script eksekusi pengujian
-└── tsconfig.json                   # Konfigurasi TypeScript (Strict compilation)
+│   └── settings/                   # Modul Pengaturan (5 Skenario)
+├── generated/                      # Staging area hasil generate AI (sebelum review)
+│   └── README.md                   # Prosedur verifikasi dan promosi kode
+├── requirements/                   # Dokumen input spesifikasi fitur baru (PRD/AC)
+│   └── README.md                   # Format penulisan kebutuhan fitur
+├── reports/                        # Hasil eksekusi Allure (diabaikan oleh git)
+│   └── allure-results/             # Tempat keluaran data Allure (.gitkeep)
+├── scripts/                        # Script penunjang otomasi
+│   └── generate-docs.ts            # Sinkronisasi dokumen dari file .feature
+├── shared/                         # Komponen reusable lintas modul
+│   ├── config/env.config.ts        # Konfigurasi variabel lingkungan
+│   ├── constants/i18n.ts           # Kamus dwi-bahasa (EN / ID)
+│   ├── pages/base.screen.ts        # Base Screen Object (Universal Locator)
+│   └── steps/common.steps.ts       # Langkah bersama (Given, Background)
+├── wdio.android.conf.ts            # Konfigurasi Appium Android & Hooks
+├── wdio.shared.conf.ts             # Konfigurasi utama WebdriverIO & Allure
+├── .env.example                    # Template konfigurasi lokal
+├── LICENSE                         # Lisensi framework (MIT)
+└── package.json                    # Dependensi dan script runner
 ```
 
 ---
 
-## 🛠️ Prasyarat Sistem & Konfigurasi Environment
+## 🛠️ Prasyarat Sistem & Konfigurasi
 
-### 1. Prasyarat Perangkat Lunak
-* **Node.js**: v18+ atau v20 LTS (direkomendasikan)
-* **Java JDK**: v11 atau v17 Temurin (`JAVA_HOME` terkonfigurasi)
-* **Android SDK**: Android Studio dengan platform-tools (`adb`) & API Level 33
-* **Appium 2**: Appium Server v2.5+ dengan driver `uiautomator2`
+### 1. Kebutuhan Perangkat Lunak
+* **Node.js:** Versi 20 LTS atau 22 LTS (direkomendasikan, engines >= 18.0.0)
+* **Java JDK:** Versi 11 atau 17 (pastikan `JAVA_HOME` terkonfigurasi)
+* **Android SDK:** Tersedia Android Emulator dengan API Level 33
+* **Appium 2:** Terpasang dengan driver `uiautomator2` (`appium driver install uiautomator2`)
 
-### 2. Setup Environment (`.env`)
-Salin file template `.env.example` menjadi `.env` lalu sesuaikan konfigurasi emulator lokal kamu:
+### 2. Konfigurasi Lingkungan (`.env`)
+Salin file template `.env.example` ke `.env`:
 ```bash
 cp .env.example .env
 ```
 
-Contoh konfigurasi `.env`:
+Nilai bawaan file `.env`:
 ```ini
 APPIUM_HOST=127.0.0.1
 APPIUM_PORT=4723
@@ -163,135 +211,138 @@ ANDROID_APP_PATH=./apps/kotakin.apk
 ANDROID_APP_ID=com.bmolab.kotakin
 ```
 
-### 3. Instalasi Dependensi
-```bash
-npm install
-```
-
 ---
 
 ## 📥 Sumber Resmi File APK Kotakin
 
-Sesuai anjuran dari pengembang resmi Kotakin (**BmoLab**), binary APK tidak disimpan di dalam repositori ini. Silakan peroleh file APK langsung melalui website resmi pengembang:
+Sesuai arahan pengembang asli Kotakin (**BmoLab**), file aplikasi tidak disertakan di dalam repository ini. Silakan peroleh APK resmi melalui tautan pengembang:
 
 * 🌐 **Website Resmi:** 👉 [https://bmolab.web.id/kotakin](https://bmolab.web.id/kotakin)
-* 🧪 **Program Testing:** 👉 [Gabung Closed Testing](https://bmolab.web.id/kotakin/join)
-* ✉️ **Kontak Developer:** `bmo.techdev@gmail.com`
+* 🧪 **Program Pengujian:** 👉 [Gabung Closed Testing](https://bmolab.web.id/kotakin/join)
+* ✉️ **Email Pengembang:** `bmo.techdev@gmail.com`
 
-Setelah mengunduh file APK dari website pengembang di atas, letakkan file di path:
+Letakkan file yang telah diunduh pada lokasi:
 ```text
 apps/kotakin.apk
 ```
-*(File ini otomatis diabaikan oleh `.gitignore` sehingga tidak akan terunggah ke Git).*
+*(Lokasi ini sudah tercatat di `.gitignore` sehingga tidak akan terunggah ke Git).*
 
 ---
 
-## 🚀 Menjalankan Pengujian (Flexible Run Commands)
+## 🚀 Menjalankan Pengujian
 
-Eksekusi pengujian dapat difilter secara fleksibel berdasarkan tag prioritas, tag tipe pengujian, maupun spesifik per modul:
-
-### 1. Eksekusi Berdasarkan Tag Prioritas
 ```bash
-# Menjalankan seluruh test suite otomatis (eksklusif not @manual)
+# Menjalankan seluruh pengujian otomatis
 npm run test:android
 
-# Menjalankan pengujian Smoke kritis P0 (High Priority)
+# Menjalankan skenario prioritas tinggi (Smoke Test P0)
 npm run test:smoke
 
-# Menjalankan seluruh pengujian Regresi P1 (Regression Suite)
+# Menjalankan seluruh rangkaian regresi (Regression Suite P1)
 npm run test:regression
-```
 
-### 2. Eksekusi Berdasarkan Modul Fitur
-```bash
-npm run test:feature:box         # Modul Box Management (21 skenario)
-npm run test:feature:item        # Modul Item Management (11 skenario)
-npm run test:feature:settings    # Modul Settings & Dual Language (5 skenario)
-npm run test:feature:onboarding  # Modul Onboarding Walkthrough (4 skenario)
-npm run test:feature:scanner     # Modul QR Scanner & Permission (3 skenario)
+# Menjalankan per modul fitur tertentu
+npm run test:feature:box
+npm run test:feature:item
+npm run test:feature:settings
+npm run test:feature:onboarding
+npm run test:feature:scanner
 ```
 
 ---
 
 ## 📑 Dokumentasi Otomatis (Single Source of Truth)
 
-Untuk mencegah terjadinya *document drift* antara kode dan dokumentasi:
-* **File `.feature` + tags Gherkin adalah SATU-SATUNYA Single Source of Truth**.
-* Seluruh file dokumentasi (`.md`, `.xlsx`, `.csv`) dan matriks keterlacakan (*Requirements Traceability Matrix / RTM*) digenerate secara otomatis melalui script:
+Dokumentasi spesifikasi pengujian dan matriks keterlacakan (*Requirements Traceability Matrix / RTM*) diekstrak langsung dari file `.feature`:
 
 ```bash
 npm run docs:generate
 ```
 
-Hasil generate disimpan di:
-* 📄 **Markdown Specification & RTM:** [docs/test-case-specification.md](docs/test-case-specification.md)
-* 📊 **Microsoft Excel:** [docs/test-cases.xlsx](docs/test-cases.xlsx)
-* 📝 **Universal CSV:** [docs/test-cases.csv](docs/test-cases.csv)
+Hasil pembuatan dokumen akan langsung diperbarui ke:
+* 📄 **Spesifikasi Lengkap:** [docs/test-case-specification.md](docs/test-case-specification.md)
+* 📊 **File Excel:** [docs/test-cases.xlsx](docs/test-cases.xlsx)
+* 📝 **File CSV:** [docs/test-cases.csv](docs/test-cases.csv)
 
 ---
 
 ## 📊 Pelaporan Interaktif (Allure Report)
 
-Setelah pengujian selesai, dashboard Allure Report dapat dibuka langsung:
+Setelah pengujian selesai, buka laporan interaktif di peramban:
 
 ```bash
 npm run report:open
 ```
 
-Atau generate ulang laporan HTML secara manual:
+Atau bangun ulang file laporan HTML secara manual:
 ```bash
 npm run report:generate
 ```
 
-**Fitur Dashboard Allure:**
-- Ringkasan visual tingkat kelulusan skenario.
-- Rincian durasi eksekusi per step Cucumber BDD.
-- Lampiran tangkapan layar otomatis (*auto-screenshot on step failure*).
-- Klasifikasi severity (@smoke = Critical, @bva = Normal).
+---
+
+## 🤖 Continuous Integration (GitHub Actions)
+
+Alur integrasi berkelanjutan didefinisikan pada [.github/workflows/test-runner.yml](.github/workflows/test-runner.yml):
+
+1. **Pemeriksaan Kualitas Kode Otomatis (Setiap Push & PR):**
+   * Menjalankan kompilasi TypeScript (`npx tsc --noEmit`) pada runner Ubuntu untuk memastikan seluruh step definition dan Screen Object bebas dari kesalahan ketik atau tipe data dalam ~30 detik.
+2. **Eksekusi Android Emulator (On-Demand / Manual Trigger):**
+   * Dipicu secara manual melalui tab **Actions ➡️ Kotakin Mobile E2E Automation ➡️ Run workflow**.
+   * Karena file binary APK tidak disimpan di dalam Git, job emulator menerima input parameter `apk_url` (opsional) bila ingin mengunduh APK dari server artefak privat, atau dapat menggunakan runner yang telah memiliki APK lokal.
 
 ---
 
-## 🤖 Continuous Integration (GitHub Actions CI/CD)
+## 🧠 Panduan Integrasi AI Skill
 
-Framework ini terintegrasi dengan GitHub Actions di [.github/workflows/test-runner.yml](.github/workflows/test-runner.yml) dengan arsitektur **Dual-Mode**:
+Folder [.agents/skills/](.agents/skills/) memuat instruksi kecerdasan buatan untuk membantu perancangan dan audit aplikasi:
 
-1. **Trigger Otomatis (`push` / `pull_request`):**
-   - Menjalankan **Code Quality & TypeScript Check** di runner `ubuntu-latest`.
-   - Memverifikasi kompilasi kode zero-error (`tsc --noEmit`) dalam ~30 detik.
-2. **Trigger Manual (*On-Demand Workflow Dispatch*):**
-   - Dijalankan via menu **Actions ➡️ Kotakin Mobile E2E Automation ➡️ Run workflow**.
-   - Pengguna dapat memilih fitur target (`box`, `item`, `settings`, `all`).
-   - Runner `macos-latest` otomatis mengunduh APK resmi `v1.0.0`, meluncurkan Android Emulator (API 33), menjalankan pengujian, dan mengunggah **Allure Report Artifact HTML**.
+* **`nexus-test-generator`:** Merancang skenario Gherkin BDD, Screen Object, dan Step Definition berdasarkan dokumen kebutuhan baru di `requirements/`.
+* **`app-quality-advisor`:** Mengaudit alur UX, validasi formulir, dan potensi kesalahan heuristik aplikasi mobile pasca eksekusi pengujian.
+
+Untuk pengguna **Claude Code**, folder [.claude/skills/](.claude/skills/) sudah disiapkan sebagai tautan simbolik (*symlink*) langsung ke `.agents/skills/`.  
+*(Catatan pengguna Windows: pastikan `git config core.symlinks true` atau salin isi folder secara manual bila fitur symlink dinonaktifkan di sistem operasi).*
 
 ---
 
-## 🧠 Panduan Penggunaan AI Skill (Authoring & UX Audit)
+## 🔧 Troubleshooting & FAQ
 
-Folder [.agents/skills/](.agents/skills/) berisi *custom skills* yang kompatibel dengan **Google Antigravity**, **Claude Code**, dan AI Agent modern lainnya.
+#### 1. Pesan kesalahan `The application at '.../apps/kotakin.apk' does not exist`
+Penyebab: File APK belum diletakkan di folder tujuan.  
+**Solusi:** Unduh file APK resmi dari [https://bmolab.web.id/kotakin](https://bmolab.web.id/kotakin), lalu letakkan di path `apps/kotakin.apk`. Bila menggunakan nama atau path berbeda, sesuaikan variabel `ANDROID_APP_PATH` pada file `.env`.
 
-### 1. Skill `nexus-test-generator` (Authoring Time)
-Gunakan skill ini ketika ada fitur baru atau perubahan PRD untuk merancang skenario BDD dan Screen Object stub:
+#### 2. Perangkat emulator tidak terdeteksi saat menjalankan test
+Pastikan Android Emulator sudah menyala dan terdeteksi oleh Android Debug Bridge:
+```bash
+adb devices
+```
+Bila daftar perangkat kosong, buka Android Studio Virtual Device Manager dan luncurkan emulator terlebih dahulu. (WebdriverIO secara otomatis menangani startup Appium Server via `@wdio/appium-service`).
 
-**Contoh Prompt ke Agent:**
-> *"Gunakan skill nexus-test-generator untuk merancang skenario pengujian berdasarkan requirements/box-sharing.md dengan target platform Android, lalu simpan draf ke generated/box-sharing/."*
+#### 3. Pesan kesalahan `The driver 'uiautomator2' is not installed`
+Pasang driver Appium yang dibutuhkan melalui terminal:
+```bash
+appium driver install uiautomator2
+```
 
-**Aturan Kerja AI Agent:**
-- Dilarang mengarang selector. Buat stub selector dan tandai `// TODO: verify with dev` jika belum ada dump UI aktual.
-- Wajib mengecek pustaka step yang sudah ada di `shared/steps/` sebelum membuat step baru (*Step Reuse Rule*).
-- Draf wajib disimpan di `generated/` untuk menunggu *Human Review Gate*.
+#### 4. Kesalahan `JAVA_HOME is not set`
+Pastikan variabel lingkungan `JAVA_HOME` mengarah ke instalasi Java JDK (versi 11 atau 17):
+```bash
+# Contoh konfigurasi di macOS zsh (~/.zshrc)
+export JAVA_HOME=$(/usr/libexec/java_home -v 17)
+```
 
 ---
 
-### 2. Skill `app-quality-advisor` (Post-Execution UX & Quality Audit)
-Gunakan skill ini setelah menjalankan pengujian otomasi atau eksplorasi aplikasi untuk mengevaluasi *User Experience (UX)*, menemukan *anti-patterns*, dan menyusun pesan siap-kirim ke developer:
+## ➕ Cara Menambah Test Baru
 
-**Contoh Prompt ke Agent:**
-> *"Gunakan skill app-quality-advisor untuk mengaudit alur pembuatan kotak pada Kotakin Android App. Evaluasi formulir validasi, penanganan whitespace, dan dialog konfirmasi. Buat draf pesan format Microsoft Teams untuk tim developer."*
+1. **Siapkan Dokumen:** Buat file kebutuhan baru di `requirements/{nama-fitur}.md`.
+2. **Gunakan Skill Authoring:** Minta AI Agent membuat draf dengan `nexus-test-generator` ke `generated/{nama-fitur}/`.
+3. **Review & Promosikan:** Periksa selector elemen UI aktual, lalu pindahkan file yang sudah divalidasi ke dalam folder `features/{nama-fitur}/`.
+4. **Perbarui Dokumen:** Jalankan `npm run docs:generate` untuk menyinkronkan seluruh dokumen spesifikasi dan RTM secara otomatis.
 
-**Pilar Evaluasi Kualitas:**
-1. **Form Validation & Cognitive Friction:** Evaluasi inline error vs disruptive alert dialog.
-2. **Data Integrity & Safety:** Evaluasi penanganan tombol delete, snackbar undo, dan duplikasi entitas.
-3. **Empty States & First-Time Experience:** Evaluasi instruksi dan daya tarik visual pada layar kosong.
-4. **Navigation Consistency & Recovery:** Evaluasi konsistensi navigasi kembali (*back button / Android gesture*).
-5. **Localization & UI Adaptability:** Evaluasi kelengkapan terjemahan dan potensi teks terpotong (*text truncation*).
-6. **Visual Ergonomics & Touch Targets:** Evaluasi keterbacaan kontras dan ukuran tombol (minimal 48x48 dp).
+---
+
+## 🙏 Credits & Lisensi
+
+* **Aplikasi Kotakin:** Dibuat dan dikembangkan oleh **Bimo Ichmu** (**BmoLab**). Hak cipta dan kepemilikan aplikasi sepenuhnya milik pengembang aslinya. Informasi selengkapnya dapat diakses di [https://bmolab.web.id/kotakin](https://bmolab.web.id/kotakin).
+* **Test Automation Framework:** Didistribusikan di bawah lisensi [MIT](LICENSE). Lisensi ini berlaku untuk seluruh kode framework otomasi pengujian di repository ini.

@@ -1,4 +1,4 @@
-@feature-item @JIRA-KTK-401
+@feature-item @REQ-KTK-401
 Feature: Kotakin Item Management Inside Box
   As a Kotakin user
   I want to add, photograph, and manage items inside my storage boxes

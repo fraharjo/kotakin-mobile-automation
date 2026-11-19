@@ -1,4 +1,4 @@
-@feature-box @JIRA-KTK-201
+@feature-box @REQ-KTK-201
 Feature: Kotakin Box Creation & Management
   As a Kotakin user
   I want to create, search, and manage storage boxes

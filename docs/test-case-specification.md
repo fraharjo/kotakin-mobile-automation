@@ -13,69 +13,69 @@
 
 ### Distribusi Modul Pengujian
 
-| Modul Aplikasi | Total Skenario | Status Otomatisasi | Jira Key |
+| Modul Aplikasi | Total Skenario | Status Otomatisasi | Requirement Key |
 | :--- | :---: | :---: | :--- |
-| **Box Creation & Management** | 26 | 🟢 100% Automated | `@JIRA-KTK-201` |
-| **Item Management Inside Box** | 11 | 🟢 100% Automated | `@JIRA-KTK-401` |
-| **Onboarding & Walkthrough** | 4 | 🟢 100% Automated | `@JIRA-KTK-101` |
-| **Physical QR Code Scanner** | 3 | 🟢 100% Automated | `@JIRA-KTK-501` |
-| **Application Settings & Localization** | 5 | 🟢 100% Automated | `@JIRA-KTK-301` |
+| **Box Creation & Management** | 26 | 🟢 100% Automated | `@REQ-KTK-201` |
+| **Item Management Inside Box** | 11 | 🟢 100% Automated | `@REQ-KTK-401` |
+| **Onboarding & Walkthrough** | 4 | 🟢 100% Automated | `@REQ-KTK-101` |
+| **Physical QR Code Scanner** | 3 | 🟢 100% Automated | `@REQ-KTK-501` |
+| **Application Settings & Localization** | 5 | 🟢 100% Automated | `@REQ-KTK-301` |
 
 ---
 
 ## 2. Requirements Traceability Matrix (RTM)
 
-| Jira ID | Modul | Test Case ID | Nama Skenario | Kategori Pengujian | Prioritas |
+| Requirement ID | Modul | Test Case ID | Nama Skenario | Kategori Pengujian | Prioritas |
 | :--- | :--- | :--- | :--- | :--- | :---: |
-| `KTK-201` | Box Creation & Management | `TC-KTK-001` | Create a new box with all fields populated | Smoke / Critical Path | P0 |
-| `KTK-201` | Box Creation & Management | `TC-KTK-002` | Create a new box with only mandatory name field | Positive Functional | P1 |
-| `KTK-201` | Box Creation & Management | `TC-KTK-003` | View box detail and verify action buttons | Positive Functional | P1 |
-| `KTK-201` | Box Creation & Management | `TC-KTK-004` | Add a box to favorites | Positive Functional | P1 |
-| `KTK-201` | Box Creation & Management | `TC-KTK-005` | Remove a box from favorites | Positive Functional | P1 |
-| `KTK-201` | Box Creation & Management | `TC-KTK-006` | Edit existing box details and save changes successfully | Positive Functional | P1 |
-| `KTK-201` | Box Creation & Management | `TC-KTK-007` | Fail to save box edits when box name is cleared | Negative Validation | P1 |
-| `KTK-201` | Box Creation & Management | `TC-KTK-008` | Cancel box editing and verify original details remain unchanged | Positive Functional | P1 |
-| `KTK-201` | Box Creation & Management | `TC-KTK-009` | Cancel box deletion and verify box is preserved in stash | Positive Functional | P1 |
-| `KTK-201` | Box Creation & Management | `TC-KTK-010` | Delete a box permanently and verify removal from stash dashboard | Positive Functional | P1 |
-| `KTK-201` | Box Creation & Management | `TC-KTK-011` | Allow creation of duplicate box names and update total box counter | Positive Functional | P1 |
-| `KTK-201` | Box Creation & Management | `TC-KTK-012` | Search for an existing box by name | Positive Functional | P1 |
-| `KTK-201` | Box Creation & Management | `TC-KTK-013` | Clear search query and restore full box list | Positive Functional | P1 |
-| `KTK-201` | Box Creation & Management | `TC-KTK-014` | Search box with case-insensitive query | Positive Functional | P1 |
-| `KTK-201` | Box Creation & Management | `TC-KTK-015` | Search box using partial substring matching | Positive Functional | P1 |
-| `KTK-201` | Box Creation & Management | `TC-KTK-016` | Search box with leading and trailing whitespace query | Positive Functional | P1 |
-| `KTK-201` | Box Creation & Management | `TC-KTK-017` | Search for a box by the name of an item stored inside it | Positive Functional | P1 |
-| `KTK-201` | Box Creation & Management | `TC-KTK-018` | Fail to create box when mandatory box name is empty | Negative Validation | P1 |
-| `KTK-201` | Box Creation & Management | `TC-KTK-019` | Search with non-existent keyword shows empty results state | Negative Validation | P1 |
-| `KTK-201` | Box Creation & Management | `TC-KTK-020` | Create a box with special characters and numerical identifiers | Positive Functional | P1 |
-| `KTK-201` | Box Creation & Management | `TC-KTK-021` | Search box with special regex characters without application crash | Positive Functional | P1 |
-| `KTK-201` | Box Creation & Management | `TC-KTK-022` | Fail to create box when name contains only whitespace | Negative Validation | P1 |
-| `KTK-201` | Box Creation & Management | `TC-KTK-023` | Create a box with minimum boundary single-character name | Boundary Value Analysis | P2 |
-| `KTK-201` | Box Creation & Management | `TC-KTK-024` | Create a box with script injection tags and verify literal text rendering | Security & Sanitization | P2 |
-| `KTK-201` | Box Creation & Management | `TC-KTK-025` | Cancel box creation midway and verify draft is not saved to stash | Negative Validation | P1 |
-| `KTK-201` | Box Creation & Management | `TC-KTK-026` | Preserve dashboard state when application is minimized to background | App Lifecycle | P1 |
-| `KTK-401` | Item Management Inside Box | `TC-KTK-027` | Add a new item with photo, title, description, and adjusted quantity | Security & Sanitization | P0 |
-| `KTK-401` | Item Management Inside Box | `TC-KTK-028` | Add an item with mandatory title only and default quantity | Positive Functional | P1 |
-| `KTK-401` | Item Management Inside Box | `TC-KTK-029` | Adjust item quantity using increment and decrement controls | Positive Functional | P1 |
-| `KTK-401` | Item Management Inside Box | `TC-KTK-030` | Add an item with minimum boundary single-character title | Boundary Value Analysis | P2 |
-| `KTK-401` | Item Management Inside Box | `TC-KTK-031` | Fail to save item when mandatory title is empty | Negative Validation | P1 |
-| `KTK-401` | Item Management Inside Box | `TC-KTK-032` | Fail to save item when title contains only whitespace | Negative Validation | P1 |
-| `KTK-401` | Item Management Inside Box | `TC-KTK-033` | Cancel item creation and discard captured photo | Negative Validation | P1 |
-| `KTK-401` | Item Management Inside Box | `TC-KTK-034` | Add an item with special characters, punctuation, and emojis | Positive Functional | P1 |
-| `KTK-401` | Item Management Inside Box | `TC-KTK-035` | Add an item with maximum length boundary title and long description | Security & Sanitization | P2 |
-| `KTK-401` | Item Management Inside Box | `TC-KTK-036` | Add an item with script injection tags and verify literal text rendering | Security & Sanitization | P2 |
-| `KTK-401` | Item Management Inside Box | `TC-KTK-037` | Remove an attached photo before saving item | Positive Functional | P1 |
-| `KTK-101` | Onboarding & Walkthrough | `TC-KTK-038` | Complete full onboarding walkthrough to My Stash | Smoke / Critical Path | P0 |
-| `KTK-101` | Onboarding & Walkthrough | `TC-KTK-039` | Skip onboarding from the initial welcome screen | Positive Functional | P1 |
-| `KTK-101` | Onboarding & Walkthrough | `TC-KTK-040` | Skip onboarding midway from step two | Positive Functional | P1 |
-| `KTK-101` | Onboarding & Walkthrough | `TC-KTK-041` | Verify onboarding step headers correspond to expected feature guides | Positive Functional | P1 |
-| `KTK-501` | Physical QR Code Scanner | `TC-KTK-042` | Trigger QR code scanner from dashboard | Smoke / Critical Path | P0 |
-| `KTK-501` | Physical QR Code Scanner | `TC-KTK-043` | Verify camera permission requirement message when scanner is launched | Negative Validation | P1 |
-| `KTK-501` | Physical QR Code Scanner | `TC-KTK-044` | Return safely to My Stash after opening scanner | Positive Functional | P1 |
-| `KTK-301` | Application Settings & Localization | `TC-KTK-045` | Switch application language to Bahasa Indonesia | Smoke / Critical Path | P0 |
-| `KTK-301` | Application Settings & Localization | `TC-KTK-046` | Switch application language back to English | Positive Functional | P1 |
-| `KTK-301` | Application Settings & Localization | `TC-KTK-047` | Navigate to About Kotakin screen and verify app version | Positive Functional | P1 |
-| `KTK-301` | Application Settings & Localization | `TC-KTK-048` | Navigate back to My Stash from Settings screen | Positive Functional | P1 |
-| `KTK-301` | Application Settings & Localization | `TC-KTK-049` | Verify Backup and Restore action buttons are accessible | Positive Functional | P1 |
+| `@REQ-KTK-201` | Box Creation & Management | `TC-KTK-001` | Create a new box with all fields populated | Smoke / Critical Path | P0 |
+| `@REQ-KTK-201` | Box Creation & Management | `TC-KTK-002` | Create a new box with only mandatory name field | Positive Functional | P1 |
+| `@REQ-KTK-201` | Box Creation & Management | `TC-KTK-003` | View box detail and verify action buttons | Positive Functional | P1 |
+| `@REQ-KTK-201` | Box Creation & Management | `TC-KTK-004` | Add a box to favorites | Positive Functional | P1 |
+| `@REQ-KTK-201` | Box Creation & Management | `TC-KTK-005` | Remove a box from favorites | Positive Functional | P1 |
+| `@REQ-KTK-201` | Box Creation & Management | `TC-KTK-006` | Edit existing box details and save changes successfully | Positive Functional | P1 |
+| `@REQ-KTK-201` | Box Creation & Management | `TC-KTK-007` | Fail to save box edits when box name is cleared | Negative Validation | P1 |
+| `@REQ-KTK-201` | Box Creation & Management | `TC-KTK-008` | Cancel box editing and verify original details remain unchanged | Positive Functional | P1 |
+| `@REQ-KTK-201` | Box Creation & Management | `TC-KTK-009` | Cancel box deletion and verify box is preserved in stash | Positive Functional | P1 |
+| `@REQ-KTK-201` | Box Creation & Management | `TC-KTK-010` | Delete a box permanently and verify removal from stash dashboard | Positive Functional | P1 |
+| `@REQ-KTK-201` | Box Creation & Management | `TC-KTK-011` | Allow creation of duplicate box names and update total box counter | Positive Functional | P1 |
+| `@REQ-KTK-201` | Box Creation & Management | `TC-KTK-012` | Search for an existing box by name | Positive Functional | P1 |
+| `@REQ-KTK-201` | Box Creation & Management | `TC-KTK-013` | Clear search query and restore full box list | Positive Functional | P1 |
+| `@REQ-KTK-201` | Box Creation & Management | `TC-KTK-014` | Search box with case-insensitive query | Positive Functional | P1 |
+| `@REQ-KTK-201` | Box Creation & Management | `TC-KTK-015` | Search box using partial substring matching | Positive Functional | P1 |
+| `@REQ-KTK-201` | Box Creation & Management | `TC-KTK-016` | Search box with leading and trailing whitespace query | Positive Functional | P1 |
+| `@REQ-KTK-201` | Box Creation & Management | `TC-KTK-017` | Search for a box by the name of an item stored inside it | Positive Functional | P1 |
+| `@REQ-KTK-201` | Box Creation & Management | `TC-KTK-018` | Fail to create box when mandatory box name is empty | Negative Validation | P1 |
+| `@REQ-KTK-201` | Box Creation & Management | `TC-KTK-019` | Search with non-existent keyword shows empty results state | Negative Validation | P1 |
+| `@REQ-KTK-201` | Box Creation & Management | `TC-KTK-020` | Create a box with special characters and numerical identifiers | Positive Functional | P1 |
+| `@REQ-KTK-201` | Box Creation & Management | `TC-KTK-021` | Search box with special regex characters without application crash | Positive Functional | P1 |
+| `@REQ-KTK-201` | Box Creation & Management | `TC-KTK-022` | Fail to create box when name contains only whitespace | Negative Validation | P1 |
+| `@REQ-KTK-201` | Box Creation & Management | `TC-KTK-023` | Create a box with minimum boundary single-character name | Boundary Value Analysis | P2 |
+| `@REQ-KTK-201` | Box Creation & Management | `TC-KTK-024` | Create a box with script injection tags and verify literal text rendering | Security & Sanitization | P2 |
+| `@REQ-KTK-201` | Box Creation & Management | `TC-KTK-025` | Cancel box creation midway and verify draft is not saved to stash | Negative Validation | P1 |
+| `@REQ-KTK-201` | Box Creation & Management | `TC-KTK-026` | Preserve dashboard state when application is minimized to background | App Lifecycle | P1 |
+| `@REQ-KTK-401` | Item Management Inside Box | `TC-KTK-027` | Add a new item with photo, title, description, and adjusted quantity | Security & Sanitization | P0 |
+| `@REQ-KTK-401` | Item Management Inside Box | `TC-KTK-028` | Add an item with mandatory title only and default quantity | Positive Functional | P1 |
+| `@REQ-KTK-401` | Item Management Inside Box | `TC-KTK-029` | Adjust item quantity using increment and decrement controls | Positive Functional | P1 |
+| `@REQ-KTK-401` | Item Management Inside Box | `TC-KTK-030` | Add an item with minimum boundary single-character title | Boundary Value Analysis | P2 |
+| `@REQ-KTK-401` | Item Management Inside Box | `TC-KTK-031` | Fail to save item when mandatory title is empty | Negative Validation | P1 |
+| `@REQ-KTK-401` | Item Management Inside Box | `TC-KTK-032` | Fail to save item when title contains only whitespace | Negative Validation | P1 |
+| `@REQ-KTK-401` | Item Management Inside Box | `TC-KTK-033` | Cancel item creation and discard captured photo | Negative Validation | P1 |
+| `@REQ-KTK-401` | Item Management Inside Box | `TC-KTK-034` | Add an item with special characters, punctuation, and emojis | Positive Functional | P1 |
+| `@REQ-KTK-401` | Item Management Inside Box | `TC-KTK-035` | Add an item with maximum length boundary title and long description | Security & Sanitization | P2 |
+| `@REQ-KTK-401` | Item Management Inside Box | `TC-KTK-036` | Add an item with script injection tags and verify literal text rendering | Security & Sanitization | P2 |
+| `@REQ-KTK-401` | Item Management Inside Box | `TC-KTK-037` | Remove an attached photo before saving item | Positive Functional | P1 |
+| `@REQ-KTK-101` | Onboarding & Walkthrough | `TC-KTK-038` | Complete full onboarding walkthrough to My Stash | Smoke / Critical Path | P0 |
+| `@REQ-KTK-101` | Onboarding & Walkthrough | `TC-KTK-039` | Skip onboarding from the initial welcome screen | Positive Functional | P1 |
+| `@REQ-KTK-101` | Onboarding & Walkthrough | `TC-KTK-040` | Skip onboarding midway from step two | Positive Functional | P1 |
+| `@REQ-KTK-101` | Onboarding & Walkthrough | `TC-KTK-041` | Verify onboarding step headers correspond to expected feature guides | Positive Functional | P1 |
+| `@REQ-KTK-501` | Physical QR Code Scanner | `TC-KTK-042` | Trigger QR code scanner from dashboard | Smoke / Critical Path | P0 |
+| `@REQ-KTK-501` | Physical QR Code Scanner | `TC-KTK-043` | Verify camera permission requirement message when scanner is launched | Negative Validation | P1 |
+| `@REQ-KTK-501` | Physical QR Code Scanner | `TC-KTK-044` | Return safely to My Stash after opening scanner | Positive Functional | P1 |
+| `@REQ-KTK-301` | Application Settings & Localization | `TC-KTK-045` | Switch application language to Bahasa Indonesia | Smoke / Critical Path | P0 |
+| `@REQ-KTK-301` | Application Settings & Localization | `TC-KTK-046` | Switch application language back to English | Positive Functional | P1 |
+| `@REQ-KTK-301` | Application Settings & Localization | `TC-KTK-047` | Navigate to About Kotakin screen and verify app version | Positive Functional | P1 |
+| `@REQ-KTK-301` | Application Settings & Localization | `TC-KTK-048` | Navigate back to My Stash from Settings screen | Positive Functional | P1 |
+| `@REQ-KTK-301` | Application Settings & Localization | `TC-KTK-049` | Verify Backup and Restore action buttons are accessible | Positive Functional | P1 |
 
 ---
 
@@ -84,10 +84,10 @@
 ### Modul: Box Creation & Management
 
 #### [TC-KTK-001] Create a new box with all fields populated
-- **Jira Issue:** `@JIRA-KTK-201`
+- **Requirement:** `@REQ-KTK-201`
 - **Kategori:** Smoke / Critical Path
 - **Prioritas:** P0 (Critical / Smoke)
-- **Tags:** `@feature-box @JIRA-KTK-201 @automated @smoke @regression @android`
+- **Tags:** `@feature-box @REQ-KTK-201 @automated @smoke @regression @android`
 - **Langkah Pengujian (Gherkin):**
   `When the user taps the "New box" button`  
   `And the user enters box name "Kitchenware" and description "Fragile plates and glassware"`  
@@ -97,7 +97,7 @@
 - **Expected Result:** the box "Kitchenware" should appear in the stash list
 
 #### [TC-KTK-002] Create a new box with only mandatory name field
-- **Jira Issue:** `@JIRA-KTK-201`
+- **Requirement:** `@REQ-KTK-201`
 - **Kategori:** Positive Functional
 - **Prioritas:** P1 (Medium)
 - **Tags:** `@automated @functional @android`
@@ -109,7 +109,7 @@
 - **Expected Result:** the box "Garage Tools" should appear in the stash list
 
 #### [TC-KTK-003] View box detail and verify action buttons
-- **Jira Issue:** `@JIRA-KTK-201`
+- **Requirement:** `@REQ-KTK-201`
 - **Kategori:** Positive Functional
 - **Prioritas:** P1 (Medium)
 - **Tags:** `@automated @e2e @regression @android`
@@ -119,7 +119,7 @@
 - **Expected Result:** the box detail screen should display "Add new item" and "Show QR code" buttons
 
 #### [TC-KTK-004] Add a box to favorites
-- **Jira Issue:** `@JIRA-KTK-201`
+- **Requirement:** `@REQ-KTK-201`
 - **Kategori:** Positive Functional
 - **Prioritas:** P1 (Medium)
 - **Tags:** `@automated @functional @favorite @android`
@@ -131,7 +131,7 @@
 - **Expected Result:** the action option should update to "Remove from favorites"
 
 #### [TC-KTK-005] Remove a box from favorites
-- **Jira Issue:** `@JIRA-KTK-201`
+- **Requirement:** `@REQ-KTK-201`
 - **Kategori:** Positive Functional
 - **Prioritas:** P1 (Medium)
 - **Tags:** `@automated @functional @favorite @android`
@@ -143,7 +143,7 @@
 - **Expected Result:** the action option should update to "Add to favorites"
 
 #### [TC-KTK-006] Edit existing box details and save changes successfully
-- **Jira Issue:** `@JIRA-KTK-201`
+- **Requirement:** `@REQ-KTK-201`
 - **Kategori:** Positive Functional
 - **Prioritas:** P1 (Medium)
 - **Tags:** `@automated @functional @edit @android`
@@ -157,7 +157,7 @@
 - **Expected Result:** the box title should display "Kitchenware Updated"
 
 #### [TC-KTK-007] Fail to save box edits when box name is cleared
-- **Jira Issue:** `@JIRA-KTK-201`
+- **Requirement:** `@REQ-KTK-201`
 - **Kategori:** Negative Validation
 - **Prioritas:** P1 (Medium)
 - **Tags:** `@automated @negative @edit @android`
@@ -171,7 +171,7 @@
 - **Expected Result:** the user should remain on the "Edit Box" screen
 
 #### [TC-KTK-008] Cancel box editing and verify original details remain unchanged
-- **Jira Issue:** `@JIRA-KTK-201`
+- **Requirement:** `@REQ-KTK-201`
 - **Kategori:** Positive Functional
 - **Prioritas:** P1 (Medium)
 - **Tags:** `@automated @functional @edit @cancel @android`
@@ -185,7 +185,7 @@
 - **Expected Result:** the box title should display "Kitchenware Updated"
 
 #### [TC-KTK-009] Cancel box deletion and verify box is preserved in stash
-- **Jira Issue:** `@JIRA-KTK-201`
+- **Requirement:** `@REQ-KTK-201`
 - **Kategori:** Positive Functional
 - **Prioritas:** P1 (Medium)
 - **Tags:** `@automated @functional @delete @cancel @android`
@@ -199,7 +199,7 @@
 - **Expected Result:** the user should remain on the box detail screen
 
 #### [TC-KTK-010] Delete a box permanently and verify removal from stash dashboard
-- **Jira Issue:** `@JIRA-KTK-201`
+- **Requirement:** `@REQ-KTK-201`
 - **Kategori:** Positive Functional
 - **Prioritas:** P1 (Medium)
 - **Tags:** `@automated @functional @delete @android`
@@ -214,7 +214,7 @@
 - **Expected Result:** the box "Kitchenware Updated" should no longer appear in the stash list
 
 #### [TC-KTK-011] Allow creation of duplicate box names and update total box counter
-- **Jira Issue:** `@JIRA-KTK-201`
+- **Requirement:** `@REQ-KTK-201`
 - **Kategori:** Positive Functional
 - **Prioritas:** P1 (Medium)
 - **Tags:** `@automated @functional @duplicate @android`
@@ -226,7 +226,7 @@
 - **Expected Result:** multiple boxes with name "Garage Tools" should appear in the stash list
 
 #### [TC-KTK-012] Search for an existing box by name
-- **Jira Issue:** `@JIRA-KTK-201`
+- **Requirement:** `@REQ-KTK-201`
 - **Kategori:** Positive Functional
 - **Prioritas:** P1 (Medium)
 - **Tags:** `@automated @functional @android`
@@ -236,7 +236,7 @@
 - **Expected Result:** the stash list should display "Garage Tools"
 
 #### [TC-KTK-013] Clear search query and restore full box list
-- **Jira Issue:** `@JIRA-KTK-201`
+- **Requirement:** `@REQ-KTK-201`
 - **Kategori:** Positive Functional
 - **Prioritas:** P1 (Medium)
 - **Tags:** `@automated @functional @android`
@@ -247,7 +247,7 @@
 - **Expected Result:** the search input should be empty
 
 #### [TC-KTK-014] Search box with case-insensitive query
-- **Jira Issue:** `@JIRA-KTK-201`
+- **Requirement:** `@REQ-KTK-201`
 - **Kategori:** Positive Functional
 - **Prioritas:** P1 (Medium)
 - **Tags:** `@automated @functional @regex @android`
@@ -257,7 +257,7 @@
 - **Expected Result:** the stash list should display "Garage Tools"
 
 #### [TC-KTK-015] Search box using partial substring matching
-- **Jira Issue:** `@JIRA-KTK-201`
+- **Requirement:** `@REQ-KTK-201`
 - **Kategori:** Positive Functional
 - **Prioritas:** P1 (Medium)
 - **Tags:** `@automated @functional @regex @android`
@@ -267,7 +267,7 @@
 - **Expected Result:** the stash list should display "Garage Tools"
 
 #### [TC-KTK-016] Search box with leading and trailing whitespace query
-- **Jira Issue:** `@JIRA-KTK-201`
+- **Requirement:** `@REQ-KTK-201`
 - **Kategori:** Positive Functional
 - **Prioritas:** P1 (Medium)
 - **Tags:** `@automated @functional @sanitization @android`
@@ -277,7 +277,7 @@
 - **Expected Result:** the stash list should display "Garage Tools"
 
 #### [TC-KTK-017] Search for a box by the name of an item stored inside it
-- **Jira Issue:** `@JIRA-KTK-201`
+- **Requirement:** `@REQ-KTK-201`
 - **Kategori:** Positive Functional
 - **Prioritas:** P1 (Medium)
 - **Tags:** `@automated @functional @cross-search @android`
@@ -287,7 +287,7 @@
 - **Expected Result:** the stash list should display the box containing "Ceramic Mug"
 
 #### [TC-KTK-018] Fail to create box when mandatory box name is empty
-- **Jira Issue:** `@JIRA-KTK-201`
+- **Requirement:** `@REQ-KTK-201`
 - **Kategori:** Negative Validation
 - **Prioritas:** P1 (Medium)
 - **Tags:** `@automated @negative @android`
@@ -299,7 +299,7 @@
 - **Expected Result:** the user should remain on the "New Box" creation form
 
 #### [TC-KTK-019] Search with non-existent keyword shows empty results state
-- **Jira Issue:** `@JIRA-KTK-201`
+- **Requirement:** `@REQ-KTK-201`
 - **Kategori:** Negative Validation
 - **Prioritas:** P1 (Medium)
 - **Tags:** `@automated @negative @android`
@@ -309,7 +309,7 @@
 - **Expected Result:** the stash list should display the empty search result message
 
 #### [TC-KTK-020] Create a box with special characters and numerical identifiers
-- **Jira Issue:** `@JIRA-KTK-201`
+- **Requirement:** `@REQ-KTK-201`
 - **Kategori:** Positive Functional
 - **Prioritas:** P1 (Medium)
 - **Tags:** `@automated @edge-case @android`
@@ -322,7 +322,7 @@
 - **Expected Result:** the box "Box #101 [Fragile] & 100% Cotton" should appear in the stash list
 
 #### [TC-KTK-021] Search box with special regex characters without application crash
-- **Jira Issue:** `@JIRA-KTK-201`
+- **Requirement:** `@REQ-KTK-201`
 - **Kategori:** Positive Functional
 - **Prioritas:** P1 (Medium)
 - **Tags:** `@automated @edge-case @regex @stress @android`
@@ -332,7 +332,7 @@
 - **Expected Result:** the stash list should handle the query without crashing
 
 #### [TC-KTK-022] Fail to create box when name contains only whitespace
-- **Jira Issue:** `@JIRA-KTK-201`
+- **Requirement:** `@REQ-KTK-201`
 - **Kategori:** Negative Validation
 - **Prioritas:** P1 (Medium)
 - **Tags:** `@p1 @automated @negative @boundary @AC-02 @android`
@@ -344,7 +344,7 @@
 - **Expected Result:** the user should remain on the "New Box" creation form
 
 #### [TC-KTK-023] Create a box with minimum boundary single-character name
-- **Jira Issue:** `@JIRA-KTK-201`
+- **Requirement:** `@REQ-KTK-201`
 - **Kategori:** Boundary Value Analysis
 - **Prioritas:** P2 (Edge Case)
 - **Tags:** `@p1 @automated @positive @boundary @AC-01 @android`
@@ -356,7 +356,7 @@
 - **Expected Result:** the box "B" should appear in the stash list
 
 #### [TC-KTK-024] Create a box with script injection tags and verify literal text rendering
-- **Jira Issue:** `@JIRA-KTK-201`
+- **Requirement:** `@REQ-KTK-201`
 - **Kategori:** Security & Sanitization
 - **Prioritas:** P2 (Edge Case)
 - **Tags:** `@p2 @automated @positive @security @AC-01 @android`
@@ -368,7 +368,7 @@
 - **Expected Result:** the box "<script>alert(1)</script> Safe Box" should appear in the stash list
 
 #### [TC-KTK-025] Cancel box creation midway and verify draft is not saved to stash
-- **Jira Issue:** `@JIRA-KTK-201`
+- **Requirement:** `@REQ-KTK-201`
 - **Kategori:** Negative Validation
 - **Prioritas:** P1 (Medium)
 - **Tags:** `@p1 @automated @negative @lifecycle @cancel @AC-03 @android`
@@ -381,7 +381,7 @@
 - **Expected Result:** the box "Abandoned Draft Box" should no longer appear in the stash list
 
 #### [TC-KTK-026] Preserve dashboard state when application is minimized to background
-- **Jira Issue:** `@JIRA-KTK-201`
+- **Requirement:** `@REQ-KTK-201`
 - **Kategori:** App Lifecycle
 - **Prioritas:** P1 (Medium)
 - **Tags:** `@p2 @automated @lifecycle @resilience @AC-04 @android`
@@ -394,10 +394,10 @@
 ### Modul: Item Management Inside Box
 
 #### [TC-KTK-027] Add a new item with photo, title, description, and adjusted quantity
-- **Jira Issue:** `@JIRA-KTK-401`
+- **Requirement:** `@REQ-KTK-401`
 - **Kategori:** Security & Sanitization
 - **Prioritas:** P0 (Critical / Smoke)
-- **Tags:** `@feature-item @JIRA-KTK-401 @automated @smoke @regression @android`
+- **Tags:** `@feature-item @REQ-KTK-401 @automated @smoke @regression @android`
 - **Langkah Pengujian (Gherkin):**
   `When the user taps the "Add new item" button`  
   `And the user captures a photo and proceeds to item details`  
@@ -408,7 +408,7 @@
 - **Expected Result:** the item "Ceramic Mug" should be listed inside the box
 
 #### [TC-KTK-028] Add an item with mandatory title only and default quantity
-- **Jira Issue:** `@JIRA-KTK-401`
+- **Requirement:** `@REQ-KTK-401`
 - **Kategori:** Positive Functional
 - **Prioritas:** P1 (Medium)
 - **Tags:** `@automated @functional @android`
@@ -421,7 +421,7 @@
 - **Expected Result:** the item "Spare Keys" should be listed inside the box
 
 #### [TC-KTK-029] Adjust item quantity using increment and decrement controls
-- **Jira Issue:** `@JIRA-KTK-401`
+- **Requirement:** `@REQ-KTK-401`
 - **Kategori:** Positive Functional
 - **Prioritas:** P1 (Medium)
 - **Tags:** `@automated @functional @android`
@@ -434,7 +434,7 @@
 - **Expected Result:** the item quantity indicator should display 3
 
 #### [TC-KTK-030] Add an item with minimum boundary single-character title
-- **Jira Issue:** `@JIRA-KTK-401`
+- **Requirement:** `@REQ-KTK-401`
 - **Kategori:** Boundary Value Analysis
 - **Prioritas:** P2 (Edge Case)
 - **Tags:** `@automated @functional @boundary @android`
@@ -447,7 +447,7 @@
 - **Expected Result:** the item "X" should be listed inside the box
 
 #### [TC-KTK-031] Fail to save item when mandatory title is empty
-- **Jira Issue:** `@JIRA-KTK-401`
+- **Requirement:** `@REQ-KTK-401`
 - **Kategori:** Negative Validation
 - **Prioritas:** P1 (Medium)
 - **Tags:** `@automated @negative @android`
@@ -460,7 +460,7 @@
 - **Expected Result:** the user should remain on the "Add Item Details" screen
 
 #### [TC-KTK-032] Fail to save item when title contains only whitespace
-- **Jira Issue:** `@JIRA-KTK-401`
+- **Requirement:** `@REQ-KTK-401`
 - **Kategori:** Negative Validation
 - **Prioritas:** P1 (Medium)
 - **Tags:** `@automated @negative @android`
@@ -473,7 +473,7 @@
 - **Expected Result:** the user should remain on the "Add Item Details" screen
 
 #### [TC-KTK-033] Cancel item creation and discard captured photo
-- **Jira Issue:** `@JIRA-KTK-401`
+- **Requirement:** `@REQ-KTK-401`
 - **Kategori:** Negative Validation
 - **Prioritas:** P1 (Medium)
 - **Tags:** `@automated @negative @android`
@@ -485,7 +485,7 @@
 - **Expected Result:** the user should be returned to the box detail screen without saving
 
 #### [TC-KTK-034] Add an item with special characters, punctuation, and emojis
-- **Jira Issue:** `@JIRA-KTK-401`
+- **Requirement:** `@REQ-KTK-401`
 - **Kategori:** Positive Functional
 - **Prioritas:** P1 (Medium)
 - **Tags:** `@automated @edge-case @regex @android`
@@ -498,7 +498,7 @@
 - **Expected Result:** the item "Item #42: [Vintage] & 'Rare' ⚡️ (50% Off)" should be listed inside the box
 
 #### [TC-KTK-035] Add an item with maximum length boundary title and long description
-- **Jira Issue:** `@JIRA-KTK-401`
+- **Requirement:** `@REQ-KTK-401`
 - **Kategori:** Security & Sanitization
 - **Prioritas:** P2 (Edge Case)
 - **Tags:** `@automated @edge-case @stress @boundary @android`
@@ -511,7 +511,7 @@
 - **Expected Result:** the maximum length item should be listed inside the box
 
 #### [TC-KTK-036] Add an item with script injection tags and verify literal text rendering
-- **Jira Issue:** `@JIRA-KTK-401`
+- **Requirement:** `@REQ-KTK-401`
 - **Kategori:** Security & Sanitization
 - **Prioritas:** P2 (Edge Case)
 - **Tags:** `@automated @edge-case @security @android`
@@ -524,7 +524,7 @@
 - **Expected Result:** the item "<script>alert('XSS')</script>" should be listed inside the box
 
 #### [TC-KTK-037] Remove an attached photo before saving item
-- **Jira Issue:** `@JIRA-KTK-401`
+- **Requirement:** `@REQ-KTK-401`
 - **Kategori:** Positive Functional
 - **Prioritas:** P1 (Medium)
 - **Tags:** `@automated @edge-case @android`
@@ -538,10 +538,10 @@
 ### Modul: Onboarding & Walkthrough
 
 #### [TC-KTK-038] Complete full onboarding walkthrough to My Stash
-- **Jira Issue:** `@JIRA-KTK-101`
+- **Requirement:** `@REQ-KTK-101`
 - **Kategori:** Smoke / Critical Path
 - **Prioritas:** P0 (Critical / Smoke)
-- **Tags:** `@feature-onboarding @JIRA-KTK-101 @automated @smoke @android`
+- **Tags:** `@feature-onboarding @REQ-KTK-101 @automated @smoke @android`
 - **Langkah Pengujian (Gherkin):**
   `Given the user opens the Kotakin app`  
   `When the user advances through all onboarding steps using the Next button`  
@@ -550,7 +550,7 @@
 - **Expected Result:** the user should be redirected to the "My Stash" dashboard
 
 #### [TC-KTK-039] Skip onboarding from the initial welcome screen
-- **Jira Issue:** `@JIRA-KTK-101`
+- **Requirement:** `@REQ-KTK-101`
 - **Kategori:** Positive Functional
 - **Prioritas:** P1 (Medium)
 - **Tags:** `@automated @functional @android`
@@ -561,7 +561,7 @@
 - **Expected Result:** the user should be redirected to the "My Stash" dashboard
 
 #### [TC-KTK-040] Skip onboarding midway from step two
-- **Jira Issue:** `@JIRA-KTK-101`
+- **Requirement:** `@REQ-KTK-101`
 - **Kategori:** Positive Functional
 - **Prioritas:** P1 (Medium)
 - **Tags:** `@automated @functional @android`
@@ -573,7 +573,7 @@
 - **Expected Result:** the user should be redirected to the "My Stash" dashboard
 
 #### [TC-KTK-041] Verify onboarding step headers correspond to expected feature guides
-- **Jira Issue:** `@JIRA-KTK-101`
+- **Requirement:** `@REQ-KTK-101`
 - **Kategori:** Positive Functional
 - **Prioritas:** P1 (Medium)
 - **Tags:** `@automated @edge-case @android`
@@ -591,17 +591,17 @@
 ### Modul: Physical QR Code Scanner
 
 #### [TC-KTK-042] Trigger QR code scanner from dashboard
-- **Jira Issue:** `@JIRA-KTK-501`
+- **Requirement:** `@REQ-KTK-501`
 - **Kategori:** Smoke / Critical Path
 - **Prioritas:** P0 (Critical / Smoke)
-- **Tags:** `@feature-scanner @JIRA-KTK-501 @automated @smoke @android`
+- **Tags:** `@feature-scanner @REQ-KTK-501 @automated @smoke @android`
 - **Langkah Pengujian (Gherkin):**
   `When the user taps the "Scan" button on the dashboard`  
   `Then the QR scanner view or permission prompt should be displayed`  
 - **Expected Result:** the QR scanner view or permission prompt should be displayed
 
 #### [TC-KTK-043] Verify camera permission requirement message when scanner is launched
-- **Jira Issue:** `@JIRA-KTK-501`
+- **Requirement:** `@REQ-KTK-501`
 - **Kategori:** Negative Validation
 - **Prioritas:** P1 (Medium)
 - **Tags:** `@automated @negative @android @permission`
@@ -611,7 +611,7 @@
 - **Expected Result:** the app should display the permission prompt button "Grant camera permission"
 
 #### [TC-KTK-044] Return safely to My Stash after opening scanner
-- **Jira Issue:** `@JIRA-KTK-501`
+- **Requirement:** `@REQ-KTK-501`
 - **Kategori:** Positive Functional
 - **Prioritas:** P1 (Medium)
 - **Tags:** `@automated @edge-case @android`
@@ -624,10 +624,10 @@
 ### Modul: Application Settings & Localization
 
 #### [TC-KTK-045] Switch application language to Bahasa Indonesia
-- **Jira Issue:** `@JIRA-KTK-301`
+- **Requirement:** `@REQ-KTK-301`
 - **Kategori:** Smoke / Critical Path
 - **Prioritas:** P0 (Critical / Smoke)
-- **Tags:** `@feature-settings @JIRA-KTK-301 @automated @smoke @android`
+- **Tags:** `@feature-settings @REQ-KTK-301 @automated @smoke @android`
 - **Langkah Pengujian (Gherkin):**
   `When the user opens the Settings screen`  
   `And the user selects the language option "Bahasa Indonesia"`  
@@ -635,7 +635,7 @@
 - **Expected Result:** the language option "Bahasa Indonesia" should be selected
 
 #### [TC-KTK-046] Switch application language back to English
-- **Jira Issue:** `@JIRA-KTK-301`
+- **Requirement:** `@REQ-KTK-301`
 - **Kategori:** Positive Functional
 - **Prioritas:** P1 (Medium)
 - **Tags:** `@automated @functional @android`
@@ -646,7 +646,7 @@
 - **Expected Result:** the language option "English" should be selected
 
 #### [TC-KTK-047] Navigate to About Kotakin screen and verify app version
-- **Jira Issue:** `@JIRA-KTK-301`
+- **Requirement:** `@REQ-KTK-301`
 - **Kategori:** Positive Functional
 - **Prioritas:** P1 (Medium)
 - **Tags:** `@automated @functional @android`
@@ -659,7 +659,7 @@
 - **Expected Result:** the user should see the Settings screen header
 
 #### [TC-KTK-048] Navigate back to My Stash from Settings screen
-- **Jira Issue:** `@JIRA-KTK-301`
+- **Requirement:** `@REQ-KTK-301`
 - **Kategori:** Positive Functional
 - **Prioritas:** P1 (Medium)
 - **Tags:** `@automated @functional @android`
@@ -670,7 +670,7 @@
 - **Expected Result:** the user should be redirected to the "My Stash" dashboard
 
 #### [TC-KTK-049] Verify Backup and Restore action buttons are accessible
-- **Jira Issue:** `@JIRA-KTK-301`
+- **Requirement:** `@REQ-KTK-301`
 - **Kategori:** Positive Functional
 - **Prioritas:** P1 (Medium)
 - **Tags:** `@automated @edge-case @android`

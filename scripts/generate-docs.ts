@@ -4,7 +4,7 @@ import path from 'path';
 interface TestCase {
   id: string;
   module: string;
-  jiraKey: string;
+  reqKey: string;
   featureTitle: string;
   scenarioTitle: string;
   type: string;
@@ -43,7 +43,7 @@ function parseFeatureFiles(): TestCase[] {
       const content = fs.readFileSync(fullPath, 'utf-8');
       const lines = content.split('\n');
 
-      let currentJira = 'KTK-GEN';
+      let currentReqKey = 'KTK-GEN';
       let featureTitle = mod;
       let currentTags: string[] = [];
       let inScenario = false;
@@ -54,9 +54,9 @@ function parseFeatureFiles(): TestCase[] {
         const rawLine = lines[i];
         const line = rawLine.trim();
 
-        if (line.startsWith('@JIRA-') || line.includes('@JIRA-')) {
-          const match = line.match(/@JIRA-([A-Z0-9-]+)/);
-          if (match) currentJira = match[1];
+        if (line.includes('@REQ-') || line.includes('@JIRA-')) {
+          const match = line.match(/@(REQ|JIRA)-([A-Z0-9-]+)/);
+          if (match) currentReqKey = match[2];
         }
 
         if (line.startsWith('Feature:')) {
@@ -72,7 +72,7 @@ function parseFeatureFiles(): TestCase[] {
 
         if (line.startsWith('Scenario:') || line.startsWith('Scenario Outline:')) {
           if (inScenario && currentScenarioTitle) {
-            testCases.push(buildTestCase(tcCounter++, mod, currentJira, featureTitle, currentScenarioTitle, currentTags, currentSteps));
+            testCases.push(buildTestCase(tcCounter++, mod, currentReqKey, featureTitle, currentScenarioTitle, currentTags, currentSteps));
             currentSteps = [];
             currentTags = [];
           }
@@ -84,7 +84,7 @@ function parseFeatureFiles(): TestCase[] {
         if (inScenario) {
           if (line.startsWith('@')) {
             // New scenario tags
-            testCases.push(buildTestCase(tcCounter++, mod, currentJira, featureTitle, currentScenarioTitle, currentTags, currentSteps));
+            testCases.push(buildTestCase(tcCounter++, mod, currentReqKey, featureTitle, currentScenarioTitle, currentTags, currentSteps));
             inScenario = false;
             currentScenarioTitle = '';
             currentSteps = [];
@@ -102,7 +102,7 @@ function parseFeatureFiles(): TestCase[] {
       }
 
       if (inScenario && currentScenarioTitle) {
-        testCases.push(buildTestCase(tcCounter++, mod, currentJira, featureTitle, currentScenarioTitle, currentTags, currentSteps));
+        testCases.push(buildTestCase(tcCounter++, mod, currentReqKey, featureTitle, currentScenarioTitle, currentTags, currentSteps));
       }
     }
   }
@@ -113,7 +113,7 @@ function parseFeatureFiles(): TestCase[] {
 function buildTestCase(
   num: number,
   moduleKey: string,
-  jiraKey: string,
+  reqKey: string,
   featureTitle: string,
   scenarioTitle: string,
   tags: string[],
@@ -148,7 +148,7 @@ function buildTestCase(
   return {
     id,
     module: MODULES_MAP[moduleKey] || moduleKey,
-    jiraKey,
+    reqKey,
     featureTitle,
     scenarioTitle,
     type,
@@ -183,19 +183,19 @@ function generateMarkdown(testCases: TestCase[]): string {
   md += `| **Manual Verification Cases** | **${manual}** | ${((manual / total) * 100).toFixed(1)}% |\n\n`;
 
   md += `### Distribusi Modul Pengujian\n\n`;
-  md += `| Modul Aplikasi | Total Skenario | Status Otomatisasi | Jira Key |\n`;
+  md += `| Modul Aplikasi | Total Skenario | Status Otomatisasi | Requirement Key |\n`;
   md += `| :--- | :---: | :---: | :--- |\n`;
   for (const [modName, list] of Object.entries(modulesGroup)) {
-    const jira = list[0]?.jiraKey || 'KTK-XXX';
-    md += `| **${modName}** | ${list.length} | 🟢 100% Automated | \`@JIRA-${jira}\` |\n`;
+    const req = list[0]?.reqKey || 'KTK-XXX';
+    md += `| **${modName}** | ${list.length} | 🟢 100% Automated | \`@REQ-${req}\` |\n`;
   }
   md += `\n---\n\n`;
 
   md += `## 2. Requirements Traceability Matrix (RTM)\n\n`;
-  md += `| Jira ID | Modul | Test Case ID | Nama Skenario | Kategori Pengujian | Prioritas |\n`;
+  md += `| Requirement ID | Modul | Test Case ID | Nama Skenario | Kategori Pengujian | Prioritas |\n`;
   md += `| :--- | :--- | :--- | :--- | :--- | :---: |\n`;
   for (const tc of testCases) {
-    md += `| \`${tc.jiraKey}\` | ${tc.module} | \`${tc.id}\` | ${tc.scenarioTitle} | ${tc.type} | ${tc.priority.split(' ')[0]} |\n`;
+    md += `| \`@REQ-${tc.reqKey}\` | ${tc.module} | \`${tc.id}\` | ${tc.scenarioTitle} | ${tc.type} | ${tc.priority.split(' ')[0]} |\n`;
   }
   md += `\n---\n\n`;
 
@@ -204,7 +204,7 @@ function generateMarkdown(testCases: TestCase[]): string {
     md += `### Modul: ${modName}\n\n`;
     for (const tc of list) {
       md += `#### [${tc.id}] ${tc.scenarioTitle}\n`;
-      md += `- **Jira Issue:** \`@JIRA-${tc.jiraKey}\`\n`;
+      md += `- **Requirement:** \`@REQ-${tc.reqKey}\`\n`;
       md += `- **Kategori:** ${tc.type}\n`;
       md += `- **Prioritas:** ${tc.priority}\n`;
       md += `- **Tags:** \`${tc.tags.join(' ')}\`\n`;
@@ -223,7 +223,7 @@ function generateCSV(testCases: TestCase[]): string {
   const headers = [
     'Test Case ID',
     'Module',
-    'Jira Key',
+    'Requirement Key',
     'Scenario Title',
     'Test Type',
     'Priority',
@@ -245,7 +245,7 @@ function generateCSV(testCases: TestCase[]): string {
       [
         tc.id,
         `"${tc.module}"`,
-        tc.jiraKey,
+        `@REQ-${tc.reqKey}`,
         sanitizedTitle,
         `"${tc.type}"`,
         `"${tc.priority}"`,
@@ -309,7 +309,7 @@ function generateExcelXML(testCases: TestCase[]): string {
    <Row ss:Height="26">
     <Cell ss:StyleID="Header"><Data ss:Type="String">Test Case ID</Data></Cell>
     <Cell ss:StyleID="Header"><Data ss:Type="String">Module</Data></Cell>
-    <Cell ss:StyleID="Header"><Data ss:Type="String">Jira Key</Data></Cell>
+    <Cell ss:StyleID="Header"><Data ss:Type="String">Requirement Key</Data></Cell>
     <Cell ss:StyleID="Header"><Data ss:Type="String">Scenario Title</Data></Cell>
     <Cell ss:StyleID="Header"><Data ss:Type="String">Test Type</Data></Cell>
     <Cell ss:StyleID="Header"><Data ss:Type="String">Priority</Data></Cell>
@@ -323,7 +323,7 @@ function generateExcelXML(testCases: TestCase[]): string {
     xml += `   <Row ss:Height="22">
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">${escapeXml(tc.id)}</Data></Cell>
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">${escapeXml(tc.module)}</Data></Cell>
-    <Cell ss:StyleID="DataCell"><Data ss:Type="String">${escapeXml(tc.jiraKey)}</Data></Cell>
+    <Cell ss:StyleID="DataCell"><Data ss:Type="String">${escapeXml('@REQ-' + tc.reqKey)}</Data></Cell>
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">${escapeXml(tc.scenarioTitle)}</Data></Cell>
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">${escapeXml(tc.type)}</Data></Cell>
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">${escapeXml(tc.priority)}</Data></Cell>

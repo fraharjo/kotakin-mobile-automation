@@ -1,4 +1,4 @@
-@feature-onboarding @JIRA-KTK-101
+@feature-onboarding @REQ-KTK-101
 Feature: Kotakin Onboarding & Walkthrough
   As a new Kotakin user
   I want to be guided through the initial walkthrough screens

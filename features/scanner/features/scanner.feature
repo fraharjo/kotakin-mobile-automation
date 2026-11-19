@@ -1,4 +1,4 @@
-@feature-scanner @JIRA-KTK-501
+@feature-scanner @REQ-KTK-501
 Feature: Kotakin Physical QR Code Scanner
   As a Kotakin user
   I want to scan physical QR codes attached to storage boxes

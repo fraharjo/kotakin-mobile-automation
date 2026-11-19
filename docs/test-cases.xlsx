@@ -43,7 +43,7 @@
    <Row ss:Height="26">
     <Cell ss:StyleID="Header"><Data ss:Type="String">Test Case ID</Data></Cell>
     <Cell ss:StyleID="Header"><Data ss:Type="String">Module</Data></Cell>
-    <Cell ss:StyleID="Header"><Data ss:Type="String">Jira Key</Data></Cell>
+    <Cell ss:StyleID="Header"><Data ss:Type="String">Requirement Key</Data></Cell>
     <Cell ss:StyleID="Header"><Data ss:Type="String">Scenario Title</Data></Cell>
     <Cell ss:StyleID="Header"><Data ss:Type="String">Test Type</Data></Cell>
     <Cell ss:StyleID="Header"><Data ss:Type="String">Priority</Data></Cell>
@@ -55,19 +55,19 @@
    <Row ss:Height="22">
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">TC-KTK-001</Data></Cell>
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">Box Creation &amp; Management</Data></Cell>
-    <Cell ss:StyleID="DataCell"><Data ss:Type="String">KTK-201</Data></Cell>
+    <Cell ss:StyleID="DataCell"><Data ss:Type="String">@REQ-KTK-201</Data></Cell>
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">Create a new box with all fields populated</Data></Cell>
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">Smoke / Critical Path</Data></Cell>
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">P0 (Critical / Smoke)</Data></Cell>
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">Automated</Data></Cell>
-    <Cell ss:StyleID="DataCell"><Data ss:Type="String">@feature-box @JIRA-KTK-201 @automated @smoke @regression @android</Data></Cell>
+    <Cell ss:StyleID="DataCell"><Data ss:Type="String">@feature-box @REQ-KTK-201 @automated @smoke @regression @android</Data></Cell>
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">When the user taps the &quot;New box&quot; button | And the user enters box name &quot;Kitchenware&quot; and description &quot;Fragile plates and glassware&quot; | And the user selects box color &quot;Blue&quot; and enters location &quot;Kitchen Cupboard A&quot; | And the user taps the Create Box button | Then the box &quot;Kitchenware&quot; should appear in the stash list</Data></Cell>
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">the box &quot;Kitchenware&quot; should appear in the stash list</Data></Cell>
    </Row>
    <Row ss:Height="22">
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">TC-KTK-002</Data></Cell>
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">Box Creation &amp; Management</Data></Cell>
-    <Cell ss:StyleID="DataCell"><Data ss:Type="String">KTK-201</Data></Cell>
+    <Cell ss:StyleID="DataCell"><Data ss:Type="String">@REQ-KTK-201</Data></Cell>
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">Create a new box with only mandatory name field</Data></Cell>
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">Positive Functional</Data></Cell>
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">P1 (Medium)</Data></Cell>
@@ -79,7 +79,7 @@
    <Row ss:Height="22">
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">TC-KTK-003</Data></Cell>
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">Box Creation &amp; Management</Data></Cell>
-    <Cell ss:StyleID="DataCell"><Data ss:Type="String">KTK-201</Data></Cell>
+    <Cell ss:StyleID="DataCell"><Data ss:Type="String">@REQ-KTK-201</Data></Cell>
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">View box detail and verify action buttons</Data></Cell>
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">Positive Functional</Data></Cell>
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">P1 (Medium)</Data></Cell>
@@ -91,7 +91,7 @@
    <Row ss:Height="22">
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">TC-KTK-004</Data></Cell>
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">Box Creation &amp; Management</Data></Cell>
-    <Cell ss:StyleID="DataCell"><Data ss:Type="String">KTK-201</Data></Cell>
+    <Cell ss:StyleID="DataCell"><Data ss:Type="String">@REQ-KTK-201</Data></Cell>
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">Add a box to favorites</Data></Cell>
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">Positive Functional</Data></Cell>
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">P1 (Medium)</Data></Cell>
@@ -103,7 +103,7 @@
    <Row ss:Height="22">
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">TC-KTK-005</Data></Cell>
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">Box Creation &amp; Management</Data></Cell>
-    <Cell ss:StyleID="DataCell"><Data ss:Type="String">KTK-201</Data></Cell>
+    <Cell ss:StyleID="DataCell"><Data ss:Type="String">@REQ-KTK-201</Data></Cell>
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">Remove a box from favorites</Data></Cell>
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">Positive Functional</Data></Cell>
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">P1 (Medium)</Data></Cell>
@@ -115,7 +115,7 @@
    <Row ss:Height="22">
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">TC-KTK-006</Data></Cell>
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">Box Creation &amp; Management</Data></Cell>
-    <Cell ss:StyleID="DataCell"><Data ss:Type="String">KTK-201</Data></Cell>
+    <Cell ss:StyleID="DataCell"><Data ss:Type="String">@REQ-KTK-201</Data></Cell>
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">Edit existing box details and save changes successfully</Data></Cell>
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">Positive Functional</Data></Cell>
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">P1 (Medium)</Data></Cell>
@@ -127,7 +127,7 @@
    <Row ss:Height="22">
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">TC-KTK-007</Data></Cell>
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">Box Creation &amp; Management</Data></Cell>
-    <Cell ss:StyleID="DataCell"><Data ss:Type="String">KTK-201</Data></Cell>
+    <Cell ss:StyleID="DataCell"><Data ss:Type="String">@REQ-KTK-201</Data></Cell>
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">Fail to save box edits when box name is cleared</Data></Cell>
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">Negative Validation</Data></Cell>
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">P1 (Medium)</Data></Cell>
@@ -139,7 +139,7 @@
    <Row ss:Height="22">
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">TC-KTK-008</Data></Cell>
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">Box Creation &amp; Management</Data></Cell>
-    <Cell ss:StyleID="DataCell"><Data ss:Type="String">KTK-201</Data></Cell>
+    <Cell ss:StyleID="DataCell"><Data ss:Type="String">@REQ-KTK-201</Data></Cell>
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">Cancel box editing and verify original details remain unchanged</Data></Cell>
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">Positive Functional</Data></Cell>
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">P1 (Medium)</Data></Cell>
@@ -151,7 +151,7 @@
    <Row ss:Height="22">
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">TC-KTK-009</Data></Cell>
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">Box Creation &amp; Management</Data></Cell>
-    <Cell ss:StyleID="DataCell"><Data ss:Type="String">KTK-201</Data></Cell>
+    <Cell ss:StyleID="DataCell"><Data ss:Type="String">@REQ-KTK-201</Data></Cell>
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">Cancel box deletion and verify box is preserved in stash</Data></Cell>
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">Positive Functional</Data></Cell>
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">P1 (Medium)</Data></Cell>
@@ -163,7 +163,7 @@
    <Row ss:Height="22">
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">TC-KTK-010</Data></Cell>
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">Box Creation &amp; Management</Data></Cell>
-    <Cell ss:StyleID="DataCell"><Data ss:Type="String">KTK-201</Data></Cell>
+    <Cell ss:StyleID="DataCell"><Data ss:Type="String">@REQ-KTK-201</Data></Cell>
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">Delete a box permanently and verify removal from stash dashboard</Data></Cell>
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">Positive Functional</Data></Cell>
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">P1 (Medium)</Data></Cell>
@@ -175,7 +175,7 @@
    <Row ss:Height="22">
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">TC-KTK-011</Data></Cell>
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">Box Creation &amp; Management</Data></Cell>
-    <Cell ss:StyleID="DataCell"><Data ss:Type="String">KTK-201</Data></Cell>
+    <Cell ss:StyleID="DataCell"><Data ss:Type="String">@REQ-KTK-201</Data></Cell>
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">Allow creation of duplicate box names and update total box counter</Data></Cell>
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">Positive Functional</Data></Cell>
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">P1 (Medium)</Data></Cell>
@@ -187,7 +187,7 @@
    <Row ss:Height="22">
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">TC-KTK-012</Data></Cell>
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">Box Creation &amp; Management</Data></Cell>
-    <Cell ss:StyleID="DataCell"><Data ss:Type="String">KTK-201</Data></Cell>
+    <Cell ss:StyleID="DataCell"><Data ss:Type="String">@REQ-KTK-201</Data></Cell>
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">Search for an existing box by name</Data></Cell>
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">Positive Functional</Data></Cell>
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">P1 (Medium)</Data></Cell>
@@ -199,7 +199,7 @@
    <Row ss:Height="22">
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">TC-KTK-013</Data></Cell>
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">Box Creation &amp; Management</Data></Cell>
-    <Cell ss:StyleID="DataCell"><Data ss:Type="String">KTK-201</Data></Cell>
+    <Cell ss:StyleID="DataCell"><Data ss:Type="String">@REQ-KTK-201</Data></Cell>
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">Clear search query and restore full box list</Data></Cell>
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">Positive Functional</Data></Cell>
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">P1 (Medium)</Data></Cell>
@@ -211,7 +211,7 @@
    <Row ss:Height="22">
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">TC-KTK-014</Data></Cell>
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">Box Creation &amp; Management</Data></Cell>
-    <Cell ss:StyleID="DataCell"><Data ss:Type="String">KTK-201</Data></Cell>
+    <Cell ss:StyleID="DataCell"><Data ss:Type="String">@REQ-KTK-201</Data></Cell>
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">Search box with case-insensitive query</Data></Cell>
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">Positive Functional</Data></Cell>
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">P1 (Medium)</Data></Cell>
@@ -223,7 +223,7 @@
    <Row ss:Height="22">
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">TC-KTK-015</Data></Cell>
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">Box Creation &amp; Management</Data></Cell>
-    <Cell ss:StyleID="DataCell"><Data ss:Type="String">KTK-201</Data></Cell>
+    <Cell ss:StyleID="DataCell"><Data ss:Type="String">@REQ-KTK-201</Data></Cell>
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">Search box using partial substring matching</Data></Cell>
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">Positive Functional</Data></Cell>
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">P1 (Medium)</Data></Cell>
@@ -235,7 +235,7 @@
    <Row ss:Height="22">
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">TC-KTK-016</Data></Cell>
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">Box Creation &amp; Management</Data></Cell>
-    <Cell ss:StyleID="DataCell"><Data ss:Type="String">KTK-201</Data></Cell>
+    <Cell ss:StyleID="DataCell"><Data ss:Type="String">@REQ-KTK-201</Data></Cell>
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">Search box with leading and trailing whitespace query</Data></Cell>
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">Positive Functional</Data></Cell>
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">P1 (Medium)</Data></Cell>
@@ -247,7 +247,7 @@
    <Row ss:Height="22">
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">TC-KTK-017</Data></Cell>
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">Box Creation &amp; Management</Data></Cell>
-    <Cell ss:StyleID="DataCell"><Data ss:Type="String">KTK-201</Data></Cell>
+    <Cell ss:StyleID="DataCell"><Data ss:Type="String">@REQ-KTK-201</Data></Cell>
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">Search for a box by the name of an item stored inside it</Data></Cell>
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">Positive Functional</Data></Cell>
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">P1 (Medium)</Data></Cell>
@@ -259,7 +259,7 @@
    <Row ss:Height="22">
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">TC-KTK-018</Data></Cell>
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">Box Creation &amp; Management</Data></Cell>
-    <Cell ss:StyleID="DataCell"><Data ss:Type="String">KTK-201</Data></Cell>
+    <Cell ss:StyleID="DataCell"><Data ss:Type="String">@REQ-KTK-201</Data></Cell>
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">Fail to create box when mandatory box name is empty</Data></Cell>
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">Negative Validation</Data></Cell>
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">P1 (Medium)</Data></Cell>
@@ -271,7 +271,7 @@
    <Row ss:Height="22">
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">TC-KTK-019</Data></Cell>
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">Box Creation &amp; Management</Data></Cell>
-    <Cell ss:StyleID="DataCell"><Data ss:Type="String">KTK-201</Data></Cell>
+    <Cell ss:StyleID="DataCell"><Data ss:Type="String">@REQ-KTK-201</Data></Cell>
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">Search with non-existent keyword shows empty results state</Data></Cell>
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">Negative Validation</Data></Cell>
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">P1 (Medium)</Data></Cell>
@@ -283,7 +283,7 @@
    <Row ss:Height="22">
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">TC-KTK-020</Data></Cell>
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">Box Creation &amp; Management</Data></Cell>
-    <Cell ss:StyleID="DataCell"><Data ss:Type="String">KTK-201</Data></Cell>
+    <Cell ss:StyleID="DataCell"><Data ss:Type="String">@REQ-KTK-201</Data></Cell>
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">Create a box with special characters and numerical identifiers</Data></Cell>
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">Positive Functional</Data></Cell>
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">P1 (Medium)</Data></Cell>
@@ -295,7 +295,7 @@
    <Row ss:Height="22">
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">TC-KTK-021</Data></Cell>
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">Box Creation &amp; Management</Data></Cell>
-    <Cell ss:StyleID="DataCell"><Data ss:Type="String">KTK-201</Data></Cell>
+    <Cell ss:StyleID="DataCell"><Data ss:Type="String">@REQ-KTK-201</Data></Cell>
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">Search box with special regex characters without application crash</Data></Cell>
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">Positive Functional</Data></Cell>
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">P1 (Medium)</Data></Cell>
@@ -307,7 +307,7 @@
    <Row ss:Height="22">
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">TC-KTK-022</Data></Cell>
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">Box Creation &amp; Management</Data></Cell>
-    <Cell ss:StyleID="DataCell"><Data ss:Type="String">KTK-201</Data></Cell>
+    <Cell ss:StyleID="DataCell"><Data ss:Type="String">@REQ-KTK-201</Data></Cell>
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">Fail to create box when name contains only whitespace</Data></Cell>
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">Negative Validation</Data></Cell>
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">P1 (Medium)</Data></Cell>
@@ -319,7 +319,7 @@
    <Row ss:Height="22">
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">TC-KTK-023</Data></Cell>
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">Box Creation &amp; Management</Data></Cell>
-    <Cell ss:StyleID="DataCell"><Data ss:Type="String">KTK-201</Data></Cell>
+    <Cell ss:StyleID="DataCell"><Data ss:Type="String">@REQ-KTK-201</Data></Cell>
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">Create a box with minimum boundary single-character name</Data></Cell>
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">Boundary Value Analysis</Data></Cell>
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">P2 (Edge Case)</Data></Cell>
@@ -331,7 +331,7 @@
    <Row ss:Height="22">
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">TC-KTK-024</Data></Cell>
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">Box Creation &amp; Management</Data></Cell>
-    <Cell ss:StyleID="DataCell"><Data ss:Type="String">KTK-201</Data></Cell>
+    <Cell ss:StyleID="DataCell"><Data ss:Type="String">@REQ-KTK-201</Data></Cell>
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">Create a box with script injection tags and verify literal text rendering</Data></Cell>
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">Security &amp; Sanitization</Data></Cell>
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">P2 (Edge Case)</Data></Cell>
@@ -343,7 +343,7 @@
    <Row ss:Height="22">
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">TC-KTK-025</Data></Cell>
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">Box Creation &amp; Management</Data></Cell>
-    <Cell ss:StyleID="DataCell"><Data ss:Type="String">KTK-201</Data></Cell>
+    <Cell ss:StyleID="DataCell"><Data ss:Type="String">@REQ-KTK-201</Data></Cell>
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">Cancel box creation midway and verify draft is not saved to stash</Data></Cell>
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">Negative Validation</Data></Cell>
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">P1 (Medium)</Data></Cell>
@@ -355,7 +355,7 @@
    <Row ss:Height="22">
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">TC-KTK-026</Data></Cell>
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">Box Creation &amp; Management</Data></Cell>
-    <Cell ss:StyleID="DataCell"><Data ss:Type="String">KTK-201</Data></Cell>
+    <Cell ss:StyleID="DataCell"><Data ss:Type="String">@REQ-KTK-201</Data></Cell>
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">Preserve dashboard state when application is minimized to background</Data></Cell>
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">App Lifecycle</Data></Cell>
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">P1 (Medium)</Data></Cell>
@@ -367,19 +367,19 @@
    <Row ss:Height="22">
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">TC-KTK-027</Data></Cell>
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">Item Management Inside Box</Data></Cell>
-    <Cell ss:StyleID="DataCell"><Data ss:Type="String">KTK-401</Data></Cell>
+    <Cell ss:StyleID="DataCell"><Data ss:Type="String">@REQ-KTK-401</Data></Cell>
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">Add a new item with photo, title, description, and adjusted quantity</Data></Cell>
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">Security &amp; Sanitization</Data></Cell>
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">P0 (Critical / Smoke)</Data></Cell>
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">Automated</Data></Cell>
-    <Cell ss:StyleID="DataCell"><Data ss:Type="String">@feature-item @JIRA-KTK-401 @automated @smoke @regression @android</Data></Cell>
+    <Cell ss:StyleID="DataCell"><Data ss:Type="String">@feature-item @REQ-KTK-401 @automated @smoke @regression @android</Data></Cell>
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">When the user taps the &quot;Add new item&quot; button | And the user captures a photo and proceeds to item details | And the user enters item title &quot;Ceramic Mug&quot; and description &quot;Blue porcelain coffee mug&quot; | And the user increases the item quantity by 2 | And the user taps the Save Item button | Then the item &quot;Ceramic Mug&quot; should be listed inside the box</Data></Cell>
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">the item &quot;Ceramic Mug&quot; should be listed inside the box</Data></Cell>
    </Row>
    <Row ss:Height="22">
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">TC-KTK-028</Data></Cell>
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">Item Management Inside Box</Data></Cell>
-    <Cell ss:StyleID="DataCell"><Data ss:Type="String">KTK-401</Data></Cell>
+    <Cell ss:StyleID="DataCell"><Data ss:Type="String">@REQ-KTK-401</Data></Cell>
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">Add an item with mandatory title only and default quantity</Data></Cell>
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">Positive Functional</Data></Cell>
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">P1 (Medium)</Data></Cell>
@@ -391,7 +391,7 @@
    <Row ss:Height="22">
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">TC-KTK-029</Data></Cell>
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">Item Management Inside Box</Data></Cell>
-    <Cell ss:StyleID="DataCell"><Data ss:Type="String">KTK-401</Data></Cell>
+    <Cell ss:StyleID="DataCell"><Data ss:Type="String">@REQ-KTK-401</Data></Cell>
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">Adjust item quantity using increment and decrement controls</Data></Cell>
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">Positive Functional</Data></Cell>
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">P1 (Medium)</Data></Cell>
@@ -403,7 +403,7 @@
    <Row ss:Height="22">
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">TC-KTK-030</Data></Cell>
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">Item Management Inside Box</Data></Cell>
-    <Cell ss:StyleID="DataCell"><Data ss:Type="String">KTK-401</Data></Cell>
+    <Cell ss:StyleID="DataCell"><Data ss:Type="String">@REQ-KTK-401</Data></Cell>
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">Add an item with minimum boundary single-character title</Data></Cell>
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">Boundary Value Analysis</Data></Cell>
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">P2 (Edge Case)</Data></Cell>
@@ -415,7 +415,7 @@
    <Row ss:Height="22">
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">TC-KTK-031</Data></Cell>
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">Item Management Inside Box</Data></Cell>
-    <Cell ss:StyleID="DataCell"><Data ss:Type="String">KTK-401</Data></Cell>
+    <Cell ss:StyleID="DataCell"><Data ss:Type="String">@REQ-KTK-401</Data></Cell>
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">Fail to save item when mandatory title is empty</Data></Cell>
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">Negative Validation</Data></Cell>
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">P1 (Medium)</Data></Cell>
@@ -427,7 +427,7 @@
    <Row ss:Height="22">
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">TC-KTK-032</Data></Cell>
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">Item Management Inside Box</Data></Cell>
-    <Cell ss:StyleID="DataCell"><Data ss:Type="String">KTK-401</Data></Cell>
+    <Cell ss:StyleID="DataCell"><Data ss:Type="String">@REQ-KTK-401</Data></Cell>
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">Fail to save item when title contains only whitespace</Data></Cell>
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">Negative Validation</Data></Cell>
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">P1 (Medium)</Data></Cell>
@@ -439,7 +439,7 @@
    <Row ss:Height="22">
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">TC-KTK-033</Data></Cell>
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">Item Management Inside Box</Data></Cell>
-    <Cell ss:StyleID="DataCell"><Data ss:Type="String">KTK-401</Data></Cell>
+    <Cell ss:StyleID="DataCell"><Data ss:Type="String">@REQ-KTK-401</Data></Cell>
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">Cancel item creation and discard captured photo</Data></Cell>
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">Negative Validation</Data></Cell>
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">P1 (Medium)</Data></Cell>
@@ -451,7 +451,7 @@
    <Row ss:Height="22">
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">TC-KTK-034</Data></Cell>
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">Item Management Inside Box</Data></Cell>
-    <Cell ss:StyleID="DataCell"><Data ss:Type="String">KTK-401</Data></Cell>
+    <Cell ss:StyleID="DataCell"><Data ss:Type="String">@REQ-KTK-401</Data></Cell>
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">Add an item with special characters, punctuation, and emojis</Data></Cell>
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">Positive Functional</Data></Cell>
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">P1 (Medium)</Data></Cell>
@@ -463,7 +463,7 @@
    <Row ss:Height="22">
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">TC-KTK-035</Data></Cell>
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">Item Management Inside Box</Data></Cell>
-    <Cell ss:StyleID="DataCell"><Data ss:Type="String">KTK-401</Data></Cell>
+    <Cell ss:StyleID="DataCell"><Data ss:Type="String">@REQ-KTK-401</Data></Cell>
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">Add an item with maximum length boundary title and long description</Data></Cell>
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">Security &amp; Sanitization</Data></Cell>
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">P2 (Edge Case)</Data></Cell>
@@ -475,7 +475,7 @@
    <Row ss:Height="22">
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">TC-KTK-036</Data></Cell>
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">Item Management Inside Box</Data></Cell>
-    <Cell ss:StyleID="DataCell"><Data ss:Type="String">KTK-401</Data></Cell>
+    <Cell ss:StyleID="DataCell"><Data ss:Type="String">@REQ-KTK-401</Data></Cell>
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">Add an item with script injection tags and verify literal text rendering</Data></Cell>
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">Security &amp; Sanitization</Data></Cell>
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">P2 (Edge Case)</Data></Cell>
@@ -487,7 +487,7 @@
    <Row ss:Height="22">
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">TC-KTK-037</Data></Cell>
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">Item Management Inside Box</Data></Cell>
-    <Cell ss:StyleID="DataCell"><Data ss:Type="String">KTK-401</Data></Cell>
+    <Cell ss:StyleID="DataCell"><Data ss:Type="String">@REQ-KTK-401</Data></Cell>
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">Remove an attached photo before saving item</Data></Cell>
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">Positive Functional</Data></Cell>
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">P1 (Medium)</Data></Cell>
@@ -499,19 +499,19 @@
    <Row ss:Height="22">
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">TC-KTK-038</Data></Cell>
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">Onboarding &amp; Walkthrough</Data></Cell>
-    <Cell ss:StyleID="DataCell"><Data ss:Type="String">KTK-101</Data></Cell>
+    <Cell ss:StyleID="DataCell"><Data ss:Type="String">@REQ-KTK-101</Data></Cell>
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">Complete full onboarding walkthrough to My Stash</Data></Cell>
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">Smoke / Critical Path</Data></Cell>
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">P0 (Critical / Smoke)</Data></Cell>
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">Automated</Data></Cell>
-    <Cell ss:StyleID="DataCell"><Data ss:Type="String">@feature-onboarding @JIRA-KTK-101 @automated @smoke @android</Data></Cell>
+    <Cell ss:StyleID="DataCell"><Data ss:Type="String">@feature-onboarding @REQ-KTK-101 @automated @smoke @android</Data></Cell>
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">Given the user opens the Kotakin app | When the user advances through all onboarding steps using the Next button | And the user taps the Got it button on the final step | Then the user should be redirected to the &quot;My Stash&quot; dashboard</Data></Cell>
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">the user should be redirected to the &quot;My Stash&quot; dashboard</Data></Cell>
    </Row>
    <Row ss:Height="22">
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">TC-KTK-039</Data></Cell>
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">Onboarding &amp; Walkthrough</Data></Cell>
-    <Cell ss:StyleID="DataCell"><Data ss:Type="String">KTK-101</Data></Cell>
+    <Cell ss:StyleID="DataCell"><Data ss:Type="String">@REQ-KTK-101</Data></Cell>
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">Skip onboarding from the initial welcome screen</Data></Cell>
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">Positive Functional</Data></Cell>
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">P1 (Medium)</Data></Cell>
@@ -523,7 +523,7 @@
    <Row ss:Height="22">
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">TC-KTK-040</Data></Cell>
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">Onboarding &amp; Walkthrough</Data></Cell>
-    <Cell ss:StyleID="DataCell"><Data ss:Type="String">KTK-101</Data></Cell>
+    <Cell ss:StyleID="DataCell"><Data ss:Type="String">@REQ-KTK-101</Data></Cell>
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">Skip onboarding midway from step two</Data></Cell>
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">Positive Functional</Data></Cell>
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">P1 (Medium)</Data></Cell>
@@ -535,7 +535,7 @@
    <Row ss:Height="22">
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">TC-KTK-041</Data></Cell>
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">Onboarding &amp; Walkthrough</Data></Cell>
-    <Cell ss:StyleID="DataCell"><Data ss:Type="String">KTK-101</Data></Cell>
+    <Cell ss:StyleID="DataCell"><Data ss:Type="String">@REQ-KTK-101</Data></Cell>
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">Verify onboarding step headers correspond to expected feature guides</Data></Cell>
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">Positive Functional</Data></Cell>
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">P1 (Medium)</Data></Cell>
@@ -547,19 +547,19 @@
    <Row ss:Height="22">
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">TC-KTK-042</Data></Cell>
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">Physical QR Code Scanner</Data></Cell>
-    <Cell ss:StyleID="DataCell"><Data ss:Type="String">KTK-501</Data></Cell>
+    <Cell ss:StyleID="DataCell"><Data ss:Type="String">@REQ-KTK-501</Data></Cell>
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">Trigger QR code scanner from dashboard</Data></Cell>
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">Smoke / Critical Path</Data></Cell>
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">P0 (Critical / Smoke)</Data></Cell>
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">Automated</Data></Cell>
-    <Cell ss:StyleID="DataCell"><Data ss:Type="String">@feature-scanner @JIRA-KTK-501 @automated @smoke @android</Data></Cell>
+    <Cell ss:StyleID="DataCell"><Data ss:Type="String">@feature-scanner @REQ-KTK-501 @automated @smoke @android</Data></Cell>
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">When the user taps the &quot;Scan&quot; button on the dashboard | Then the QR scanner view or permission prompt should be displayed</Data></Cell>
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">the QR scanner view or permission prompt should be displayed</Data></Cell>
    </Row>
    <Row ss:Height="22">
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">TC-KTK-043</Data></Cell>
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">Physical QR Code Scanner</Data></Cell>
-    <Cell ss:StyleID="DataCell"><Data ss:Type="String">KTK-501</Data></Cell>
+    <Cell ss:StyleID="DataCell"><Data ss:Type="String">@REQ-KTK-501</Data></Cell>
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">Verify camera permission requirement message when scanner is launched</Data></Cell>
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">Negative Validation</Data></Cell>
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">P1 (Medium)</Data></Cell>
@@ -571,7 +571,7 @@
    <Row ss:Height="22">
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">TC-KTK-044</Data></Cell>
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">Physical QR Code Scanner</Data></Cell>
-    <Cell ss:StyleID="DataCell"><Data ss:Type="String">KTK-501</Data></Cell>
+    <Cell ss:StyleID="DataCell"><Data ss:Type="String">@REQ-KTK-501</Data></Cell>
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">Return safely to My Stash after opening scanner</Data></Cell>
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">Positive Functional</Data></Cell>
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">P1 (Medium)</Data></Cell>
@@ -583,19 +583,19 @@
    <Row ss:Height="22">
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">TC-KTK-045</Data></Cell>
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">Application Settings &amp; Localization</Data></Cell>
-    <Cell ss:StyleID="DataCell"><Data ss:Type="String">KTK-301</Data></Cell>
+    <Cell ss:StyleID="DataCell"><Data ss:Type="String">@REQ-KTK-301</Data></Cell>
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">Switch application language to Bahasa Indonesia</Data></Cell>
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">Smoke / Critical Path</Data></Cell>
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">P0 (Critical / Smoke)</Data></Cell>
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">Automated</Data></Cell>
-    <Cell ss:StyleID="DataCell"><Data ss:Type="String">@feature-settings @JIRA-KTK-301 @automated @smoke @android</Data></Cell>
+    <Cell ss:StyleID="DataCell"><Data ss:Type="String">@feature-settings @REQ-KTK-301 @automated @smoke @android</Data></Cell>
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">When the user opens the Settings screen | And the user selects the language option &quot;Bahasa Indonesia&quot; | Then the language option &quot;Bahasa Indonesia&quot; should be selected</Data></Cell>
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">the language option &quot;Bahasa Indonesia&quot; should be selected</Data></Cell>
    </Row>
    <Row ss:Height="22">
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">TC-KTK-046</Data></Cell>
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">Application Settings &amp; Localization</Data></Cell>
-    <Cell ss:StyleID="DataCell"><Data ss:Type="String">KTK-301</Data></Cell>
+    <Cell ss:StyleID="DataCell"><Data ss:Type="String">@REQ-KTK-301</Data></Cell>
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">Switch application language back to English</Data></Cell>
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">Positive Functional</Data></Cell>
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">P1 (Medium)</Data></Cell>
@@ -607,7 +607,7 @@
    <Row ss:Height="22">
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">TC-KTK-047</Data></Cell>
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">Application Settings &amp; Localization</Data></Cell>
-    <Cell ss:StyleID="DataCell"><Data ss:Type="String">KTK-301</Data></Cell>
+    <Cell ss:StyleID="DataCell"><Data ss:Type="String">@REQ-KTK-301</Data></Cell>
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">Navigate to About Kotakin screen and verify app version</Data></Cell>
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">Positive Functional</Data></Cell>
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">P1 (Medium)</Data></Cell>
@@ -619,7 +619,7 @@
    <Row ss:Height="22">
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">TC-KTK-048</Data></Cell>
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">Application Settings &amp; Localization</Data></Cell>
-    <Cell ss:StyleID="DataCell"><Data ss:Type="String">KTK-301</Data></Cell>
+    <Cell ss:StyleID="DataCell"><Data ss:Type="String">@REQ-KTK-301</Data></Cell>
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">Navigate back to My Stash from Settings screen</Data></Cell>
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">Positive Functional</Data></Cell>
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">P1 (Medium)</Data></Cell>
@@ -631,7 +631,7 @@
    <Row ss:Height="22">
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">TC-KTK-049</Data></Cell>
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">Application Settings &amp; Localization</Data></Cell>
-    <Cell ss:StyleID="DataCell"><Data ss:Type="String">KTK-301</Data></Cell>
+    <Cell ss:StyleID="DataCell"><Data ss:Type="String">@REQ-KTK-301</Data></Cell>
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">Verify Backup and Restore action buttons are accessible</Data></Cell>
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">Positive Functional</Data></Cell>
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">P1 (Medium)</Data></Cell>
