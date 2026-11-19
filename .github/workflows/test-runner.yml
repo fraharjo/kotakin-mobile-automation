@@ -45,7 +45,7 @@ jobs:
         run: npm install
 
       - name: Verify TypeScript Compilation (Zero Errors)
-        run: npx tsc --noEmit
+        run: npm run typecheck
 
   # ==========================================
   # 2. ANDROID EMULATOR E2E TESTS (ON DEMAND)

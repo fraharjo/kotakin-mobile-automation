@@ -133,6 +133,11 @@ Tag Gherkin digunakan untuk mengatur keterlacakan dan eksekusi pengujian:
 | | `@permission` | Pengujian penolakan dan pemberian izin kamera perangkat |
 | | `@lifecycle` | Pengujian saat aplikasi masuk background dan dibuka kembali |
 | | `@favorite` | Verifikasi toggle bookmark / favorite |
+| **Modul Fitur** | `@feature-box` | Filter pengujian khusus modul Box Management |
+| | `@feature-item` | Filter pengujian khusus modul Item Management |
+| | `@feature-settings` | Filter pengujian khusus modul Application Settings & i18n |
+| | `@feature-onboarding` | Filter pengujian khusus modul Onboarding Walkthrough |
+| | `@feature-scanner` | Filter pengujian khusus modul QR Code Scanner |
 | **Platform** | `@android` | Penanda pengujian ditujukan untuk platform Android |
 
 ---

@@ -1,8 +1,12 @@
 {
-  "name": "nexus-automation",
+  "name": "kotakin-mobile-automation",
   "version": "1.0.0",
-  "description": "Enterprise Multi-Stream QA Automation Framework for Web, Android, and iOS with Cucumber, Appium, and AI Test Generation",
-  "main": "index.js",
+  "description": "Mobile test automation for the Kotakin Android app: WebdriverIO, Appium 2, Cucumber BDD, Allure",
+  "private": true,
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/fraharjo/kotakin-mobile-automation.git"
+  },
   "scripts": {
     "test": "npm run test:android",
     "test:android": "wdio run wdio.android.conf.ts --cucumberOpts.tags=\"@automated and not @manual\"",
@@ -13,7 +17,9 @@
     "test:feature:item": "wdio run wdio.android.conf.ts --cucumberOpts.tags=\"@feature-item and @automated\"",
     "test:feature:scanner": "wdio run wdio.android.conf.ts --cucumberOpts.tags=\"@feature-scanner and @automated\"",
     "test:feature:settings": "wdio run wdio.android.conf.ts --cucumberOpts.tags=\"@feature-settings and @automated\"",
+    "typecheck": "tsc --noEmit",
     "docs:generate": "ts-node scripts/generate-docs.ts",
+    "appium:setup": "appium driver install uiautomator2",
     "report:generate": "allure generate ./reports/allure-results --clean -o ./reports/allure-report",
     "report:open": "allure open ./reports/allure-report",
     "report": "npm run report:generate && npm run report:open"
@@ -24,13 +30,14 @@
     "cucumber",
     "bdd",
     "typescript",
-    "multi-stream",
-    "allure"
+    "allure",
+    "kotakin",
+    "android-automation"
   ],
-  "author": "Nexus QA Team",
+  "author": "Fadli Raharjo",
   "license": "MIT",
   "engines": {
-    "node": ">=18.0.0"
+    "node": ">=20.0.0"
   },
   "devDependencies": {
     "@types/node": "^20.11.0",

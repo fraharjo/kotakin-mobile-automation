@@ -74,6 +74,25 @@ export const config: Options.Testrunner = {
   // =====
   // Hooks
   // =====
+  onPrepare: function () {
+    const fs = require('fs');
+    const path = require('path');
+    const resultsDir = path.join(process.cwd(), 'reports', 'allure-results');
+    if (fs.existsSync(resultsDir)) {
+      const files = fs.readdirSync(resultsDir);
+      for (const file of files) {
+        if (file !== '.gitkeep') {
+          try {
+            fs.unlinkSync(path.join(resultsDir, file));
+          } catch (e) {
+            // ignore
+          }
+        }
+      }
+      console.log('[WDIO] Cleaned previous Allure results, preserving .gitkeep.');
+    }
+  },
+
   afterStep: async function (step, scenario, { error, duration, passed }) {
     if (error) {
       // Auto-capture screenshot on failure and attach to Allure report
