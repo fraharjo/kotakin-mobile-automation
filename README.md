@@ -1,86 +1,111 @@
-# Nexus Automation Platform 🚀
+# Kotakin Mobile Automation Framework 🚀
 
-**Nexus Automation** adalah platform otomatisasi pengujian terpadu untuk **Web, Android, dan iOS** yang mengadopsi pendekatan **Multi-Stream Monorepo**, **Shift-Left BDD (Cucumber)**, dan **AI-Augmented QA**.
+Production-grade Mobile Test Automation Framework for **Kotakin Android App** (`com.bmolab.kotakin`), built with **WebdriverIO v8**, **Appium 2**, **Cucumber BDD**, **TypeScript**, **Allure 2 Reports**, and **AI-Driven Quality Heuristics**.
+
+[![Android Testing](https://img.shields.io/badge/Platform-Android%20Emulator-green.svg)](https://developer.android.com/)
+[![WebdriverIO](https://img.shields.io/badge/WebdriverIO-v8-blue.svg)](https://webdriver.io/)
+[![Appium](https://img.shields.io/badge/Appium-v2-purple.svg)](https://appium.io/)
+[![Cucumber BDD](https://img.shields.io/badge/BDD-Cucumber-success.svg)](https://cucumber.io/)
+[![Allure Report](https://img.shields.io/badge/Report-Allure%202-orange.svg)](https://allurereport.org/)
+[![Test Status](https://img.shields.io/badge/Tests-49%2F49%20Passed-brightgreen.svg)]()
 
 ---
 
-## 📁 Struktur Monorepo
+## 📊 Test Suite Coverage (100% Pass Rate)
+
+Total **49 Skenario BDD** terotomatisasi secara penuh melintasi 5 modul aplikasi Kotakin:
+
+| Modul | Total Skenario | Status | Fokus Pengujian |
+| :--- | :---: | :---: | :--- |
+| **Box Creation & Management** | 21 | 🟢 Passed | CRUD Box, BVA boundaries, Search & Filter, Sanitization, Lifecycle |
+| **Item Management Inside Box** | 11 | 🟢 Passed | Photo capture, Stepper counter, Whitespace negative, Emojis, Long text |
+| **Application Settings & Localization** | 5 | 🟢 Passed | Dual language (EN/ID), Version verification, Backup/Restore |
+| **Onboarding & Walkthrough** | 4 | 🟢 Passed | Multi-slide progression, Skip actions, Feature guides verification |
+| **Physical QR Code Scanner** | 3 | 🟢 Passed | Viewfinder launch, Camera permission denial, Safe return navigation |
+
+---
+
+## 📁 Struktur Project Monorepo
 
 ```text
-nexus-automation/
-├── apps/                          # File APK Android / IPA iOS untuk testing
-├── docs/
-│   └── qa-prompt-guide.md         # Template prompt AI untuk QA generate test
-├── shared/                        # Komponen yang dipakai bersama antar stream
-│   ├── pages/base.screen.ts       # Base Screen Object (Universal Locator Web & Mobile)
-│   └── steps/common.steps.ts      # Shared Steps (Login dasar, wait, dsb.)
-├── features/                      # Domain masing-masing fitur aplikasi
-│   ├── onboarding/                # Fitur Onboarding (@feature-onboarding)
-│   ├── box/                       # Fitur Manajemen Box (@feature-box)
-│   ├── item/                      # Fitur Manajemen Item (@feature-item)
-│   ├── scanner/                   # Fitur QR Code Scanner (@feature-scanner)
-│   └── settings/                  # Fitur Pengaturan (@feature-settings)
-├── reports/                       # Hasil test & Allure report
-├── .github/workflows/
-│   └── test-runner.yml            # CI/CD GitHub Actions dengan parameter selector Stream
-├── package.json
-├── tsconfig.json
-├── wdio.shared.conf.ts            # Konfigurasi global Cucumber & Allure
-├── wdio.web.conf.ts               # Runner Web Browser (Chrome)
-└── wdio.android.conf.ts           # Runner Android Emulator (Appium)
+kotakin-mobile-automation/
+├── .agents/skills/                 # AI Agent Skills (Quality Auditor & Test Generator)
+│   ├── nexus-test-generator/       # BDD Gherkin & POM code generator
+│   └── app-quality-advisor/        # UX Heuristic Auditor & Dev advisor
+├── apps/                           # Lokasi APK Kotakin (baca apps/README.md)
+│   └── README.md                   # Panduan download APK via GitHub Releases
+├── docs/                           # Dokumentasi & Spesifikasi Pengujian
+│   ├── test-case-specification.md  # Spesifikasi 49 test cases lengkap
+│   ├── test-cases.xlsx             # Export format Microsoft Excel (.xlsx)
+│   └── test-cases.csv              # Export format Universal CSV (.csv)
+├── features/                       # Fitur & Skenario BDD Cucumber
+│   ├── box/                        # Fitur Manajemen Box (21 Skenario)
+│   ├── item/                       # Fitur Manajemen Item (11 Skenario)
+│   ├── onboarding/                 # Fitur Onboarding (4 Skenario)
+│   ├── scanner/                    # Fitur QR Code Scanner (3 Skenario)
+│   └── settings/                   # Fitur Settings & i18n (5 Skenario)
+├── shared/                         # Komponen Reusable Framework
+│   ├── constants/i18n.ts           # Centralized Type-Safe i18n Dictionary
+│   └── pages/base.screen.ts        # Base Screen Object (Universal Locator Engine)
+├── reports/                        # Allure results & HTML reports
+├── wdio.android.conf.ts            # Konfigurasi Appium Android Emulator
+├── wdio.shared.conf.ts             # Konfigurasi shared Cucumber & Allure
+└── tsconfig.json                   # Konfigurasi TypeScript
 ```
 
 ---
 
 ## 🛠️ Panduan Memulai (Quick Start)
 
-### 1. Install Dependencies
-Buka terminal di root direktori projek, lalu jalankan:
+### 1. Prasyarat Sistem
+* **Node.js** (v18+)
+* **Java JDK** (v11+)
+* **Android SDK** & **Android Emulator** aktif
+* **Appium 2** dengan driver `uiautomator2`
+
+### 2. Instalasi Dependensi
 ```bash
 npm install
 ```
 
-### 2. Menjalankan Automation Web
-Jalankan semua test web yang ber-tag `@automated`:
+### 3. Unduh File APK Kotakin
+Jalankan perintah ini di root folder untuk mengunduh APK langsung dari GitHub Releases:
 ```bash
-npm run test:web
+curl -L -o apps/kotakin.apk https://github.com/fraharjo/kotakin-mobile-automation/releases/download/v1.0.0/kotakin.apk
 ```
 
-Menjalankan test khusus per stream:
+---
+
+## 🚀 Menjalankan Pengujian
+
 ```bash
-# Jalankan hanya Stream Auth
-npm run test:stream:auth
-
-# Jalankan hanya Stream Catalog
-npm run test:stream:catalog
-
-# Jalankan hanya Stream Checkout
-npm run test:stream:checkout
-```
-
-### 3. Menjalankan Automation Android (Emulator)
-1. Siapkan file APK di `apps/my-demo-app.apk` (baca panduan di [apps/README.md](apps/README.md)).
-2. Pastikan Android Emulator sudah aktif.
-3. Jalankan command:
-```bash
+# Menjalankan seluruh test suite (49 skenario)
 npm run test:android
+
+# Menjalankan test per fitur modul
+npm run test:feature:box
+npm run test:feature:item
+npm run test:feature:settings
+npm run test:feature:onboarding
+npm run test:feature:scanner
 ```
 
 ---
 
 ## 📊 Melihat Laporan Pengujian (Allure Report)
 
-Setelah test dijalankan, buka dashboard Allure interaktif dengan:
+Setelah pengujian selesai dijalankan, buka dashboard Allure interaktif dengan:
 ```bash
-npm run report
+npm run report:open
 ```
-Dashboard akan menampilkan:
-- **Behaviors**: Pengelompokan berdasarkan Stream, Epic, dan Feature.
-- **Failures & Blockers**: Tangkapan layar otomatis (*screenshot*) dan stack trace kegagalan.
-- **Timeline & Categories**: Status `@smoke`, `@regression`, `@automated`, dan `@manual`.
+
+Dashboard menampilkan grafik lulus 100%, durasi per test case, rekaman step Cucumber, dan tangkapan layar otomatis jika ada kegagalan.
 
 ---
 
-## 🤖 AI-Augmented QA Workflow
-QA cukup memberikan requirement PRD / Jira / Figma ke AI menggunakan template yang ada di:
-👉 **[docs/qa-prompt-guide.md](docs/qa-prompt-guide.md)**
+## 📑 Spesifikasi Test Case (Excel & Dokumentasi)
+
+Seluruh spesifikasi test case dan matriks keterlacakan (*Requirements Traceability Matrix / RTM*) tersedia di:
+* 📄 **Markdown:** [docs/test-case-specification.md](docs/test-case-specification.md)
+* 📊 **Excel (.xlsx):** [docs/test-cases.xlsx](docs/test-cases.xlsx)
+* 📝 **CSV (.csv):** [docs/test-cases.csv](docs/test-cases.csv)
