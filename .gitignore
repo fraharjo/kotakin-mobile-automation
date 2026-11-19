@@ -1,0 +1,33 @@
+# Dependencies
+node_modules/
+
+# Environment Variables & Secrets
+.env
+.env.local
+.env.*.local
+*.pem
+
+# Test Reports & Artifacts
+allure-report/
+reports/allure-results/*
+!reports/allure-results/.gitkeep
+reports/allure-report/
+*.log
+
+# Large Mobile App Binaries (Option B: Excluded from Git)
+apps/*.apk
+apps/*.ipa
+apps/*.app
+!apps/README.md
+
+# Build / Compiled files
+dist/
+build/
+
+# Local Agent / AI Cache
+.gemini/
+
+# OS Files
+.DS_Store
+**/.DS_Store
+Thumbs.db

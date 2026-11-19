@@ -1,0 +1,45 @@
+{
+  "name": "nexus-automation",
+  "version": "1.0.0",
+  "description": "Enterprise Multi-Stream QA Automation Framework for Web, Android, and iOS with Cucumber, Appium, and AI Test Generation",
+  "main": "index.js",
+  "scripts": {
+    "test": "npm run test:android",
+    "test:web": "wdio run wdio.web.conf.ts",
+    "test:android": "wdio run wdio.android.conf.ts",
+    "test:feature:onboarding": "wdio run wdio.android.conf.ts --cucumberOpts.tags=\"@feature-onboarding and @automated\"",
+    "test:feature:box": "wdio run wdio.android.conf.ts --cucumberOpts.tags=\"@feature-box and @automated\"",
+    "test:feature:item": "wdio run wdio.android.conf.ts --cucumberOpts.tags=\"@feature-item and @automated\"",
+    "test:feature:scanner": "wdio run wdio.android.conf.ts --cucumberOpts.tags=\"@feature-scanner and @automated\"",
+    "test:feature:settings": "wdio run wdio.android.conf.ts --cucumberOpts.tags=\"@feature-settings and @automated\"",
+    "report:generate": "allure generate ./reports/allure-results --clean -o ./reports/allure-report",
+    "report:open": "allure open ./reports/allure-report",
+    "report": "npm run report:generate && npm run report:open"
+  },
+  "keywords": [
+    "webdriverio",
+    "appium",
+    "cucumber",
+    "bdd",
+    "typescript",
+    "multi-stream",
+    "allure"
+  ],
+  "author": "Nexus QA Team",
+  "license": "MIT",
+  "devDependencies": {
+    "@types/node": "^20.11.0",
+    "@wdio/allure-reporter": "^8.32.0",
+    "@wdio/appium-service": "^8.32.0",
+    "@wdio/cli": "^8.32.0",
+    "@wdio/cucumber-framework": "^8.32.0",
+    "@wdio/local-runner": "^8.32.0",
+    "@wdio/spec-reporter": "^8.32.0",
+    "allure-commandline": "^2.27.0",
+    "appium": "^2.5.0",
+    "appium-uiautomator2-driver": "^3.0.0",
+    "dotenv": "^16.4.5",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.3.3"
+  }
+}
