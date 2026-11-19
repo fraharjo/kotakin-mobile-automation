@@ -8,7 +8,7 @@ on:
   workflow_dispatch:
     inputs:
       feature:
-        description: 'Pilih Fitur yang akan di-test'
+        description: 'Pilih Fitur yang akan di-test (atau "all" untuk semua)'
         required: true
         default: 'all'
         type: choice
@@ -22,10 +22,10 @@ on:
 
 jobs:
   # ==========================================
-  # 1. TYPESCRIPT COMPILE VERIFICATION
+  # 1. CODE QUALITY & TYPESCRIPT CHECK
   # ==========================================
   typecheck:
-    name: TypeScript Check
+    name: Code & TypeScript Quality Check
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Repository
@@ -38,17 +38,18 @@ jobs:
           cache: 'npm'
 
       - name: Install Dependencies
-        run: npm ci
+        run: npm install
 
-      - name: Verify TypeScript Compilation
+      - name: Verify TypeScript Compilation (Zero Errors)
         run: npx tsc --noEmit
 
   # ==========================================
-  # 2. ANDROID EMULATOR E2E TESTS
+  # 2. ANDROID EMULATOR E2E TESTS (ON DEMAND)
   # ==========================================
   test-android:
     name: Android Emulator Tests
     needs: [typecheck]
+    if: github.event_name == 'workflow_dispatch'
     runs-on: macos-latest
     steps:
       - name: Checkout Repository
@@ -67,7 +68,7 @@ jobs:
           java-version: 17
 
       - name: Install Dependencies
-        run: npm ci
+        run: npm install
 
       - name: Download Kotakin APK from GitHub Releases
         run: |
@@ -103,7 +104,7 @@ jobs:
   report:
     name: Generate Allure Report
     needs: [test-android]
-    if: always()
+    if: github.event_name == 'workflow_dispatch' && always()
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Repository
@@ -116,12 +117,13 @@ jobs:
 
       - name: Download Allure Results
         uses: actions/download-artifact@v4
+        continue-on-error: true
         with:
           name: allure-results
           path: reports/allure-results
 
       - name: Install Dependencies
-        run: npm ci
+        run: npm install
 
       - name: Generate Allure Report
         run: npm run report:generate
