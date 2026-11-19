@@ -8,85 +8,85 @@ description: >-
 
 # Nexus Test Generator (Enterprise QA Lead & SDET Engine)
 
-Gunakan skill ini untuk memandu proses perancangan pengujian, eksplorasi aplikasi (Web, Android, iOS), dan pembuatan otomatisasi test case terstruktur di platform **Nexus Automation**.
+Use this skill to guide test design, application exploration (Web, Android, iOS), and the creation of structured test automation suites on the **Nexus Automation** platform.
 
 ---
 
-## 🎯 Prinsip Utama Framework (Core Principles)
+## 🎯 Core Framework Principles
 
-1. **Anti-Hallucination Selectors:** Dilarang mengarang selector. Gunakan konvensi penamaan terstandarisasi, verifikasi via dump UI aktual (`adb shell uiautomator dump` / browser devtools), atau tandai eksplisit dengan `// TODO: verify with dev`.
-2. **Multi-Platform Consistency:** Satu arsitektur modular yang kompatibel untuk Web, Android, dan iOS tanpa duplikasi logika bisnis.
-3. **Strict Traceability & I/O Contract:** Setiap skenario wajib memetakan langsung ke Acceptance Criteria (`@AC-<ID>`) dan Jira Issue (`@JIRA-<KEY>`). Jika requirement ambigu, catat sebagai **Open Questions & Asumsi**, bukan mengarang alur.
-4. **Risk-Based Prioritization & Applicability:** Hanya buat skenario yang relevan. Dimensi yang tidak berlaku wajib ditandai `N/A + alasan`. Klasifikasikan prioritas: `@p0` (Smoke), `@p1` (Regression), `@p2` (Edge-case).
-5. **Standardized Tagging Taxonomy:** Runner otomatis memfilter test dengan presisi tinggi (`not @manual and @automated`).
-6. **Step Reuse & Clean Code:** Cek library step yang sudah ada sebelum membuat step definition baru untuk mencegah duplikasi kode.
-
----
-
-## 📋 Kontrak Input / Output (I/O Contract)
-
-### 1. Format Input Minimum yang Diterima
-Sebelum memulai perancangan test, pastikan informasi berikut terpenuhi:
-* **Target Feature / Modul:** Nama modul (misal: `box`, `item`, `settings`, `auth`).
-* **Target Platform:** `Web`, `Android`, `iOS`, atau `Cross-Platform`.
-* **Acceptance Criteria (AC):** Daftar poin kriteria keberhasilan bernomor (`AC-01`, `AC-02`, dst.).
-* **User Roles & Permissions:** Hak akses pengguna (e.g. Guest, Authenticated User, Admin).
-* **UI Artifacts (Opsional tapi Direkomendasikan):** File APK di `apps/`, URL Web, atau konvensi Figma.
-
-### 2. Aturan Penanganan Requirement Ambigu (Ambiguity Handling)
-Jika requirement tidak lengkap atau ambigu:
-* **DILARANG** mengasumsikan alur bisnis tanpa konfirmasi.
-* Tulis daftar **Open Questions & Asumsi Kerja** di dokumen requirement (`requirements/<fitur>-prd.md`).
-* Minta klarifikasi dari user sebelum mengunci skenario BDD.
+1. **Anti-Hallucination Selectors:** Never guess or fabricate selectors. Use standardized naming conventions, verify against real UI dumps (`adb shell uiautomator dump` / browser devtools), or explicitly annotate with `// TODO: verify with dev`.
+2. **Multi-Platform Consistency:** A unified modular architecture supporting Web, Android, and iOS without duplicating business logic.
+3. **Strict Traceability & I/O Contract:** Every scenario must map directly to Acceptance Criteria (`@AC-<ID>`) and a Jira issue (`@JIRA-<KEY>`). If requirements are ambiguous, document them as **Open Questions & Assumptions** instead of assuming flows.
+4. **Risk-Based Prioritization & Applicability:** Generate only applicable scenarios. Inapplicable dimensions must be marked `N/A + justification`. Classify priority: `@p0` (Smoke), `@p1` (Regression), `@p2` (Edge-case).
+5. **Standardized Tagging Taxonomy:** Runners filter tests with precision (`not @manual and @automated`).
+6. **Step Reuse & Clean Code:** Always check the existing step library before creating new step definitions to avoid code duplication.
 
 ---
 
-## 📐 6 Dimensi Cakupan Pengujian (Test Coverage Checklist)
+## 📋 Input / Output Contract (I/O Contract)
 
-Setiap menganalisis requirement, evaluasi 6 dimensi berikut untuk menentukan skenario pengujian.
+### 1. Minimum Required Input
+Before beginning test design, ensure the following details are available:
+* **Target Feature / Module:** Module name (e.g., `box`, `item`, `settings`, `auth`).
+* **Target Platform:** `Web`, `Android`, `iOS`, or `Cross-Platform`.
+* **Acceptance Criteria (AC):** Numbered criteria list (`AC-01`, `AC-02`, etc.).
+* **User Roles & Permissions:** Access levels (e.g., Guest, Authenticated User, Admin).
+* **UI Artifacts (Optional but Recommended):** APK file in `apps/`, Web URL, or Figma design specifications.
+
+### 2. Ambiguity Handling Rules
+If requirements are incomplete or ambiguous:
+* **NEVER** assume business workflows without confirmation.
+* Document a list of **Open Questions & Working Assumptions** in the requirement file (`requirements/<feature>-prd.md`).
+* Seek clarification from the user before locking down BDD scenarios.
+
+---
+
+## 📐 6 Test Coverage Dimensions (Coverage Checklist)
+
+Evaluate the following 6 dimensions when analyzing requirements to determine test scenarios.
 > [!IMPORTANT]
-> **Aturan Applicability:** Jika suatu dimensi tidak relevan untuk fitur yang diuji (misal: hardware biometrik/kamera pada halaman Settings/About), tandai secara eksplisit: `N/A: <alasan>`, **JANGAN DIPAKSAKAN** membuat skenario fiktif.
+> **Applicability Rule:** If a dimension is not relevant for the feature under test (e.g., biometric hardware or camera on an About/Settings page), explicitly annotate: `N/A: <reason>`. **DO NOT** force fictitious scenarios.
 
-### Dimensi 1: Happy Path & Core Business Logic (Positif)
-* Alur ideal (*golden path*) dari awal hingga selesai sesuai Acceptance Criteria (`@AC-<ID>`).
-* Tag: `@p0 @automated @positive`
+### Dimension 1: Happy Path & Core Business Logic (Positive)
+* Ideal workflow (*golden path*) from start to finish matching Acceptance Criteria (`@AC-<ID>`).
+* Tags: `@p0 @automated @positive`
 
-### Dimensi 2: Boundary Value Analysis (BVA) & Equivalence Partitioning (EP)
-* Batas nilai input: `Min - 1`, `Min`, `Max`, `Max + 1`.
-* Partisi valid vs invalid: Format data, alfanumerik vs simbol, panjang teks ekstrem (150–500+ karakter).
-* Karakter ekstrem & Sanitasi: Unicode, Emoji (⚡️, 📦), whitespace-only (`"   "`), zero-width space, injeksi SQL/XSS dasar (`<script>`, `' OR '1'='1`).
-* Tag: `@p1 @automated @negative @boundary`
+### Dimension 2: Boundary Value Analysis (BVA) & Equivalence Partitioning (EP)
+* Input boundary thresholds: `Min - 1`, `Min`, `Max`, `Max + 1`.
+* Valid vs. invalid partitions: Data formats, alphanumeric vs. symbols, extreme text lengths (150–500+ characters).
+* Extreme characters & Sanitization: Unicode, Emoji (⚡️, 📦), whitespace-only (`"   "`), zero-width spaces, basic SQL/XSS injection (`<script>`, `' OR '1'='1`).
+* Tags: `@p1 @automated @negative @boundary`
 
-### Dimensi 3: State Transition & Alur Batal (User Journey)
-* Transisi status entitas: Misal `Draft` → `Pending` → `Success` → `Cancelled` → `Expired`.
-* Pembatalan & Interupsi Pengguna: Menekan tombol Back/Kembali, tombol Cancel, atau refresh halaman saat proses berlangsung.
-* Tag: `@p1 @automated @negative @lifecycle`
+### Dimension 3: State Transitions & Cancellation Flows (User Journey)
+* Entity state transitions: e.g., `Draft` → `Pending` → `Success` → `Cancelled` → `Expired`.
+* User cancellation & interruptions: Tapping Back, tapping Cancel, or reloading during in-progress operations.
+* Tags: `@p1 @automated @negative @lifecycle`
 
-### Dimensi 4: Negative & Backend Error Handling
-* Respons error server / API: HTTP 400 Bad Request, 401 Unauthorized, 403 Forbidden, 404 Not Found, 500 Server Error, 504 Timeout.
-* Penanganan UI: Inline field validation error, toast message, atau error banner dialog.
-* Tag: `@p1 @automated @negative`
+### Dimension 4: Negative & Backend Error Handling
+* Server / API error responses: HTTP 400 Bad Request, 401 Unauthorized, 403 Forbidden, 404 Not Found, 500 Server Error, 504 Timeout.
+* UI error handling: Inline field validation errors, toast notifications, or error banner dialogs.
+* Tags: `@p1 @automated @negative`
 
-### Dimensi 5: The 5 UI & UX States (Figma / UI Alignment)
-1. **Ideal State:** Konten terisi lengkap dan normal.
-2. **Empty State:** Layar saat data belum ada (ilustrasi, pesan kosong, dan CTA).
-3. **Loading / Skeleton State:** Indikator progress / skeleton loading saat memuat data.
-4. **Error State:** Tampilan saat komponen gagal dimuat dengan tombol retry.
-5. **Partial / Overflow State:** Teks sangat panjang (elipsis `...`), multiline label tidak terpotong rusak.
-* Tag: `@p1 @automated @regression` (atau `@manual` jika hanya verifikasi visual subjektif).
+### Dimension 5: The 5 UI & UX States (Figma / UI Alignment)
+1. **Ideal State:** Fully populated and normal content.
+2. **Empty State:** Screen when no data exists (illustration, helpful copy, and primary CTA).
+3. **Loading / Skeleton State:** Progress indicators or skeleton screens while data is fetching.
+4. **Error State:** Screen displayed when components fail to load, with a retry button.
+5. **Partial / Overflow State:** Text overflow handling (ellipsis `...`), multiline labels without UI clipping.
+* Tags: `@p1 @automated @regression` (or `@manual` if subjective visual verification only).
 
-### Dimensi 6: Mobile Interruptions, Concurrency & Hardware
-* **Concurrency / Idempotency:** Double-tap tombol submit/bayar secara cepat untuk memastikan request tidak diproses dua kali.
-* **Network State:** Peralihan ke offline (Airplane Mode), koneksi lambat, atau reconnect saat request berjalan.
-* **App Backgrounding:** Aplikasi di-minimize saat proses berjalan, lalu dibuka kembali (memastikan state aman).
-* **Hardware & Physical Integration:** Scan kamera fisik, fingerprint/FaceID, SMS OTP eksternal.
-* Tag: Skenario hardware fisik ditandai `@p2 @manual`. Skenario idempotency / backgrounding ditandai `@p2 @automated`.
+### Dimension 6: Mobile Interruptions, Concurrency & Hardware
+* **Concurrency / Idempotency:** Rapid double-tapping on submit/pay buttons to ensure operations are not processed twice.
+* **Network Transitions:** Toggling offline (Airplane Mode), slow connectivity, or reconnection during active requests.
+* **App Backgrounding:** Minimizing the app mid-operation and restoring it to verify state preservation.
+* **Hardware & Physical Integration:** Physical camera scanning, biometric auth (Fingerprint/FaceID), external SMS OTP.
+* Tags: Physical hardware scenarios are tagged `@p2 @manual`. Idempotency / backgrounding scenarios are tagged `@p2 @automated`.
 
 ---
 
-## 🏷️ Standard Tagging Taxonomy (Wajib 1 Tag per Kategori)
+## 🏷️ Standard Tagging Taxonomy (Mandatory 1 Tag per Category)
 
-Setiap skenario Gherkin WAJIB memiliki setidaknya 1 tag dari masing-masing 6 kategori berikut:
+Every Gherkin scenario MUST include at least one tag from each of the following 6 categories:
 
 ```gherkin
 @feature-<name> @JIRA-<KEY> @AC-<ID>
@@ -94,41 +94,41 @@ Setiap skenario Gherkin WAJIB memiliki setidaknya 1 tag dari masing-masing 6 kat
 Scenario: Successful login with valid credentials
 ```
 
-| Kategori | Tag yang Valid | Deskripsi |
+| Category | Valid Tags | Description |
 | :--- | :--- | :--- |
-| **1. Feature & Jira** | `@feature-<modul>` `@JIRA-<KEY>` | Scope fitur dan nomor tiket pelacak (e.g. `@feature-box @JIRA-KOT-101`) |
-| **2. Traceability** | `@AC-01`, `@AC-02`, dst. | Pemetaan ke Acceptance Criteria spesifik di PRD |
-| **3. Priority** | `@p0`, `@p1`, `@p2` | `@p0` = Smoke (Critical Path)<br>`@p1` = Regression (Happy & Negative Flow)<br>`@p2` = Edge-case / Stress |
-| **4. Execution Mode** | `@automated`, `@manual` | `@automated` = Dieksekusi CI/CD runner<br>`@manual` = Uji manual (Hardware, SMS OTP, visual subjektif) |
-| **5. Platform** | `@android`, `@ios`, `@web`, `@cross-platform` | Target environment pengujian |
-| **6. Test Type** | `@positive`, `@negative`, `@boundary`, `@security`, `@lifecycle` | Klasifikasi jenis pengujian |
+| **1. Feature & Jira** | `@feature-<module>` `@JIRA-<KEY>` | Feature scope and tracking ticket (e.g., `@feature-box @JIRA-KOT-101`) |
+| **2. Traceability** | `@AC-01`, `@AC-02`, etc. | Direct mapping to specific Acceptance Criteria in PRD |
+| **3. Priority** | `@p0`, `@p1`, `@p2` | `@p0` = Smoke (Critical Path)<br>`@p1` = Regression (Happy & Negative Flows)<br>`@p2` = Edge-case / Stress |
+| **4. Execution Mode** | `@automated`, `@manual` | `@automated` = Executed by CI/CD runner<br>`@manual` = Manual testing (Hardware, SMS OTP, visual verification) |
+| **5. Platform** | `@android`, `@ios`, `@web`, `@cross-platform` | Target testing environment |
+| **6. Test Type** | `@positive`, `@negative`, `@boundary`, `@security`, `@lifecycle` | Test category classification |
 
 > [!IMPORTANT]
-> **Aturan Eksekusi Test Runner:**
-> Runner CI/CD dan local CLI WAJIB mengecualikan skenario manual dengan filter tag:
+> **Test Runner Execution Rule:**
+> CI/CD pipelines and local test runners MUST exclude manual scenarios using the tag filter:
 > `--cucumberOpts.tags="not @manual and @automated"`
 
 ---
 
-## 🔍 Konvensi Selector & Strategi Multi-Platform
+## 🔍 Selector Conventions & Multi-Platform Strategy
 
-### 1. Konvensi Penamaan Selector ({screen}-{element}-{type})
-Jika selector belum terverifikasi dari APK dump / DOM, gunakan konvensi standar berikut:
+### 1. Selector Naming Convention ({screen}-{element}-{type})
+If selectors have not been verified via APK dump or DOM inspection, use this standard convention:
 * Format: `<screen>-<element_name>-<element_type>`
-* Contoh:
-  * `login-email-input` (Input text field)
-  * `box-create-btn` (Tombol aksi)
-  * `dashboard-header-txt` (Text label / Header)
+* Examples:
+  * `login-email-input` (Text input field)
+  * `box-create-btn` (Action button)
+  * `dashboard-header-txt` (Header / text label)
   * `settings-language-radio` (Radio button)
-* Beri komentar `// TODO: verify with dev` jika selector merupakan inferensi desain.
+* Add a comment `// TODO: verify with dev` if the selector is inferred from design.
 
-### 2. Karakteristik Selector Antar-Platform
-* **Android:** Mencocokkan `content-desc` (Accessibility ID) atau `text` (Visible Label).
-* **iOS:** Mencocokkan `accessibilityIdentifier` (ID stabil) atau `label`.
-* **Web:** Mencocokkan `data-testid`, `id`, atau CSS selector.
+### 2. Platform Selector Behaviors
+* **Android:** Matches `content-desc` (Accessibility ID) or `text` (Visible Label).
+* **iOS:** Matches `accessibilityIdentifier` (Stable ID) or `label`.
+* **Web:** Matches `data-testid`, `id`, or CSS selectors.
 
-### 3. Unified Multi-Platform Pattern di `BaseScreen`
-Gunakan helper di `shared/pages/base.screen.ts`:
+### 3. Unified Multi-Platform Pattern in `BaseScreen`
+Use the helpers in `shared/pages/base.screen.ts`:
 ```typescript
 // Multi-Platform Static Selector
 get btnSubmit() {
@@ -145,85 +145,85 @@ get headerDashboard() {
 
 ## 🌐 Enterprise Multi-Language (i18n) Architecture
 
-Semua teks antarmuka yang dipengaruhi bahasa WAJIB mengikuti arsitektur terpusat:
-1. **Centralized i18n Dictionary (`shared/constants/i18n.ts`):** Single Source of Truth (SSoT) dengan `as const`.
-2. **Resilient Locator Engine:** Menggunakan `this.getByI18n(variants)` yang mencocokkan `@content-desc` dan `@text` sekaligus.
-3. **React Native State Sync:** Selalu chaining `click()`, `clearValue()`, dan `setValue('')` untuk mereset input React Native.
-4. **Native Dialog Resiliency:** Tangani native `AlertDialog` (e.g. `"Name required"`) sebelum memeriksa status form.
+All language-dependent UI strings MUST adhere to a centralized architecture:
+1. **Centralized i18n Dictionary (`shared/constants/i18n.ts`):** Single Source of Truth (SSoT) typed with `as const`.
+2. **Resilient Locator Engine:** Utilize `this.getByI18n(variants)` which checks `@content-desc` and `@text` concurrently.
+3. **React Native State Sync:** Always chain `click()`, `clearValue()`, and `setValue('')` when resetting React Native inputs.
+4. **Native Dialog Resilience:** Handle native `AlertDialog` (e.g., `"Name required"`) before evaluating underlying form states.
 
 ---
 
-## 🧭 Alur Kerja 5 Tahap (5-Stage Workflow)
+## 🧭 5-Stage Workflow
 
 ```
-[Tahap 1: Wawancara I/O & Open Questions] 
+[Stage 1: I/O Interview & Open Questions] 
        ⬇
-[Tahap 2: Eksplorasi APK / Web DOM Dinamis] 
+[Stage 2: Dynamic APK / Web DOM Exploration] 
        ⬇
-[Tahap 3: Sintesis Matriks, Traceability AC & Review Manusia (Checkpoint)] 
+[Stage 3: Matrix Synthesis, AC Traceability & Human Review (Checkpoint)] 
        ⬇
-[Tahap 4: Generasi Kode Modular (features/)] 
+[Stage 4: Modular Code Generation (features/)] 
        ⬇
-[Tahap 5: Validasi Kompilasi TypeScript & Test Runner]
+[Stage 5: TypeScript Compilation Validation & Test Runner Check]
 ```
 
 ---
 
-## Tahap 1: Wawancara Bertahap (I/O & Requirement Contract)
+## Stage 1: Phased Interview (I/O & Requirement Contract)
 
-Ajukan pertanyaan **satu per satu**:
-1. **Pertanyaan 1 - Modul & Platform:** Fitur apa yang ingin dibuat dan apa target platformnya (`Android`, `iOS`, `Web`)?
-2. **Pertanyaan 2 - Acceptance Criteria (AC):** Sebutkan daftar AC bernomor (`AC-01`, `AC-02`) atau paste dokumen user story.
-3. **Pertanyaan 3 - Negative & Edge Cases:** Apa validasi error, batasan input, atau alur pembatalan yang diharapkan?
-4. **Pertanyaan 4 - UI / APK Source:** Apakah ada file APK di `apps/` untuk di-dump selector aslinya?
+Ask questions **one at a time**:
+1. **Question 1 - Module & Platform:** What feature needs testing and what is the target platform (`Android`, `iOS`, `Web`)?
+2. **Question 2 - Acceptance Criteria (AC):** Provide the numbered AC list (`AC-01`, `AC-02`) or paste user story documents.
+3. **Question 3 - Negative & Edge Cases:** What error validations, input limits, or cancellation flows are expected?
+4. **Question 4 - UI / APK Source:** Is an APK available in `apps/` to dump actual selectors?
 
 ---
 
-## Tahap 2: Eksplorasi Selector Dinamis (Anti-Hallucination)
+## Stage 2: Dynamic Selector Exploration (Anti-Hallucination)
 
-Jika APK tersedia di `apps/`:
+If an APK is present in `apps/`:
 ```bash
-# 1. Cek Activity & Package
+# 1. Inspect Activity & Package
 ~/Library/Android/sdk/build-tools/36.0.0/aapt dump badging apps/<app>.apk | grep -E "package: name|launchable-activity"
 
-# 2. Dump XML Hierarchy Aktual
+# 2. Dump Actual XML Hierarchy
 adb shell uiautomator dump /sdcard/window_dump.xml
 adb pull /sdcard/window_dump.xml /tmp/window_dump.xml
 ```
-Ekstrak `content-desc`, `resource-id`, dan `text` asli langsung dari dump XML.
+Extract actual `content-desc`, `resource-id`, and `text` directly from the XML dump.
 
 ---
 
-## Tahap 3: Sintesis Matriks, Traceability, & Checkpoint Review
+## Stage 3: Matrix Synthesis, Traceability, & Review Checkpoint
 
 > [!IMPORTANT]
-> **CHECKPOINT REVIEW MANUSIA:**
-> Wajib menyajikan artefak Matriks & Rancangan Skenario BDD kepada pengguna terlebih dahulu. **DILARANG membuat file kode di Tahap 4 sebelum pengguna menyetujui rancangan ini.**
+> **HUMAN REVIEW CHECKPOINT:**
+> You MUST present the Coverage Matrix & BDD Scenario Plan to the user first. **DO NOT generate code files in Stage 4 before the user reviews and approves this plan.**
 
-### Format Matriks Rancangan:
-| ID Skenario | AC Mapping | Prioritas | Tipe | Platform | Ringkasan Skenario | Status Eksekusi |
+### Proposed Matrix Format:
+| Scenario ID | AC Mapping | Priority | Type | Platform | Scenario Summary | Execution Status |
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-| `TC-BOX-001` | `AC-01` | `@p0` | `@positive` | `@android` | Sukses membuat kotak baru dengan data valid | `@automated` |
-| `TC-BOX-002` | `AC-02` | `@p1` | `@negative` | `@android` | Gagal membuat kotak jika nama kosong | `@automated` |
-| `TC-BOX-003` | `AC-03` | `@p2` | `@edge-case` | `@android` | Cek integrasi kamera QR scanner fisik | `@manual` |
+| `TC-BOX-001` | `AC-01` | `@p0` | `@positive` | `@android` | Successfully create a new box with valid details | `@automated` |
+| `TC-BOX-002` | `AC-02` | `@p1` | `@negative` | `@android` | Fail to create box when mandatory name is empty | `@automated` |
+| `TC-BOX-003` | `AC-03` | `@p2` | `@edge-case` | `@android` | Verify physical QR camera scanner integration | `@manual` |
 
-*Catatan: Dimensi yang tidak berlaku ditandai `N/A: <alasan>` (misal: "Hardware biometric N/A untuk modul About").*
+*Note: Inapplicable dimensions must be explicitly marked `N/A: <reason>` (e.g., "Biometric hardware is N/A for About module").*
 
 ---
 
-## Tahap 4: Generasi Kode Modular (`features/`)
+## Stage 4: Modular Code Generation (`features/`)
 
-Buat 4 file per fitur dengan struktur bersih:
+Generate 4 files per feature adhering to the clean domain structure:
 ```text
-features/<nama_fitur>/
-├── requirements/<nama_fitur>-prd.md    # PRD, AC Mapping, Open Questions
-├── features/<nama_fitur>.feature       # BDD Gherkin dengan Tag Lengkap
-├── pages/<nama_fitur>.screen.ts        # Screen Object (POM)
-└── steps/<nama_fitur>.steps.ts         # Step Definitions (Cek reuse dulu)
+features/<feature_name>/
+├── requirements/<feature_name>-prd.md    # PRD, AC Mapping, Open Questions
+├── features/<feature_name>.feature       # BDD Gherkin with Full Tagging
+├── pages/<feature_name>.screen.ts        # Screen Object (POM)
+└── steps/<feature_name>.steps.ts         # Step Definitions (Verify reuse first)
 ```
 
-### Aturan Step Reuse:
-Sebelum membuat step definition baru, periksa file step yang sudah ada di modul lain (`features/*/steps/*.steps.ts`) atau `shared/`. Gunakan kembali step yang sudah ada (misal: `Given the user is on the "My Stash" dashboard`).
+### Step Reuse Rules:
+Before creating new step definitions, inspect existing step files across other modules (`features/*/steps/*.steps.ts`) and `shared/`. Reuse existing step phrases whenever applicable (e.g., `Given the user is on the "My Stash" dashboard`).
 
 ---
 
@@ -322,21 +322,21 @@ When('the user fills the box name with {string} and description {string}', async
 
 ---
 
-## Tahap 5: Validasi Kompilasi & Kesiapan Eksekusi
+## Stage 5: Compilation Validation & Execution Readiness
 
-1. **Verifikasi Kompilasi TypeScript:**
+1. **Verify TypeScript Compilation:**
    ```bash
    npx tsc --noEmit
    ```
-   Wajib exit code 0 tanpa error.
-2. **Perintah Eksekusi Otomatis (Aman dari Skenario Manual):**
+   Must exit with code 0 and zero type errors.
+2. **Automated Test Execution Commands (Excluding Manual Scenarios):**
    ```bash
-   # Eksekusi seluruh automated test Android
+   # Run all automated Android tests
    npm run test:android
 
-   # Eksekusi per fitur
-   npm run test:feature:<nama>
+   # Run by specific feature module
+   npm run test:feature:<name>
 
-   # Eksekusi dengan filter Allure Report
-   npm run report
+   # Generate and open Allure Report
+   npm run report:open
    ```

@@ -1,51 +1,51 @@
-# Panduan Prompting AI untuk QA (Nexus Test Generator)
+# QA Prompting Guide for AI (Nexus Test Generator)
 
-Gunakan template prompt ini setiap kali ada PRD, tiket Jira, atau desain Figma baru untuk stream Anda.
+Use this prompt template whenever there is a new PRD, Jira ticket, or Figma design for your stream.
 
 ---
 
-## 1. Prompt: Generate BDD & Screen Object Baru
+## 1. Prompt: Generate New BDD & Screen Object
 
 ```text
-Halo, tolong buatkan BDD Cucumber (.feature), Screen Object TypeScript, dan Step Definition untuk Stream [NAMA_STREAM, misal: checkout] berdasarkan requirement berikut:
+Hi, please create Cucumber BDD (.feature), TypeScript Screen Object, and Step Definition for Stream [STREAM_NAME, e.g., checkout] based on the following requirements:
 
---- INFORMASI TIKET & DESAIN ---
-Jira Ticket: [misal: JIRA-PAY-402]
-Figma Screen: [misal: Screens/Payment/QRIS-v2]
-Tipe Pengujian: [misal: Functional / Regression / E2E]
+--- TICKET & DESIGN INFORMATION ---
+Jira Ticket: [e.g., JIRA-PAY-402]
+Figma Screen: [e.g., Screens/Payment/QRIS-v2]
+Testing Type: [e.g., Functional / Regression / E2E]
 
 --- ACCEPTANCE CRITERIA / USER STORY ---
-[Paste teks User Story & Acceptance Criteria dari Jira / PRD di sini]
+[Paste User Story & Acceptance Criteria from Jira / PRD here]
 
---- KOMPONEN FIGMA / UI LOCATORS ---
-[Paste daftar nama layer/komponen Figma, misal:
+--- FIGMA COMPONENTS / UI LOCATORS ---
+[Paste list of Figma layer/component names or selector IDs, e.g.:
 - Input QRIS Nominal: #input-nominal / ~input-nominal
-- Tombol Bayar Sekarang: #btn-pay / ~btn-pay
+- Pay Now Button: #btn-pay / ~btn-pay
 - Status Dialog: #dialog-status / ~dialog-status]
 
---- KETENTUAN OUTPUT ---
-1. Terapkan tagging standar:
-   - Stream: @stream-[nama]
-   - Eligibility: @automated atau @manual
-   - Category: @smoke, @functional, @regression, atau @e2e
+--- OUTPUT SPECIFICATIONS ---
+1. Apply standard tagging:
+   - Stream: @stream-[name]
+   - Eligibility: @automated or @manual
+   - Category: @smoke, @functional, @regression, or @e2e
    - Platform: @web, @android, @ios
-2. Buat file .feature Gherkin yang rapi (Given-When-Then).
-3. Buat file Screen Object yang meng-extend BaseScreen dengan reserved locator untuk Web (#id/css) dan Mobile (~accessibility-id).
-4. Buat file Step Definition TypeScript yang memanggil Screen Object tersebut.
+2. Generate clean Gherkin .feature files (Given-When-Then).
+3. Generate Screen Object files extending BaseScreen with reserved locators for Web (#id/css) and Mobile (~accessibility-id).
+4. Generate TypeScript Step Definition files that call the Screen Object methods.
 ```
 
 ---
 
-## 2. Prompt: Self-Healing & Fix Failure Test
+## 2. Prompt: Self-Healing & Fix Failing Tests
 
 ```text
-Halo, test scenario [@JIRA-xxx] pada Stream [nama_stream] mengalami kegagalan (FAIL) pada platform [Web / Android].
+Hi, the test scenario [@JIRA-xxx] in Stream [stream_name] is FAILING on the [Web / Android] platform.
 
---- LOG ERROR ALLURE ---
-[Paste error log / stack trace dari Allure Report di sini]
+--- ALLURE ERROR LOG ---
+[Paste error log / stack trace from Allure Report here]
 
---- PERUBAHAN UI / LOCATOR TERBARU ---
-[Sebutkan jika ada perubahan ID atau struktur halaman dari Dev]
+--- RECENT UI / LOCATOR CHANGES ---
+[Mention any ID or page hierarchy changes from the Dev team]
 
-Tolong periksa file Screen Object dan Step Definition terkait, lalu berikan perbaikan kodenya agar test kembali passing (GREEN).
+Please inspect the corresponding Screen Object and Step Definition files, and provide the fix so the test passes (GREEN) again.
 ```
