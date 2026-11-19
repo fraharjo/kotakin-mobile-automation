@@ -5,13 +5,16 @@
   "main": "index.js",
   "scripts": {
     "test": "npm run test:android",
-    "test:web": "wdio run wdio.web.conf.ts",
-    "test:android": "wdio run wdio.android.conf.ts",
+    "test:android": "wdio run wdio.android.conf.ts --cucumberOpts.tags=\"@automated and not @manual\"",
+    "test:smoke": "wdio run wdio.android.conf.ts --cucumberOpts.tags=\"@smoke and not @manual\"",
+    "test:regression": "wdio run wdio.android.conf.ts --cucumberOpts.tags=\"@regression and not @manual\"",
     "test:feature:onboarding": "wdio run wdio.android.conf.ts --cucumberOpts.tags=\"@feature-onboarding and @automated\"",
     "test:feature:box": "wdio run wdio.android.conf.ts --cucumberOpts.tags=\"@feature-box and @automated\"",
     "test:feature:item": "wdio run wdio.android.conf.ts --cucumberOpts.tags=\"@feature-item and @automated\"",
     "test:feature:scanner": "wdio run wdio.android.conf.ts --cucumberOpts.tags=\"@feature-scanner and @automated\"",
     "test:feature:settings": "wdio run wdio.android.conf.ts --cucumberOpts.tags=\"@feature-settings and @automated\"",
+    "docs:generate": "ts-node scripts/generate-docs.ts",
+    "apk:download": "bash scripts/download-apk.sh",
     "report:generate": "allure generate ./reports/allure-results --clean -o ./reports/allure-report",
     "report:open": "allure open ./reports/allure-report",
     "report": "npm run report:generate && npm run report:open"

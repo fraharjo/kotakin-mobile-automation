@@ -1,219 +1,682 @@
-# Nexus Automation - Test Case Specification & Traceability Matrix
+# Kotakin Mobile Automation - Comprehensive Test Case Specification & RTM
 
-> **Application Under Test:** Kotakin (`com.bmolab.kotakin`)  
-> **Framework Architecture:** WebdriverIO v8 + Appium 2 + Cucumber BDD + TypeScript  
-> **Total Test Suite:** 49 Scenarios (100% Automated & Passed)  
-> **Last Verification Date:** 2026-11-19  
+> [!NOTE]
+> **Single Source of Truth Notice:** File ini digenerate secara otomatis dari file Gherkin Feature (`features/**/*.feature`) menggunakan script `npm run docs:generate`. Dilarang mengedit file ini secara manual.
 
----
+## 1. Executive Summary & Test Statistics
 
-## 📊 1. Executive Summary & Test Suite Metrics
+| Metrik Pengujian | Nilai | Persentase |
+| :--- | :---: | :---: |
+| **Total Test Cases** | **49** | 100% |
+| **Automated Test Cases** | **49** | 100.0% |
+| **Manual Verification Cases** | **0** | 0.0% |
 
-| Metric | Value |
-| :--- | :--- |
-| **Total Test Scenarios** | **49 Scenarios** |
-| **Total Test Steps** | **230+ Steps** |
-| **Execution Status** | **49 Passed / 0 Failed / 0 Skipped (100% Pass Rate)** |
-| **Total Features / Modules** | **5 Modules** (Box, Item, Onboarding, Scanner, Settings) |
-| **Automated vs Manual** | 49 Automated (100%) |
-| **Locators Architecture** | Centralized Type-Safe i18n Dictionary (`shared/constants/i18n.ts`) + Resilient BaseScreen |
+### Distribusi Modul Pengujian
 
-### Distribusi Berdasarkan Modul:
-```mermaid
-pie title Distribusi Skenario per Modul
-    "Box Management (21)" : 21
-    "Item Management (11)" : 11
-    "Settings & Localization (5)" : 5
-    "Onboarding (4)" : 4
-    "QR Scanner (3)" : 3
-```
+| Modul Aplikasi | Total Skenario | Status Otomatisasi | Jira Key |
+| :--- | :---: | :---: | :--- |
+| **Box Creation & Management** | 26 | 🟢 100% Automated | `@JIRA-KTK-201` |
+| **Item Management Inside Box** | 11 | 🟢 100% Automated | `@JIRA-KTK-401` |
+| **Onboarding & Walkthrough** | 4 | 🟢 100% Automated | `@JIRA-KTK-101` |
+| **Physical QR Code Scanner** | 3 | 🟢 100% Automated | `@JIRA-KTK-501` |
+| **Application Settings & Localization** | 5 | 🟢 100% Automated | `@JIRA-KTK-301` |
 
 ---
 
-## 🏷️ 2. Standard Tagging Taxonomy & Priority Reference
+## 2. Requirements Traceability Matrix (RTM)
 
-Setiap test case diklasifikasikan dengan tag taxonomy terstandarisasi:
-
-* **Prioritas:**
-  * `@p0` (**Smoke / Critical Path**): Fitur utama yang esensial agar aplikasi bisa digunakan.
-  * `@p1` (**Regression / Core Flows**): Validasi input, BVA, alur pembatalan, dan happy path modul sekunder.
-  * `@p2` (**Edge-Case / Stress / Security**): Karakter ekstrem, regex, sanitasi script, backgrounding aplikasi.
-* **Tipe Pengujian:**
-  * `@positive`: Alur sukses dengan data valid.
-  * `@negative`: Penolakan terhadap data tidak valid atau form kosong.
-  * `@boundary`: Pengujian batas minimum (1 char), spasi kosong (*whitespace-only*), dan teks panjang.
-  * `@security`: Sanitasi input tag HTML/script injection.
-  * `@lifecycle`: Transisi state, pembatalan aksi (Cancel/Back), dan backgrounding aplikasi.
-  * `@resilience`: Ketahanan terhadap interupsi, duplikasi data, dan karakter query regex.
-
----
-
-## 📐 3. Cakupan 6 Dimensi Pengujian (6 Dimensions Matrix)
-
-| Dimensi Pengujian | Modul Terkait | Contoh Skenario Kunci |
-| :--- | :--- | :--- |
-| **Dimensi 1: Happy Path & Core Logic** | Semua Modul | Create Box, Add Item, Navigate Onboarding, Change Language |
-| **Dimensi 2: BVA & Regex Sanitization** | Box, Item | Min Boundary (`"B"`), Whitespace-only (`"   "`), Script injection (`<script>`), Regex query (`*?+[]%_'`) |
-| **Dimensi 3: State Transition & Cancel** | Box, Item, Scanner | Cancel box creation midway, Cancel edit box, Cancel delete box, Cancel item creation |
-| **Dimensi 4: Negative & Field Validation** | Box, Item | Empty box name, Empty item title, Search non-existent keyword |
-| **Dimensi 5: The 5 UI & UX States** | Box, Onboarding | Empty search state, Multi-step guide headers, Multi-box duplication counter |
-| **Dimensi 6: Mobile Disruption & Lifecycle** | Box, Scanner | App Backgrounding (minimize 2s), Hardware camera permission revocation |
-
----
-
-## 📋 4. Spesifikasi Lengkap Test Case per Modul
-
----
-
-### Modul 1: Kotakin Onboarding & Walkthrough (4 Skenario)
-* **File:** `features/onboarding/features/onboarding.feature`
-* **Jira Key:** `JIRA-KTK-101`
-* **Page Object:** `features/onboarding/pages/onboarding.screen.ts`
-
-| ID Test Case | Judul Skenario | Prioritas & Tipe | AC Mapping | Ringkasan Alur & Ekspektasi |
-| :--- | :--- | :--- | :--- | :--- |
-| `TC-ONB-001` | Complete full onboarding walkthrough to My Stash | `@p0` `@positive` | `AC-01, AC-02, AC-03` | User menekan tombol "Next" di setiap slide (Create Boxes, Scan & Share, Search Everything) lalu menekan "Got it!". Ekspektasi: Dialihkan ke dashboard "My Stash". |
-| `TC-ONB-002` | Skip onboarding from the initial welcome screen | `@p1` `@positive` `@lifecycle` | `AC-04` | User langsung menekan tombol "Skip" pada slide selamat datang pertama. Ekspektasi: Langsung dialihkan ke dashboard "My Stash". |
-| `TC-ONB-003` | Skip onboarding midway from step two | `@p1` `@positive` `@lifecycle` | `AC-04` | User menekan "Next" 1 kali ke slide kedua ("Create Boxes"), lalu menekan tombol "Skip". Ekspektasi: Dialihkan ke dashboard "My Stash". |
-| `TC-ONB-004` | Verify onboarding step headers correspond to expected feature guides | `@p1` `@positive` | `AC-02` | Memvalidasi teks judul pada setiap slide onboarding secara berurutan: "Create Boxes", "Scan & Share", dan "Search Everything". |
-
----
-
-### Modul 2: Kotakin Box Creation & Management (21 Skenario)
-* **File:** `features/box/features/box.feature`
-* **Jira Key:** `JIRA-KTK-201`
-* **Page Object:** `features/box/pages/box.screen.ts`
-
-| ID Test Case | Judul Skenario | Prioritas & Tipe | AC Mapping | Ringkasan Alur & Ekspektasi |
-| :--- | :--- | :--- | :--- | :--- |
-| `TC-BOX-001` | Create a new box with all fields populated | `@p0` `@positive` | `AC-01` | Input nama "Kitchenware", deskripsi "Fragile plates", warna "Blue", dan lokasi "Kitchen Cupboard A". Ekspektasi: Kotak muncul di daftar My Stash. |
-| `TC-BOX-002` | Create a new box with only mandatory name field | `@p1` `@positive` | `AC-02` | Input nama "Garage Tools" dan kosongkan field opsional. Ekspektasi: Kotak berhasil dibuat dan muncul di My Stash. |
-| `TC-BOX-003` | View box detail and verify action buttons | `@p0` `@positive` | `AC-12` | Buka detail kotak "Kitchenware". Ekspektasi: Tombol "Add new item" dan "Show QR code" tampil aktif. |
-| `TC-BOX-004` | Add a box to favorites | `@p1` `@positive` | `AC-14` | Buka menu aksi kotak, tap "Add to favorites". Ekspektasi: Menu berubah menjadi "Remove from favorites". |
-| `TC-BOX-005` | Remove a box from favorites | `@p1` `@positive` | `AC-14` | Buka menu aksi kotak favorit, tap "Remove from favorites". Ekspektasi: Menu kembali menjadi "Add to favorites". |
-| `TC-BOX-006` | Edit existing box details and save changes successfully | `@p0` `@positive` | `AC-15` | Buka edit box, perbarui nama ke "Kitchenware Updated" dan lokasi "Basement B", lalu simpan. Ekspektasi: Judul kotak terupdate seketika. |
-| `TC-BOX-007` | Fail to save box edits when box name is cleared | `@p1` `@negative` | `AC-16` | Buka edit box, kosongkan field nama, tap "Save Changes". Ekspektasi: Muncul dialog validasi "Name required" / "Please enter a name" dan tetap di form. |
-| `TC-BOX-008` | Cancel box editing and verify original details remain unchanged | `@p1` `@negative` `@lifecycle` | `AC-17` | Ubah nama dan lokasi di form edit, lalu tekan tombol "Cancel". Ekspektasi: Nama asli "Kitchenware Updated" tetap terjaga tanpa berubah. |
-| `TC-BOX-009` | Cancel box deletion and verify box is preserved in stash | `@p1` `@negative` `@lifecycle` | `AC-18, AC-19` | Buka dialog konfirmasi hapus kotak ("Delete Box?"), tap "CANCEL". Ekspektasi: Modal tertutup dan kotak tetap ada di detail screen. |
-| `TC-BOX-010` | Delete a box permanently and verify removal from stash dashboard | `@p0` `@positive` | `AC-18, AC-20` | Buka dialog hapus, tap "DELETE". Ekspektasi: Dialihkan ke My Stash dan kotak "Kitchenware Updated" hilang permanen dari daftar. |
-| `TC-BOX-011` | Allow creation of duplicate box names and update total box counter | `@p1` `@positive` `@resilience` | `AC-03, AC-13` | Buat kotak kedua dengan nama sama ("Garage Tools"). Ekspektasi: Dua kotak mandiri berhasil terbuat dan counter bertambah. |
-| `TC-BOX-012` | Search for an existing box by name | `@p0` `@positive` | `AC-05` | Ketik query "Garage Tools" di input search. Ekspektasi: Item "Garage Tools" tampil di hasil pencarian. |
-| `TC-BOX-013` | Clear search query and restore full box list | `@p1` `@positive` | `AC-11` | Tap tombol "Clear search" (`~Clear search`). Ekspektasi: Input search bersih dan seluruh daftar kotak kembali tampil. |
-| `TC-BOX-014` | Search box with case-insensitive query | `@p1` `@positive` `@resilience` | `AC-05` | Ketik query huruf kecil "garage tools". Ekspektasi: Tetap menemukan kotak "Garage Tools". |
-| `TC-BOX-015` | Search box using partial substring matching | `@p1` `@positive` `@resilience` | `AC-06` | Ketik potongan kata "Tools". Ekspektasi: Kotak "Garage Tools" tetap berhasil ditemukan. |
-| `TC-BOX-016` | Search box with leading and trailing whitespace query | `@p1` `@positive` `@boundary` | `AC-07` | Ketik query dengan spasi di awal dan akhir (`"  Garage Tools  "`). Ekspektasi: Spasi otomatis di-trim dan hasil pencarian valid. |
-| `TC-BOX-017` | Search for a box by the name of an item stored inside it | `@p1` `@positive` | `AC-08` | Ketik nama item anak ("Ceramic Mug"). Ekspektasi: Kontainer kotak induk yang menyimpan item tersebut ditampilkan. |
-| `TC-BOX-018` | Fail to create box when mandatory box name is empty | `@p1` `@negative` | `AC-04` | Buka form New Box tanpa mengisi nama, langsung tap "Create box". Ekspektasi: Muncul validasi popup dan user tetap di form. |
-| `TC-BOX-019` | Search with non-existent keyword shows empty results state | `@p1` `@negative` | `AC-09` | Cari keyword fiktif "xyz_nonexistent_item_999". Ekspektasi: Menampilkan teks "No results" dan "No items match your search.". |
-| `TC-BOX-020` | Create a box with special characters and numerical identifiers | `@p2` `@positive` `@edge-case` | `AC-13` | Input nama `"Box #101 [Fragile] & 100% Cotton"`. Ekspektasi: Karakter simbol tersimpan aman di database dan tampil di daftar. |
-| `TC-BOX-021` | Search box with special regex characters without application crash | `@p2` `@positive` `@stress` | `AC-10` | Cari query simbol regex (`"*?+[]%_'"`). Ekspektasi: Pencarian dieksekusi secara aman tanpa app crash atau unhandled syntax error. |
-| `TC-BOX-022` | Fail to create box when name contains only whitespace *(Baru)* | `@p1` `@negative` `@boundary` | `AC-04` | Input nama hanya spasi `"     "`, tap Create Box. Ekspektasi: Ditolak dan user tetap berada di form New Box. |
-| `TC-BOX-023` | Create a box with minimum boundary single-character name *(Baru)* | `@p1` `@positive` `@boundary` | `AC-01` | Input nama 1 karakter `"B"`, tap Create Box. Ekspektasi: Kotak "B" berhasil tersimpan dan tampil di My Stash. |
-| `TC-BOX-024` | Create a box with script injection tags and verify literal text rendering *(Baru)* | `@p2` `@positive` `@security` | `AC-01` | Input nama `"<script>alert(1)</script> Safe Box"`. Ekspektasi: Teks dirender sebagai string biasa (*literal*) tanpa eksekusi kode. |
-| `TC-BOX-025` | Cancel box creation midway and verify draft is not saved to stash *(Baru)* | `@p1` `@negative` `@lifecycle` | `AC-17` | Ketik nama "Abandoned Draft Box" lalu tap tombol Go back/Kembali. Ekspektasi: Kembali ke My Stash dan kotak draft **tidak tersimpan**. |
-| `TC-BOX-026` | Preserve dashboard state when application is minimized to background *(Baru)* | `@p2` `@positive` `@resilience` | `AC-12` | Minimize aplikasi ke background selama 2 detik lalu buka kembali. Ekspektasi: Dashboard My Stash tetap aktif dan stabil tanpa crash. |
+| Jira ID | Modul | Test Case ID | Nama Skenario | Kategori Pengujian | Prioritas |
+| :--- | :--- | :--- | :--- | :--- | :---: |
+| `KTK-201` | Box Creation & Management | `TC-KTK-001` | Create a new box with all fields populated | Smoke / Critical Path | P0 |
+| `KTK-201` | Box Creation & Management | `TC-KTK-002` | Create a new box with only mandatory name field | Positive Functional | P1 |
+| `KTK-201` | Box Creation & Management | `TC-KTK-003` | View box detail and verify action buttons | Positive Functional | P1 |
+| `KTK-201` | Box Creation & Management | `TC-KTK-004` | Add a box to favorites | Positive Functional | P1 |
+| `KTK-201` | Box Creation & Management | `TC-KTK-005` | Remove a box from favorites | Positive Functional | P1 |
+| `KTK-201` | Box Creation & Management | `TC-KTK-006` | Edit existing box details and save changes successfully | Positive Functional | P1 |
+| `KTK-201` | Box Creation & Management | `TC-KTK-007` | Fail to save box edits when box name is cleared | Negative Validation | P1 |
+| `KTK-201` | Box Creation & Management | `TC-KTK-008` | Cancel box editing and verify original details remain unchanged | Positive Functional | P1 |
+| `KTK-201` | Box Creation & Management | `TC-KTK-009` | Cancel box deletion and verify box is preserved in stash | Positive Functional | P1 |
+| `KTK-201` | Box Creation & Management | `TC-KTK-010` | Delete a box permanently and verify removal from stash dashboard | Positive Functional | P1 |
+| `KTK-201` | Box Creation & Management | `TC-KTK-011` | Allow creation of duplicate box names and update total box counter | Positive Functional | P1 |
+| `KTK-201` | Box Creation & Management | `TC-KTK-012` | Search for an existing box by name | Positive Functional | P1 |
+| `KTK-201` | Box Creation & Management | `TC-KTK-013` | Clear search query and restore full box list | Positive Functional | P1 |
+| `KTK-201` | Box Creation & Management | `TC-KTK-014` | Search box with case-insensitive query | Positive Functional | P1 |
+| `KTK-201` | Box Creation & Management | `TC-KTK-015` | Search box using partial substring matching | Positive Functional | P1 |
+| `KTK-201` | Box Creation & Management | `TC-KTK-016` | Search box with leading and trailing whitespace query | Positive Functional | P1 |
+| `KTK-201` | Box Creation & Management | `TC-KTK-017` | Search for a box by the name of an item stored inside it | Positive Functional | P1 |
+| `KTK-201` | Box Creation & Management | `TC-KTK-018` | Fail to create box when mandatory box name is empty | Negative Validation | P1 |
+| `KTK-201` | Box Creation & Management | `TC-KTK-019` | Search with non-existent keyword shows empty results state | Negative Validation | P1 |
+| `KTK-201` | Box Creation & Management | `TC-KTK-020` | Create a box with special characters and numerical identifiers | Positive Functional | P1 |
+| `KTK-201` | Box Creation & Management | `TC-KTK-021` | Search box with special regex characters without application crash | Positive Functional | P1 |
+| `KTK-201` | Box Creation & Management | `TC-KTK-022` | Fail to create box when name contains only whitespace | Negative Validation | P1 |
+| `KTK-201` | Box Creation & Management | `TC-KTK-023` | Create a box with minimum boundary single-character name | Boundary Value Analysis | P2 |
+| `KTK-201` | Box Creation & Management | `TC-KTK-024` | Create a box with script injection tags and verify literal text rendering | Security & Sanitization | P2 |
+| `KTK-201` | Box Creation & Management | `TC-KTK-025` | Cancel box creation midway and verify draft is not saved to stash | Negative Validation | P1 |
+| `KTK-201` | Box Creation & Management | `TC-KTK-026` | Preserve dashboard state when application is minimized to background | App Lifecycle | P1 |
+| `KTK-401` | Item Management Inside Box | `TC-KTK-027` | Add a new item with photo, title, description, and adjusted quantity | Security & Sanitization | P0 |
+| `KTK-401` | Item Management Inside Box | `TC-KTK-028` | Add an item with mandatory title only and default quantity | Positive Functional | P1 |
+| `KTK-401` | Item Management Inside Box | `TC-KTK-029` | Adjust item quantity using increment and decrement controls | Positive Functional | P1 |
+| `KTK-401` | Item Management Inside Box | `TC-KTK-030` | Add an item with minimum boundary single-character title | Boundary Value Analysis | P2 |
+| `KTK-401` | Item Management Inside Box | `TC-KTK-031` | Fail to save item when mandatory title is empty | Negative Validation | P1 |
+| `KTK-401` | Item Management Inside Box | `TC-KTK-032` | Fail to save item when title contains only whitespace | Negative Validation | P1 |
+| `KTK-401` | Item Management Inside Box | `TC-KTK-033` | Cancel item creation and discard captured photo | Negative Validation | P1 |
+| `KTK-401` | Item Management Inside Box | `TC-KTK-034` | Add an item with special characters, punctuation, and emojis | Positive Functional | P1 |
+| `KTK-401` | Item Management Inside Box | `TC-KTK-035` | Add an item with maximum length boundary title and long description | Security & Sanitization | P2 |
+| `KTK-401` | Item Management Inside Box | `TC-KTK-036` | Add an item with script injection tags and verify literal text rendering | Security & Sanitization | P2 |
+| `KTK-401` | Item Management Inside Box | `TC-KTK-037` | Remove an attached photo before saving item | Positive Functional | P1 |
+| `KTK-101` | Onboarding & Walkthrough | `TC-KTK-038` | Complete full onboarding walkthrough to My Stash | Smoke / Critical Path | P0 |
+| `KTK-101` | Onboarding & Walkthrough | `TC-KTK-039` | Skip onboarding from the initial welcome screen | Positive Functional | P1 |
+| `KTK-101` | Onboarding & Walkthrough | `TC-KTK-040` | Skip onboarding midway from step two | Positive Functional | P1 |
+| `KTK-101` | Onboarding & Walkthrough | `TC-KTK-041` | Verify onboarding step headers correspond to expected feature guides | Positive Functional | P1 |
+| `KTK-501` | Physical QR Code Scanner | `TC-KTK-042` | Trigger QR code scanner from dashboard | Smoke / Critical Path | P0 |
+| `KTK-501` | Physical QR Code Scanner | `TC-KTK-043` | Verify camera permission requirement message when scanner is launched | Negative Validation | P1 |
+| `KTK-501` | Physical QR Code Scanner | `TC-KTK-044` | Return safely to My Stash after opening scanner | Positive Functional | P1 |
+| `KTK-301` | Application Settings & Localization | `TC-KTK-045` | Switch application language to Bahasa Indonesia | Smoke / Critical Path | P0 |
+| `KTK-301` | Application Settings & Localization | `TC-KTK-046` | Switch application language back to English | Positive Functional | P1 |
+| `KTK-301` | Application Settings & Localization | `TC-KTK-047` | Navigate to About Kotakin screen and verify app version | Positive Functional | P1 |
+| `KTK-301` | Application Settings & Localization | `TC-KTK-048` | Navigate back to My Stash from Settings screen | Positive Functional | P1 |
+| `KTK-301` | Application Settings & Localization | `TC-KTK-049` | Verify Backup and Restore action buttons are accessible | Positive Functional | P1 |
 
 ---
 
-### Modul 3: Kotakin Item Management Inside Box (11 Skenario)
-* **File:** `features/item/features/item.feature`
-* **Jira Key:** `JIRA-KTK-401`
-* **Page Object:** `features/item/pages/item.screen.ts`
+## 3. Detail Spesifikasi Test Case per Modul
 
-| ID Test Case | Judul Skenario | Prioritas & Tipe | AC Mapping | Ringkasan Alur & Ekspektasi |
-| :--- | :--- | :--- | :--- | :--- |
-| `TC-ITM-001` | Add a new item with photo, title, description, and adjusted quantity | `@p0` `@positive` | `AC-01, AC-02, AC-03` | Ambil foto simulasi kamera, isi judul "Ceramic Mug", deskripsi "White porcelain", tambah kuantitas jadi 2, lalu simpan. Ekspektasi: Item tersimpan di dalam kotak. |
-| `TC-ITM-002` | Add an item with mandatory title only and default quantity | `@p1` `@positive` | `AC-02, AC-03` | Ambil foto, isi judul "Vintage Spoon", kosongkan deskripsi dengan kuantitas default 1. Ekspektasi: Item berhasil tersimpan. |
-| `TC-ITM-003` | Adjust item quantity using increment and decrement controls | `@p1` `@positive` | `AC-03` | Tap tombol tambah kuantitas 2 kali (menjadi 3), lalu tap tombol kurangi 1 kali (menjadi 2). Ekspektasi: Kuantitas tercatat 2. |
-| `TC-ITM-004` | Add an item with minimum boundary single-character title | `@p1` `@positive` `@boundary` | `AC-08` | Ambil foto, input judul 1 karakter ("A"), lalu simpan. Ekspektasi: Item "A" berhasil tersimpan. |
-| `TC-ITM-005` | Fail to save item when mandatory title is empty | `@p1` `@negative` | `AC-04` | Ambil foto, biarkan judul kosong, tap "Save Item". Ekspektasi: Validasi menolak dan user tetap di layar "Add Item Details". |
-| `TC-ITM-006` | Fail to save item when title contains only whitespace | `@p1` `@negative` `@boundary` | `AC-05` | Ambil foto, isi judul hanya spasi `"   "`, tap "Save Item". Ekspektasi: Validasi menolak dan user tetap di layar form. |
-| `TC-ITM-007` | Cancel item creation and discard captured photo | `@p1` `@negative` `@lifecycle` | `AC-06` | Ambil foto, lalu tekan tombol "Cancel". Ekspektasi: Kembali ke detail box dan item serta foto dibatalkan. |
-| `TC-ITM-008` | Add an item with special characters, punctuation, and emojis | `@p2` `@positive` `@edge-case` | `AC-07` | Input judul `"USB-C Cable (60W) #FastCharge ⚡️"`. Ekspektasi: Karakter Unicode emoji dan simbol tersimpan sempurna di SQLite. |
-| `TC-ITM-009` | Add an item with maximum length boundary title and long description | `@p2` `@positive` `@boundary` | `AC-08` | Input judul sangat panjang 150 karakter dan deskripsi 200 karakter. Ekspektasi: Item tersimpan tanpa pemotongan teks yang merusak layout. |
-| `TC-ITM-010` | Add an item with script injection tags and verify literal text rendering | `@p2` `@positive` `@security` | `AC-09` | Input judul `"<script>alert('XSS')</script> Safe Title"`. Ekspektasi: Teks dirender sebagai plain string tanpa eksekusi script. |
-| `TC-ITM-011` | Remove an attached photo before saving item | `@p1` `@positive` `@lifecycle` | `AC-10` | Ambil foto, lalu tap tombol "Remove photo" sebelum menyimpan item. Ekspektasi: Foto terhapus dari preview. |
+### Modul: Box Creation & Management
 
----
+#### [TC-KTK-001] Create a new box with all fields populated
+- **Jira Issue:** `@JIRA-KTK-201`
+- **Kategori:** Smoke / Critical Path
+- **Prioritas:** P0 (Critical / Smoke)
+- **Tags:** `@feature-box @JIRA-KTK-201 @automated @smoke @regression @android`
+- **Langkah Pengujian (Gherkin):**
+  `When the user taps the "New box" button`  
+  `And the user enters box name "Kitchenware" and description "Fragile plates and glassware"`  
+  `And the user selects box color "Blue" and enters location "Kitchen Cupboard A"`  
+  `And the user taps the Create Box button`  
+  `Then the box "Kitchenware" should appear in the stash list`  
+- **Expected Result:** the box "Kitchenware" should appear in the stash list
 
-### Modul 4: Kotakin Physical QR Code Scanner (3 Skenario)
-* **File:** `features/scanner/features/scanner.feature`
-* **Jira Key:** `JIRA-KTK-501`
-* **Page Object:** `features/scanner/pages/scanner.screen.ts`
+#### [TC-KTK-002] Create a new box with only mandatory name field
+- **Jira Issue:** `@JIRA-KTK-201`
+- **Kategori:** Positive Functional
+- **Prioritas:** P1 (Medium)
+- **Tags:** `@automated @functional @android`
+- **Langkah Pengujian (Gherkin):**
+  `When the user taps the "New box" button`  
+  `And the user enters box name "Garage Tools" and leaves optional fields blank`  
+  `And the user taps the Create Box button`  
+  `Then the box "Garage Tools" should appear in the stash list`  
+- **Expected Result:** the box "Garage Tools" should appear in the stash list
 
-| ID Test Case | Judul Skenario | Prioritas & Tipe | AC Mapping | Ringkasan Alur & Ekspektasi |
-| :--- | :--- | :--- | :--- | :--- |
-| `TC-SCN-001` | Trigger QR code scanner from dashboard | `@p0` `@positive` | `AC-01` | Tap tombol "Scan" (`~Scan`) di dashboard My Stash. Ekspektasi: Layar viewfinder scanner kamera atau prompt izin kamera terbuka. |
-| `TC-SCN-002` | Verify camera permission requirement message when scanner is launched | `@p1` `@negative` `@permission` | `AC-02` | Izin kamera dicabut (`revoke android.permission.CAMERA`), buka scanner. Ekspektasi: Menampilkan tombol "Grant camera permission" dan pesan edukasi izin. |
-| `TC-SCN-003` | Return safely to My Stash after opening scanner | `@p1` `@positive` `@lifecycle` | `AC-03` | Buka scanner, lalu tekan tombol kembali (Back hardware / nav). Ekspektasi: Pengguna kembali aman ke dashboard "My Stash" tanpa freeze. |
+#### [TC-KTK-003] View box detail and verify action buttons
+- **Jira Issue:** `@JIRA-KTK-201`
+- **Kategori:** Positive Functional
+- **Prioritas:** P1 (Medium)
+- **Tags:** `@automated @e2e @regression @android`
+- **Langkah Pengujian (Gherkin):**
+  `When the user taps on the box "Kitchenware"`  
+  `Then the box detail screen should display "Add new item" and "Show QR code" buttons`  
+- **Expected Result:** the box detail screen should display "Add new item" and "Show QR code" buttons
 
----
+#### [TC-KTK-004] Add a box to favorites
+- **Jira Issue:** `@JIRA-KTK-201`
+- **Kategori:** Positive Functional
+- **Prioritas:** P1 (Medium)
+- **Tags:** `@automated @functional @favorite @android`
+- **Langkah Pengujian (Gherkin):**
+  `Given the user has opened the detail of box "Kitchenware"`  
+  `When the user expands the Box actions menu`  
+  `And the user taps the Add to favorites button`  
+  `Then the action option should update to "Remove from favorites"`  
+- **Expected Result:** the action option should update to "Remove from favorites"
 
-### Modul 5: Kotakin Application Settings & Localization (5 Skenario)
-* **File:** `features/settings/features/settings.feature`
-* **Jira Key:** `JIRA-KTK-301`
-* **Page Object:** `features/settings/pages/settings.screen.ts`
+#### [TC-KTK-005] Remove a box from favorites
+- **Jira Issue:** `@JIRA-KTK-201`
+- **Kategori:** Positive Functional
+- **Prioritas:** P1 (Medium)
+- **Tags:** `@automated @functional @favorite @android`
+- **Langkah Pengujian (Gherkin):**
+  `Given the user has opened the detail of box "Kitchenware"`  
+  `When the user expands the Box actions menu`  
+  `And the user taps the Remove from favorites button`  
+  `Then the action option should update to "Add to favorites"`  
+- **Expected Result:** the action option should update to "Add to favorites"
 
-| ID Test Case | Judul Skenario | Prioritas & Tipe | AC Mapping | Ringkasan Alur & Ekspektasi |
-| :--- | :--- | :--- | :--- | :--- |
-| `TC-SET-001` | Switch application language to Bahasa Indonesia | `@p0` `@positive` `@i18n` | `AC-02` | Buka Settings, pilih opsi bahasa "Bahasa Indonesia". Ekspektasi: Radio button Bahasa Indonesia terpilih, header berubah menjadi "Pengaturan", dan dashboard menjadi "Simpananku". |
-| `TC-SET-002` | Switch application language back to English | `@p0` `@positive` `@i18n` | `AC-02` | Buka Settings, pilih opsi bahasa "English". Ekspektasi: Radio button English terpilih, header kembali "Settings", dan dashboard kembali "My Stash". |
-| `TC-SET-003` | Navigate to About Kotakin screen and verify app version | `@p1` `@positive` | `AC-03` | Buka Settings, tap tombol "About Kotakin", verifikasi teks "Version". Lalu tap "Go back". Ekspektasi: Versi aplikasi tampil dan berhasil kembali ke Settings. |
-| `TC-SET-004` | Navigate back to My Stash from Settings screen | `@p1` `@positive` `@lifecycle` | `AC-05` | Buka Settings, tap tombol "Go back" (`~Go back` / `~Kembali`). Ekspektasi: Pengguna kembali ke dashboard utama My Stash. |
-| `TC-SET-005` | Verify Backup and Restore action buttons are accessible | `@p1` `@positive` | `AC-04` | Buka Settings, periksa tombol aksi cadangan lokal. Ekspektasi: Tombol "Create zip backup" dan "Restore from zip backup" tampil aktif. |
+#### [TC-KTK-006] Edit existing box details and save changes successfully
+- **Jira Issue:** `@JIRA-KTK-201`
+- **Kategori:** Positive Functional
+- **Prioritas:** P1 (Medium)
+- **Tags:** `@automated @functional @edit @android`
+- **Langkah Pengujian (Gherkin):**
+  `Given the user has opened the detail of box "Kitchenware"`  
+  `When the user expands the Box actions menu`  
+  `And the user taps the Edit box button`  
+  `And the user updates the box name to "Kitchenware Updated" and location to "Basement Unit B"`  
+  `And the user taps the Save Changes button`  
+  `Then the box title should display "Kitchenware Updated"`  
+- **Expected Result:** the box title should display "Kitchenware Updated"
 
----
+#### [TC-KTK-007] Fail to save box edits when box name is cleared
+- **Jira Issue:** `@JIRA-KTK-201`
+- **Kategori:** Negative Validation
+- **Prioritas:** P1 (Medium)
+- **Tags:** `@automated @negative @edit @android`
+- **Langkah Pengujian (Gherkin):**
+  `Given the user has opened the detail of box "Kitchenware Updated"`  
+  `When the user expands the Box actions menu`  
+  `And the user taps the Edit box button`  
+  `And the user clears the box name field`  
+  `And the user taps the Save Changes button`  
+  `Then the user should remain on the "Edit Box" screen`  
+- **Expected Result:** the user should remain on the "Edit Box" screen
 
-## 🔗 5. Requirements Traceability Matrix (RTM)
+#### [TC-KTK-008] Cancel box editing and verify original details remain unchanged
+- **Jira Issue:** `@JIRA-KTK-201`
+- **Kategori:** Positive Functional
+- **Prioritas:** P1 (Medium)
+- **Tags:** `@automated @functional @edit @cancel @android`
+- **Langkah Pengujian (Gherkin):**
+  `Given the user has opened the detail of box "Kitchenware Updated"`  
+  `When the user expands the Box actions menu`  
+  `And the user taps the Edit box button`  
+  `And the user updates the box name to "Accidental Change" and location to "Unknown"`  
+  `And the user taps the Cancel edit button`  
+  `Then the box title should display "Kitchenware Updated"`  
+- **Expected Result:** the box title should display "Kitchenware Updated"
 
-Tabel berikut membuktikan bahwa seluruh Acceptance Criteria di setiap PRD telah ter-cover 100% oleh skenario otomatisasi:
+#### [TC-KTK-009] Cancel box deletion and verify box is preserved in stash
+- **Jira Issue:** `@JIRA-KTK-201`
+- **Kategori:** Positive Functional
+- **Prioritas:** P1 (Medium)
+- **Tags:** `@automated @functional @delete @cancel @android`
+- **Langkah Pengujian (Gherkin):**
+  `Given the user has opened the detail of box "Kitchenware Updated"`  
+  `When the user expands the Box actions menu`  
+  `And the user taps the Delete box button`  
+  `Then the confirmation dialog "Delete Box?" should be displayed`  
+  `When the user taps the Cancel deletion button`  
+  `Then the user should remain on the box detail screen`  
+- **Expected Result:** the user should remain on the box detail screen
 
-| Modul | Jira Tiket | Acceptance Criteria ID | Test Case ID | Status Eksekusi |
-| :--- | :--- | :--- | :--- | :--- |
-| **Onboarding** | `JIRA-KTK-101` | `AC-01, AC-02, AC-03` | `TC-ONB-001, TC-ONB-004` | ✅ Automated (Passed) |
-| **Onboarding** | `JIRA-KTK-101` | `AC-04` | `TC-ONB-002, TC-ONB-003` | ✅ Automated (Passed) |
-| **Box** | `JIRA-KTK-201` | `AC-01, AC-02` | `TC-BOX-001, TC-BOX-002, TC-BOX-023, TC-BOX-024` | ✅ Automated (Passed) |
-| **Box** | `JIRA-KTK-201` | `AC-03, AC-13` | `TC-BOX-011, TC-BOX-020` | ✅ Automated (Passed) |
-| **Box** | `JIRA-KTK-201` | `AC-04` | `TC-BOX-018, TC-BOX-022` | ✅ Automated (Passed) |
-| **Box** | `JIRA-KTK-201` | `AC-05, AC-06, AC-07` | `TC-BOX-012, TC-BOX-014, TC-BOX-015, TC-BOX-016` | ✅ Automated (Passed) |
-| **Box** | `JIRA-KTK-201` | `AC-08, AC-09, AC-10, AC-11` | `TC-BOX-013, TC-BOX-017, TC-BOX-019, TC-BOX-021` | ✅ Automated (Passed) |
-| **Box** | `JIRA-KTK-201` | `AC-12, AC-14` | `TC-BOX-003, TC-BOX-004, TC-BOX-005, TC-BOX-026` | ✅ Automated (Passed) |
-| **Box** | `JIRA-KTK-201` | `AC-15, AC-16, AC-17` | `TC-BOX-006, TC-BOX-007, TC-BOX-008, TC-BOX-025` | ✅ Automated (Passed) |
-| **Box** | `JIRA-KTK-201` | `AC-18, AC-19, AC-20` | `TC-BOX-009, TC-BOX-010` | ✅ Automated (Passed) |
-| **Item** | `JIRA-KTK-401` | `AC-01, AC-02, AC-03` | `TC-ITM-001, TC-ITM-002, TC-ITM-003` | ✅ Automated (Passed) |
-| **Item** | `JIRA-KTK-401` | `AC-04, AC-05, AC-06` | `TC-ITM-005, TC-ITM-006, TC-ITM-007` | ✅ Automated (Passed) |
-| **Item** | `JIRA-KTK-401` | `AC-07, AC-08, AC-09, AC-10` | `TC-ITM-004, TC-ITM-008, TC-ITM-009, TC-ITM-010, TC-ITM-011` | ✅ Automated (Passed) |
-| **Scanner** | `JIRA-KTK-501` | `AC-01, AC-02, AC-03` | `TC-SCN-001, TC-SCN-002, TC-SCN-003` | ✅ Automated (Passed) |
-| **Settings** | `JIRA-KTK-301` | `AC-01, AC-02` | `TC-SET-001, TC-SET-002` | ✅ Automated (Passed) |
-| **Settings** | `JIRA-KTK-301` | `AC-03, AC-04, AC-05` | `TC-SET-003, TC-SET-004, TC-SET-005` | ✅ Automated (Passed) |
+#### [TC-KTK-010] Delete a box permanently and verify removal from stash dashboard
+- **Jira Issue:** `@JIRA-KTK-201`
+- **Kategori:** Positive Functional
+- **Prioritas:** P1 (Medium)
+- **Tags:** `@automated @functional @delete @android`
+- **Langkah Pengujian (Gherkin):**
+  `Given the user has opened the detail of box "Kitchenware Updated"`  
+  `When the user expands the Box actions menu`  
+  `And the user taps the Delete box button`  
+  `Then the confirmation dialog "Delete Box?" should be displayed`  
+  `When the user taps the Confirm deletion button`  
+  `Then the user should be redirected to the "My Stash" dashboard`  
+  `And the box "Kitchenware Updated" should no longer appear in the stash list`  
+- **Expected Result:** the box "Kitchenware Updated" should no longer appear in the stash list
 
----
+#### [TC-KTK-011] Allow creation of duplicate box names and update total box counter
+- **Jira Issue:** `@JIRA-KTK-201`
+- **Kategori:** Positive Functional
+- **Prioritas:** P1 (Medium)
+- **Tags:** `@automated @functional @duplicate @android`
+- **Langkah Pengujian (Gherkin):**
+  `When the user taps the "New box" button`  
+  `And the user enters box name "Garage Tools" and leaves optional fields blank`  
+  `And the user taps the Create Box button`  
+  `Then multiple boxes with name "Garage Tools" should appear in the stash list`  
+- **Expected Result:** multiple boxes with name "Garage Tools" should appear in the stash list
 
-## 🚀 6. Panduan Menjalankan Test & Laporan Allure
+#### [TC-KTK-012] Search for an existing box by name
+- **Jira Issue:** `@JIRA-KTK-201`
+- **Kategori:** Positive Functional
+- **Prioritas:** P1 (Medium)
+- **Tags:** `@automated @functional @android`
+- **Langkah Pengujian (Gherkin):**
+  `When the user searches for box with query "Garage Tools"`  
+  `Then the stash list should display "Garage Tools"`  
+- **Expected Result:** the stash list should display "Garage Tools"
 
-### Eksekusi Otomatis per Fitur:
-```bash
-# Menjalankan modul Box Management (21 skenario)
-npm run test:feature:box
+#### [TC-KTK-013] Clear search query and restore full box list
+- **Jira Issue:** `@JIRA-KTK-201`
+- **Kategori:** Positive Functional
+- **Prioritas:** P1 (Medium)
+- **Tags:** `@automated @functional @android`
+- **Langkah Pengujian (Gherkin):**
+  `Given the user searches for box with query "Garage Tools"`  
+  `When the user taps the Clear search button`  
+  `Then the search input should be empty`  
+- **Expected Result:** the search input should be empty
 
-# Menjalankan modul Item Management (11 skenario)
-npm run test:feature:item
+#### [TC-KTK-014] Search box with case-insensitive query
+- **Jira Issue:** `@JIRA-KTK-201`
+- **Kategori:** Positive Functional
+- **Prioritas:** P1 (Medium)
+- **Tags:** `@automated @functional @regex @android`
+- **Langkah Pengujian (Gherkin):**
+  `When the user searches for box with query "garage tools"`  
+  `Then the stash list should display "Garage Tools"`  
+- **Expected Result:** the stash list should display "Garage Tools"
 
-# Menjalankan modul Settings & Localization (5 skenario)
-npm run test:feature:settings
+#### [TC-KTK-015] Search box using partial substring matching
+- **Jira Issue:** `@JIRA-KTK-201`
+- **Kategori:** Positive Functional
+- **Prioritas:** P1 (Medium)
+- **Tags:** `@automated @functional @regex @android`
+- **Langkah Pengujian (Gherkin):**
+  `When the user searches for box with query "Tools"`  
+  `Then the stash list should display "Garage Tools"`  
+- **Expected Result:** the stash list should display "Garage Tools"
 
-# Menjalankan modul Onboarding Walkthrough (4 skenario)
-npm run test:feature:onboarding
+#### [TC-KTK-016] Search box with leading and trailing whitespace query
+- **Jira Issue:** `@JIRA-KTK-201`
+- **Kategori:** Positive Functional
+- **Prioritas:** P1 (Medium)
+- **Tags:** `@automated @functional @sanitization @android`
+- **Langkah Pengujian (Gherkin):**
+  `When the user searches for box with query "  Garage Tools  "`  
+  `Then the stash list should display "Garage Tools"`  
+- **Expected Result:** the stash list should display "Garage Tools"
 
-# Menjalankan modul Physical QR Scanner (3 skenario)
-npm run test:feature:scanner
+#### [TC-KTK-017] Search for a box by the name of an item stored inside it
+- **Jira Issue:** `@JIRA-KTK-201`
+- **Kategori:** Positive Functional
+- **Prioritas:** P1 (Medium)
+- **Tags:** `@automated @functional @cross-search @android`
+- **Langkah Pengujian (Gherkin):**
+  `When the user searches for box with query "Ceramic Mug"`  
+  `Then the stash list should display the box containing "Ceramic Mug"`  
+- **Expected Result:** the stash list should display the box containing "Ceramic Mug"
 
-# Menjalankan seluruh test suite Android (49 skenario)
-npm run test:android
-```
+#### [TC-KTK-018] Fail to create box when mandatory box name is empty
+- **Jira Issue:** `@JIRA-KTK-201`
+- **Kategori:** Negative Validation
+- **Prioritas:** P1 (Medium)
+- **Tags:** `@automated @negative @android`
+- **Langkah Pengujian (Gherkin):**
+  `When the user taps the "New box" button`  
+  `And the user leaves the box name empty`  
+  `And the user taps the Create Box button`  
+  `Then the user should remain on the "New Box" creation form`  
+- **Expected Result:** the user should remain on the "New Box" creation form
 
-### Menghasilkan & Membuka Allure Report:
-```bash
-npm run report
-```
-Laporan interaktif akan otomatis terbuka di browser dengan grafik lulus 100%, rekaman step Cucumber, screenshot otomatis jika terjadi kegagalan, dan metadata tagging.
+#### [TC-KTK-019] Search with non-existent keyword shows empty results state
+- **Jira Issue:** `@JIRA-KTK-201`
+- **Kategori:** Negative Validation
+- **Prioritas:** P1 (Medium)
+- **Tags:** `@automated @negative @android`
+- **Langkah Pengujian (Gherkin):**
+  `When the user searches for box with query "xyz_nonexistent_item_999"`  
+  `Then the stash list should display the empty search result message`  
+- **Expected Result:** the stash list should display the empty search result message
+
+#### [TC-KTK-020] Create a box with special characters and numerical identifiers
+- **Jira Issue:** `@JIRA-KTK-201`
+- **Kategori:** Positive Functional
+- **Prioritas:** P1 (Medium)
+- **Tags:** `@automated @edge-case @android`
+- **Langkah Pengujian (Gherkin):**
+  `When the user taps the "New box" button`  
+  `And the user enters box name "Box #101 [Fragile] & 100% Cotton" and description "High priority items"`  
+  `And the user selects box color "Green" and enters location "Shelf B-2"`  
+  `And the user taps the Create Box button`  
+  `Then the box "Box #101 [Fragile] & 100% Cotton" should appear in the stash list`  
+- **Expected Result:** the box "Box #101 [Fragile] & 100% Cotton" should appear in the stash list
+
+#### [TC-KTK-021] Search box with special regex characters without application crash
+- **Jira Issue:** `@JIRA-KTK-201`
+- **Kategori:** Positive Functional
+- **Prioritas:** P1 (Medium)
+- **Tags:** `@automated @edge-case @regex @stress @android`
+- **Langkah Pengujian (Gherkin):**
+  `When the user searches for box with query "*?+[]%_'"`  
+  `Then the stash list should handle the query without crashing`  
+- **Expected Result:** the stash list should handle the query without crashing
+
+#### [TC-KTK-022] Fail to create box when name contains only whitespace
+- **Jira Issue:** `@JIRA-KTK-201`
+- **Kategori:** Negative Validation
+- **Prioritas:** P1 (Medium)
+- **Tags:** `@p1 @automated @negative @boundary @AC-02 @android`
+- **Langkah Pengujian (Gherkin):**
+  `When the user taps the "New box" button`  
+  `And the user enters box name "     " and leaves optional fields blank`  
+  `And the user taps the Create Box button`  
+  `Then the user should remain on the "New Box" creation form`  
+- **Expected Result:** the user should remain on the "New Box" creation form
+
+#### [TC-KTK-023] Create a box with minimum boundary single-character name
+- **Jira Issue:** `@JIRA-KTK-201`
+- **Kategori:** Boundary Value Analysis
+- **Prioritas:** P2 (Edge Case)
+- **Tags:** `@p1 @automated @positive @boundary @AC-01 @android`
+- **Langkah Pengujian (Gherkin):**
+  `When the user taps the "New box" button`  
+  `And the user enters box name "B" and leaves optional fields blank`  
+  `And the user taps the Create Box button`  
+  `Then the box "B" should appear in the stash list`  
+- **Expected Result:** the box "B" should appear in the stash list
+
+#### [TC-KTK-024] Create a box with script injection tags and verify literal text rendering
+- **Jira Issue:** `@JIRA-KTK-201`
+- **Kategori:** Security & Sanitization
+- **Prioritas:** P2 (Edge Case)
+- **Tags:** `@p2 @automated @positive @security @AC-01 @android`
+- **Langkah Pengujian (Gherkin):**
+  `When the user taps the "New box" button`  
+  `And the user enters box name "<script>alert(1)</script> Safe Box" and description "Security test"`  
+  `And the user taps the Create Box button`  
+  `Then the box "<script>alert(1)</script> Safe Box" should appear in the stash list`  
+- **Expected Result:** the box "<script>alert(1)</script> Safe Box" should appear in the stash list
+
+#### [TC-KTK-025] Cancel box creation midway and verify draft is not saved to stash
+- **Jira Issue:** `@JIRA-KTK-201`
+- **Kategori:** Negative Validation
+- **Prioritas:** P1 (Medium)
+- **Tags:** `@p1 @automated @negative @lifecycle @cancel @AC-03 @android`
+- **Langkah Pengujian (Gherkin):**
+  `When the user taps the "New box" button`  
+  `And the user enters box name "Abandoned Draft Box" and leaves optional fields blank`  
+  `And the user taps the Go back button from creation form`  
+  `Then the user should be redirected to the "My Stash" dashboard`  
+  `And the box "Abandoned Draft Box" should no longer appear in the stash list`  
+- **Expected Result:** the box "Abandoned Draft Box" should no longer appear in the stash list
+
+#### [TC-KTK-026] Preserve dashboard state when application is minimized to background
+- **Jira Issue:** `@JIRA-KTK-201`
+- **Kategori:** App Lifecycle
+- **Prioritas:** P1 (Medium)
+- **Tags:** `@p2 @automated @lifecycle @resilience @AC-04 @android`
+- **Langkah Pengujian (Gherkin):**
+  `Given the user is on the "My Stash" dashboard`  
+  `When the user minimizes the application to background for 2 seconds`  
+  `Then the user should still see the "My Stash" dashboard without any application crash`  
+- **Expected Result:** the user should still see the "My Stash" dashboard without any application crash
+
+### Modul: Item Management Inside Box
+
+#### [TC-KTK-027] Add a new item with photo, title, description, and adjusted quantity
+- **Jira Issue:** `@JIRA-KTK-401`
+- **Kategori:** Security & Sanitization
+- **Prioritas:** P0 (Critical / Smoke)
+- **Tags:** `@feature-item @JIRA-KTK-401 @automated @smoke @regression @android`
+- **Langkah Pengujian (Gherkin):**
+  `When the user taps the "Add new item" button`  
+  `And the user captures a photo and proceeds to item details`  
+  `And the user enters item title "Ceramic Mug" and description "Blue porcelain coffee mug"`  
+  `And the user increases the item quantity by 2`  
+  `And the user taps the Save Item button`  
+  `Then the item "Ceramic Mug" should be listed inside the box`  
+- **Expected Result:** the item "Ceramic Mug" should be listed inside the box
+
+#### [TC-KTK-028] Add an item with mandatory title only and default quantity
+- **Jira Issue:** `@JIRA-KTK-401`
+- **Kategori:** Positive Functional
+- **Prioritas:** P1 (Medium)
+- **Tags:** `@automated @functional @android`
+- **Langkah Pengujian (Gherkin):**
+  `When the user taps the "Add new item" button`  
+  `And the user captures a photo and proceeds to item details`  
+  `And the user enters item title "Spare Keys" and leaves description blank`  
+  `And the user taps the Save Item button`  
+  `Then the item "Spare Keys" should be listed inside the box`  
+- **Expected Result:** the item "Spare Keys" should be listed inside the box
+
+#### [TC-KTK-029] Adjust item quantity using increment and decrement controls
+- **Jira Issue:** `@JIRA-KTK-401`
+- **Kategori:** Positive Functional
+- **Prioritas:** P1 (Medium)
+- **Tags:** `@automated @functional @android`
+- **Langkah Pengujian (Gherkin):**
+  `When the user taps the "Add new item" button`  
+  `And the user captures a photo and proceeds to item details`  
+  `And the user increases the item quantity by 3`  
+  `And the user decreases the item quantity by 1`  
+  `Then the item quantity indicator should display 3`  
+- **Expected Result:** the item quantity indicator should display 3
+
+#### [TC-KTK-030] Add an item with minimum boundary single-character title
+- **Jira Issue:** `@JIRA-KTK-401`
+- **Kategori:** Boundary Value Analysis
+- **Prioritas:** P2 (Edge Case)
+- **Tags:** `@automated @functional @boundary @android`
+- **Langkah Pengujian (Gherkin):**
+  `When the user taps the "Add new item" button`  
+  `And the user captures a photo and proceeds to item details`  
+  `And the user enters item title "X" and description "Single character lower boundary"`  
+  `And the user taps the Save Item button`  
+  `Then the item "X" should be listed inside the box`  
+- **Expected Result:** the item "X" should be listed inside the box
+
+#### [TC-KTK-031] Fail to save item when mandatory title is empty
+- **Jira Issue:** `@JIRA-KTK-401`
+- **Kategori:** Negative Validation
+- **Prioritas:** P1 (Medium)
+- **Tags:** `@automated @negative @android`
+- **Langkah Pengujian (Gherkin):**
+  `When the user taps the "Add new item" button`  
+  `And the user captures a photo and proceeds to item details`  
+  `And the user leaves the item title empty`  
+  `And the user taps the Save Item button`  
+  `Then the user should remain on the "Add Item Details" screen`  
+- **Expected Result:** the user should remain on the "Add Item Details" screen
+
+#### [TC-KTK-032] Fail to save item when title contains only whitespace
+- **Jira Issue:** `@JIRA-KTK-401`
+- **Kategori:** Negative Validation
+- **Prioritas:** P1 (Medium)
+- **Tags:** `@automated @negative @android`
+- **Langkah Pengujian (Gherkin):**
+  `When the user taps the "Add new item" button`  
+  `And the user captures a photo and proceeds to item details`  
+  `And the user enters item title "     " and leaves description blank`  
+  `And the user taps the Save Item button`  
+  `Then the user should remain on the "Add Item Details" screen`  
+- **Expected Result:** the user should remain on the "Add Item Details" screen
+
+#### [TC-KTK-033] Cancel item creation and discard captured photo
+- **Jira Issue:** `@JIRA-KTK-401`
+- **Kategori:** Negative Validation
+- **Prioritas:** P1 (Medium)
+- **Tags:** `@automated @negative @android`
+- **Langkah Pengujian (Gherkin):**
+  `When the user taps the "Add new item" button`  
+  `And the user captures a photo and proceeds to item details`  
+  `And the user taps the Cancel button`  
+  `Then the user should be returned to the box detail screen without saving`  
+- **Expected Result:** the user should be returned to the box detail screen without saving
+
+#### [TC-KTK-034] Add an item with special characters, punctuation, and emojis
+- **Jira Issue:** `@JIRA-KTK-401`
+- **Kategori:** Positive Functional
+- **Prioritas:** P1 (Medium)
+- **Tags:** `@automated @edge-case @regex @android`
+- **Langkah Pengujian (Gherkin):**
+  `When the user taps the "Add new item" button`  
+  `And the user captures a photo and proceeds to item details`  
+  `And the user enters item title "Item #42: [Vintage] & 'Rare' ⚡️ (50% Off)" and description "Punctuation & symbols: @!$%^*()_+-=[]{}|;':,./<>?"`  
+  `And the user taps the Save Item button`  
+  `Then the item "Item #42: [Vintage] & 'Rare' ⚡️ (50% Off)" should be listed inside the box`  
+- **Expected Result:** the item "Item #42: [Vintage] & 'Rare' ⚡️ (50% Off)" should be listed inside the box
+
+#### [TC-KTK-035] Add an item with maximum length boundary title and long description
+- **Jira Issue:** `@JIRA-KTK-401`
+- **Kategori:** Security & Sanitization
+- **Prioritas:** P2 (Edge Case)
+- **Tags:** `@automated @edge-case @stress @boundary @android`
+- **Langkah Pengujian (Gherkin):**
+  `When the user taps the "Add new item" button`  
+  `And the user captures a photo and proceeds to item details`  
+  `And the user enters maximum boundary title of 150 characters and a multiline description of 500 characters`  
+  `And the user taps the Save Item button`  
+  `Then the maximum length item should be listed inside the box`  
+- **Expected Result:** the maximum length item should be listed inside the box
+
+#### [TC-KTK-036] Add an item with script injection tags and verify literal text rendering
+- **Jira Issue:** `@JIRA-KTK-401`
+- **Kategori:** Security & Sanitization
+- **Prioritas:** P2 (Edge Case)
+- **Tags:** `@automated @edge-case @security @android`
+- **Langkah Pengujian (Gherkin):**
+  `When the user taps the "Add new item" button`  
+  `And the user captures a photo and proceeds to item details`  
+  `And the user enters item title "<script>alert('XSS')</script>" and description "' OR '1'='1 -- SQLi test"`  
+  `And the user taps the Save Item button`  
+  `Then the item "<script>alert('XSS')</script>" should be listed inside the box`  
+- **Expected Result:** the item "<script>alert('XSS')</script>" should be listed inside the box
+
+#### [TC-KTK-037] Remove an attached photo before saving item
+- **Jira Issue:** `@JIRA-KTK-401`
+- **Kategori:** Positive Functional
+- **Prioritas:** P1 (Medium)
+- **Tags:** `@automated @edge-case @android`
+- **Langkah Pengujian (Gherkin):**
+  `When the user taps the "Add new item" button`  
+  `And the user captures a photo and proceeds to item details`  
+  `And the user taps the Remove photo button`  
+  `Then the photo should be removed from the item draft`  
+- **Expected Result:** the photo should be removed from the item draft
+
+### Modul: Onboarding & Walkthrough
+
+#### [TC-KTK-038] Complete full onboarding walkthrough to My Stash
+- **Jira Issue:** `@JIRA-KTK-101`
+- **Kategori:** Smoke / Critical Path
+- **Prioritas:** P0 (Critical / Smoke)
+- **Tags:** `@feature-onboarding @JIRA-KTK-101 @automated @smoke @android`
+- **Langkah Pengujian (Gherkin):**
+  `Given the user opens the Kotakin app`  
+  `When the user advances through all onboarding steps using the Next button`  
+  `And the user taps the Got it button on the final step`  
+  `Then the user should be redirected to the "My Stash" dashboard`  
+- **Expected Result:** the user should be redirected to the "My Stash" dashboard
+
+#### [TC-KTK-039] Skip onboarding from the initial welcome screen
+- **Jira Issue:** `@JIRA-KTK-101`
+- **Kategori:** Positive Functional
+- **Prioritas:** P1 (Medium)
+- **Tags:** `@automated @functional @android`
+- **Langkah Pengujian (Gherkin):**
+  `Given the user opens the Kotakin app`  
+  `When the user taps the Skip button on the current onboarding step`  
+  `Then the user should be redirected to the "My Stash" dashboard`  
+- **Expected Result:** the user should be redirected to the "My Stash" dashboard
+
+#### [TC-KTK-040] Skip onboarding midway from step two
+- **Jira Issue:** `@JIRA-KTK-101`
+- **Kategori:** Positive Functional
+- **Prioritas:** P1 (Medium)
+- **Tags:** `@automated @functional @android`
+- **Langkah Pengujian (Gherkin):**
+  `Given the user opens the Kotakin app`  
+  `When the user advances one step forward using the Next button`  
+  `And the user taps the Skip button on the current onboarding step`  
+  `Then the user should be redirected to the "My Stash" dashboard`  
+- **Expected Result:** the user should be redirected to the "My Stash" dashboard
+
+#### [TC-KTK-041] Verify onboarding step headers correspond to expected feature guides
+- **Jira Issue:** `@JIRA-KTK-101`
+- **Kategori:** Positive Functional
+- **Prioritas:** P1 (Medium)
+- **Tags:** `@automated @edge-case @android`
+- **Langkah Pengujian (Gherkin):**
+  `Given the user opens the Kotakin app`  
+  `Then the onboarding header should display "Welcome to Kotakin!"`  
+  `When the user advances one step forward using the Next button`  
+  `Then the onboarding header should display "Create Boxes"`  
+  `When the user advances one step forward using the Next button`  
+  `Then the onboarding header should display "Scan & Share"`  
+  `When the user advances one step forward using the Next button`  
+  `Then the onboarding header should display "Search Everything"`  
+- **Expected Result:** the onboarding header should display "Search Everything"
+
+### Modul: Physical QR Code Scanner
+
+#### [TC-KTK-042] Trigger QR code scanner from dashboard
+- **Jira Issue:** `@JIRA-KTK-501`
+- **Kategori:** Smoke / Critical Path
+- **Prioritas:** P0 (Critical / Smoke)
+- **Tags:** `@feature-scanner @JIRA-KTK-501 @automated @smoke @android`
+- **Langkah Pengujian (Gherkin):**
+  `When the user taps the "Scan" button on the dashboard`  
+  `Then the QR scanner view or permission prompt should be displayed`  
+- **Expected Result:** the QR scanner view or permission prompt should be displayed
+
+#### [TC-KTK-043] Verify camera permission requirement message when scanner is launched
+- **Jira Issue:** `@JIRA-KTK-501`
+- **Kategori:** Negative Validation
+- **Prioritas:** P1 (Medium)
+- **Tags:** `@automated @negative @android @permission`
+- **Langkah Pengujian (Gherkin):**
+  `When the user taps the "Scan" button on the dashboard`  
+  `Then the app should display the permission prompt button "Grant camera permission"`  
+- **Expected Result:** the app should display the permission prompt button "Grant camera permission"
+
+#### [TC-KTK-044] Return safely to My Stash after opening scanner
+- **Jira Issue:** `@JIRA-KTK-501`
+- **Kategori:** Positive Functional
+- **Prioritas:** P1 (Medium)
+- **Tags:** `@automated @edge-case @android`
+- **Langkah Pengujian (Gherkin):**
+  `When the user taps the "Scan" button on the dashboard`  
+  `And the user dismisses the scanner view`  
+  `Then the user should be redirected to the "My Stash" dashboard`  
+- **Expected Result:** the user should be redirected to the "My Stash" dashboard
+
+### Modul: Application Settings & Localization
+
+#### [TC-KTK-045] Switch application language to Bahasa Indonesia
+- **Jira Issue:** `@JIRA-KTK-301`
+- **Kategori:** Smoke / Critical Path
+- **Prioritas:** P0 (Critical / Smoke)
+- **Tags:** `@feature-settings @JIRA-KTK-301 @automated @smoke @android`
+- **Langkah Pengujian (Gherkin):**
+  `When the user opens the Settings screen`  
+  `And the user selects the language option "Bahasa Indonesia"`  
+  `Then the language option "Bahasa Indonesia" should be selected`  
+- **Expected Result:** the language option "Bahasa Indonesia" should be selected
+
+#### [TC-KTK-046] Switch application language back to English
+- **Jira Issue:** `@JIRA-KTK-301`
+- **Kategori:** Positive Functional
+- **Prioritas:** P1 (Medium)
+- **Tags:** `@automated @functional @android`
+- **Langkah Pengujian (Gherkin):**
+  `When the user opens the Settings screen`  
+  `And the user selects the language option "English"`  
+  `Then the language option "English" should be selected`  
+- **Expected Result:** the language option "English" should be selected
+
+#### [TC-KTK-047] Navigate to About Kotakin screen and verify app version
+- **Jira Issue:** `@JIRA-KTK-301`
+- **Kategori:** Positive Functional
+- **Prioritas:** P1 (Medium)
+- **Tags:** `@automated @functional @android`
+- **Langkah Pengujian (Gherkin):**
+  `When the user opens the Settings screen`  
+  `And the user taps the "About Kotakin" button`  
+  `Then the About screen should display the app version details`  
+  `When the user taps the Go back button`  
+  `Then the user should see the Settings screen header`  
+- **Expected Result:** the user should see the Settings screen header
+
+#### [TC-KTK-048] Navigate back to My Stash from Settings screen
+- **Jira Issue:** `@JIRA-KTK-301`
+- **Kategori:** Positive Functional
+- **Prioritas:** P1 (Medium)
+- **Tags:** `@automated @functional @android`
+- **Langkah Pengujian (Gherkin):**
+  `When the user opens the Settings screen`  
+  `And the user taps the Go back button`  
+  `Then the user should be redirected to the "My Stash" dashboard`  
+- **Expected Result:** the user should be redirected to the "My Stash" dashboard
+
+#### [TC-KTK-049] Verify Backup and Restore action buttons are accessible
+- **Jira Issue:** `@JIRA-KTK-301`
+- **Kategori:** Positive Functional
+- **Prioritas:** P1 (Medium)
+- **Tags:** `@automated @edge-case @android`
+- **Langkah Pengujian (Gherkin):**
+  `When the user opens the Settings screen`  
+  `Then the backup action button "Create zip backup" should be displayed`  
+  `And the restore action button "Restore from zip backup" should be displayed`  
+- **Expected Result:** the restore action button "Restore from zip backup" should be displayed
+
