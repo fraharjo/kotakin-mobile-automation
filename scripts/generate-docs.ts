@@ -5,6 +5,7 @@ interface TestCase {
   id: string;
   module: string;
   reqKey: string;
+  acId?: string;
   featureTitle: string;
   scenarioTitle: string;
   type: string;
@@ -119,6 +120,11 @@ function buildTestCase(
   tags: string[],
   steps: string[]
 ): TestCase {
+  const acTag = tags.find((t) => t.startsWith('@AC-'));
+  const acId = acTag ? acTag.replace('@', '') : undefined;
+  const p0 = tags.includes('@p0');
+  const p1 = tags.includes('@p1');
+  const p2 = tags.includes('@p2');
   const id = `TC-KTK-${String(num).padStart(3, '0')}`;
   const isSmoke = tags.includes('@smoke');
   const isRegression = tags.includes('@regression');
@@ -136,8 +142,10 @@ function buildTestCase(
   else if (isLifecycle) type = 'App Lifecycle';
   else if (isSmoke) type = 'Smoke / Critical Path';
 
-  let priority = 'P1 (Medium)';
-  if (isSmoke) priority = 'P0 (Critical / Smoke)';
+  let priority = 'P1 (Regression)';
+  if (p0 || isSmoke) priority = 'P0 (Smoke / Critical)';
+  else if (p2) priority = 'P2 (Edge Case)';
+  else if (p1 || isRegression) priority = 'P1 (Regression)';
   else if (isBva || isSecurity) priority = 'P2 (Edge Case)';
 
   const status = tags.includes('@manual') ? 'Manual' : 'Automated';
@@ -149,6 +157,7 @@ function buildTestCase(
     id,
     module: MODULES_MAP[moduleKey] || moduleKey,
     reqKey,
+    acId,
     featureTitle,
     scenarioTitle,
     type,
@@ -192,10 +201,12 @@ function generateMarkdown(testCases: TestCase[]): string {
   md += `\n---\n\n`;
 
   md += `## 2. Requirements Traceability Matrix (RTM)\n\n`;
-  md += `| Requirement ID | Module | Test Case ID | Scenario Title | Test Category | Priority |\n`;
-  md += `| :--- | :--- | :--- | :--- | :--- | :---: |\n`;
+  md += `| Requirement / Jira | AC Mapping | Module | Test Case ID | Scenario Title | Test Category | Priority |\n`;
+  md += `| :--- | :--- | :--- | :--- | :--- | :--- | :---: |\n`;
   for (const tc of testCases) {
-    md += `| \`@REQ-${tc.reqKey}\` | ${tc.module} | \`${tc.id}\` | ${tc.scenarioTitle} | ${tc.type} | ${tc.priority.split(' ')[0]} |\n`;
+    const reqDisplay = tc.reqKey.startsWith('KTK-') ? `@REQ-${tc.reqKey}` : `@JIRA-${tc.reqKey}`;
+    const acDisplay = tc.acId ? `\`@${tc.acId}\`` : '-';
+    md += `| \`${reqDisplay}\` | ${acDisplay} | ${tc.module} | \`${tc.id}\` | ${tc.scenarioTitle} | ${tc.type} | ${tc.priority.split(' ')[0]} |\n`;
   }
   md += `\n---\n\n`;
 

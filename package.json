@@ -22,7 +22,8 @@
     "appium:setup": "appium driver install uiautomator2",
     "report:generate": "allure generate ./reports/allure-results --clean -o ./reports/allure-report",
     "report:open": "allure open ./reports/allure-report",
-    "report": "npm run report:generate && npm run report:open"
+    "report": "npm run report:generate && npm run report:open",
+    "lint:tags": "ts-node scripts/lint-tags.ts"
   },
   "keywords": [
     "webdriverio",

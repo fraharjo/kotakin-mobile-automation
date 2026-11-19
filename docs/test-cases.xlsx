@@ -58,7 +58,7 @@
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">@REQ-KTK-201</Data></Cell>
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">Create a new box with all fields populated</Data></Cell>
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">Smoke / Critical Path</Data></Cell>
-    <Cell ss:StyleID="DataCell"><Data ss:Type="String">P0 (Critical / Smoke)</Data></Cell>
+    <Cell ss:StyleID="DataCell"><Data ss:Type="String">P0 (Smoke / Critical)</Data></Cell>
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">Automated</Data></Cell>
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">@feature-box @REQ-KTK-201 @automated @smoke @regression @android</Data></Cell>
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">When the user taps the &quot;New box&quot; button | And the user enters box name &quot;Kitchenware&quot; and description &quot;Fragile plates and glassware&quot; | And the user selects box color &quot;Blue&quot; and enters location &quot;Kitchen Cupboard A&quot; | And the user taps the Create Box button | Then the box &quot;Kitchenware&quot; should appear in the stash list</Data></Cell>
@@ -70,7 +70,7 @@
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">@REQ-KTK-201</Data></Cell>
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">Create a new box with only mandatory name field</Data></Cell>
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">Positive Functional</Data></Cell>
-    <Cell ss:StyleID="DataCell"><Data ss:Type="String">P1 (Medium)</Data></Cell>
+    <Cell ss:StyleID="DataCell"><Data ss:Type="String">P1 (Regression)</Data></Cell>
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">Automated</Data></Cell>
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">@automated @functional @android</Data></Cell>
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">When the user taps the &quot;New box&quot; button | And the user enters box name &quot;Garage Tools&quot; and leaves optional fields blank | And the user taps the Create Box button | Then the box &quot;Garage Tools&quot; should appear in the stash list</Data></Cell>
@@ -82,7 +82,7 @@
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">@REQ-KTK-201</Data></Cell>
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">View box detail and verify action buttons</Data></Cell>
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">Positive Functional</Data></Cell>
-    <Cell ss:StyleID="DataCell"><Data ss:Type="String">P1 (Medium)</Data></Cell>
+    <Cell ss:StyleID="DataCell"><Data ss:Type="String">P1 (Regression)</Data></Cell>
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">Automated</Data></Cell>
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">@automated @e2e @regression @android</Data></Cell>
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">When the user taps on the box &quot;Kitchenware&quot; | Then the box detail screen should display &quot;Add new item&quot; and &quot;Show QR code&quot; buttons</Data></Cell>
@@ -94,7 +94,7 @@
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">@REQ-KTK-201</Data></Cell>
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">Add a box to favorites</Data></Cell>
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">Positive Functional</Data></Cell>
-    <Cell ss:StyleID="DataCell"><Data ss:Type="String">P1 (Medium)</Data></Cell>
+    <Cell ss:StyleID="DataCell"><Data ss:Type="String">P1 (Regression)</Data></Cell>
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">Automated</Data></Cell>
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">@automated @functional @favorite @android</Data></Cell>
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">Given the user has opened the detail of box &quot;Kitchenware&quot; | When the user expands the Box actions menu | And the user taps the Add to favorites button | Then the action option should update to &quot;Remove from favorites&quot;</Data></Cell>
@@ -106,7 +106,7 @@
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">@REQ-KTK-201</Data></Cell>
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">Remove a box from favorites</Data></Cell>
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">Positive Functional</Data></Cell>
-    <Cell ss:StyleID="DataCell"><Data ss:Type="String">P1 (Medium)</Data></Cell>
+    <Cell ss:StyleID="DataCell"><Data ss:Type="String">P1 (Regression)</Data></Cell>
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">Automated</Data></Cell>
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">@automated @functional @favorite @android</Data></Cell>
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">Given the user has opened the detail of box &quot;Kitchenware&quot; | When the user expands the Box actions menu | And the user taps the Remove from favorites button | Then the action option should update to &quot;Add to favorites&quot;</Data></Cell>
@@ -118,7 +118,7 @@
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">@REQ-KTK-201</Data></Cell>
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">Edit existing box details and save changes successfully</Data></Cell>
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">Positive Functional</Data></Cell>
-    <Cell ss:StyleID="DataCell"><Data ss:Type="String">P1 (Medium)</Data></Cell>
+    <Cell ss:StyleID="DataCell"><Data ss:Type="String">P1 (Regression)</Data></Cell>
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">Automated</Data></Cell>
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">@automated @functional @edit @android</Data></Cell>
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">Given the user has opened the detail of box &quot;Kitchenware&quot; | When the user expands the Box actions menu | And the user taps the Edit box button | And the user updates the box name to &quot;Kitchenware Updated&quot; and location to &quot;Basement Unit B&quot; | And the user taps the Save Changes button | Then the box title should display &quot;Kitchenware Updated&quot;</Data></Cell>
@@ -130,7 +130,7 @@
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">@REQ-KTK-201</Data></Cell>
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">Fail to save box edits when box name is cleared</Data></Cell>
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">Negative Validation</Data></Cell>
-    <Cell ss:StyleID="DataCell"><Data ss:Type="String">P1 (Medium)</Data></Cell>
+    <Cell ss:StyleID="DataCell"><Data ss:Type="String">P1 (Regression)</Data></Cell>
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">Automated</Data></Cell>
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">@automated @negative @edit @android</Data></Cell>
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">Given the user has opened the detail of box &quot;Kitchenware Updated&quot; | When the user expands the Box actions menu | And the user taps the Edit box button | And the user clears the box name field | And the user taps the Save Changes button | Then the user should remain on the &quot;Edit Box&quot; screen</Data></Cell>
@@ -142,7 +142,7 @@
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">@REQ-KTK-201</Data></Cell>
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">Cancel box editing and verify original details remain unchanged</Data></Cell>
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">Positive Functional</Data></Cell>
-    <Cell ss:StyleID="DataCell"><Data ss:Type="String">P1 (Medium)</Data></Cell>
+    <Cell ss:StyleID="DataCell"><Data ss:Type="String">P1 (Regression)</Data></Cell>
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">Automated</Data></Cell>
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">@automated @functional @edit @cancel @android</Data></Cell>
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">Given the user has opened the detail of box &quot;Kitchenware Updated&quot; | When the user expands the Box actions menu | And the user taps the Edit box button | And the user updates the box name to &quot;Accidental Change&quot; and location to &quot;Unknown&quot; | And the user taps the Cancel edit button | Then the box title should display &quot;Kitchenware Updated&quot;</Data></Cell>
@@ -154,7 +154,7 @@
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">@REQ-KTK-201</Data></Cell>
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">Cancel box deletion and verify box is preserved in stash</Data></Cell>
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">Positive Functional</Data></Cell>
-    <Cell ss:StyleID="DataCell"><Data ss:Type="String">P1 (Medium)</Data></Cell>
+    <Cell ss:StyleID="DataCell"><Data ss:Type="String">P1 (Regression)</Data></Cell>
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">Automated</Data></Cell>
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">@automated @functional @delete @cancel @android</Data></Cell>
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">Given the user has opened the detail of box &quot;Kitchenware Updated&quot; | When the user expands the Box actions menu | And the user taps the Delete box button | Then the confirmation dialog &quot;Delete Box?&quot; should be displayed | When the user taps the Cancel deletion button | Then the user should remain on the box detail screen</Data></Cell>
@@ -166,7 +166,7 @@
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">@REQ-KTK-201</Data></Cell>
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">Delete a box permanently and verify removal from stash dashboard</Data></Cell>
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">Positive Functional</Data></Cell>
-    <Cell ss:StyleID="DataCell"><Data ss:Type="String">P1 (Medium)</Data></Cell>
+    <Cell ss:StyleID="DataCell"><Data ss:Type="String">P1 (Regression)</Data></Cell>
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">Automated</Data></Cell>
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">@automated @functional @delete @android</Data></Cell>
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">Given the user has opened the detail of box &quot;Kitchenware Updated&quot; | When the user expands the Box actions menu | And the user taps the Delete box button | Then the confirmation dialog &quot;Delete Box?&quot; should be displayed | When the user taps the Confirm deletion button | Then the user should be redirected to the &quot;My Stash&quot; dashboard | And the box &quot;Kitchenware Updated&quot; should no longer appear in the stash list</Data></Cell>
@@ -178,7 +178,7 @@
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">@REQ-KTK-201</Data></Cell>
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">Allow creation of duplicate box names and update total box counter</Data></Cell>
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">Positive Functional</Data></Cell>
-    <Cell ss:StyleID="DataCell"><Data ss:Type="String">P1 (Medium)</Data></Cell>
+    <Cell ss:StyleID="DataCell"><Data ss:Type="String">P1 (Regression)</Data></Cell>
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">Automated</Data></Cell>
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">@automated @functional @duplicate @android</Data></Cell>
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">When the user taps the &quot;New box&quot; button | And the user enters box name &quot;Garage Tools&quot; and leaves optional fields blank | And the user taps the Create Box button | Then multiple boxes with name &quot;Garage Tools&quot; should appear in the stash list</Data></Cell>
@@ -190,7 +190,7 @@
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">@REQ-KTK-201</Data></Cell>
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">Search for an existing box by name</Data></Cell>
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">Positive Functional</Data></Cell>
-    <Cell ss:StyleID="DataCell"><Data ss:Type="String">P1 (Medium)</Data></Cell>
+    <Cell ss:StyleID="DataCell"><Data ss:Type="String">P1 (Regression)</Data></Cell>
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">Automated</Data></Cell>
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">@automated @functional @android</Data></Cell>
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">When the user searches for box with query &quot;Garage Tools&quot; | Then the stash list should display &quot;Garage Tools&quot;</Data></Cell>
@@ -202,7 +202,7 @@
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">@REQ-KTK-201</Data></Cell>
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">Clear search query and restore full box list</Data></Cell>
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">Positive Functional</Data></Cell>
-    <Cell ss:StyleID="DataCell"><Data ss:Type="String">P1 (Medium)</Data></Cell>
+    <Cell ss:StyleID="DataCell"><Data ss:Type="String">P1 (Regression)</Data></Cell>
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">Automated</Data></Cell>
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">@automated @functional @android</Data></Cell>
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">Given the user searches for box with query &quot;Garage Tools&quot; | When the user taps the Clear search button | Then the search input should be empty</Data></Cell>
@@ -214,7 +214,7 @@
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">@REQ-KTK-201</Data></Cell>
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">Search box with case-insensitive query</Data></Cell>
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">Positive Functional</Data></Cell>
-    <Cell ss:StyleID="DataCell"><Data ss:Type="String">P1 (Medium)</Data></Cell>
+    <Cell ss:StyleID="DataCell"><Data ss:Type="String">P1 (Regression)</Data></Cell>
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">Automated</Data></Cell>
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">@automated @functional @regex @android</Data></Cell>
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">When the user searches for box with query &quot;garage tools&quot; | Then the stash list should display &quot;Garage Tools&quot;</Data></Cell>
@@ -226,7 +226,7 @@
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">@REQ-KTK-201</Data></Cell>
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">Search box using partial substring matching</Data></Cell>
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">Positive Functional</Data></Cell>
-    <Cell ss:StyleID="DataCell"><Data ss:Type="String">P1 (Medium)</Data></Cell>
+    <Cell ss:StyleID="DataCell"><Data ss:Type="String">P1 (Regression)</Data></Cell>
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">Automated</Data></Cell>
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">@automated @functional @regex @android</Data></Cell>
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">When the user searches for box with query &quot;Tools&quot; | Then the stash list should display &quot;Garage Tools&quot;</Data></Cell>
@@ -238,7 +238,7 @@
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">@REQ-KTK-201</Data></Cell>
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">Search box with leading and trailing whitespace query</Data></Cell>
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">Positive Functional</Data></Cell>
-    <Cell ss:StyleID="DataCell"><Data ss:Type="String">P1 (Medium)</Data></Cell>
+    <Cell ss:StyleID="DataCell"><Data ss:Type="String">P1 (Regression)</Data></Cell>
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">Automated</Data></Cell>
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">@automated @functional @sanitization @android</Data></Cell>
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">When the user searches for box with query &quot;  Garage Tools  &quot; | Then the stash list should display &quot;Garage Tools&quot;</Data></Cell>
@@ -250,7 +250,7 @@
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">@REQ-KTK-201</Data></Cell>
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">Search for a box by the name of an item stored inside it</Data></Cell>
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">Positive Functional</Data></Cell>
-    <Cell ss:StyleID="DataCell"><Data ss:Type="String">P1 (Medium)</Data></Cell>
+    <Cell ss:StyleID="DataCell"><Data ss:Type="String">P1 (Regression)</Data></Cell>
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">Automated</Data></Cell>
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">@automated @functional @cross-search @android</Data></Cell>
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">When the user searches for box with query &quot;Ceramic Mug&quot; | Then the stash list should display the box containing &quot;Ceramic Mug&quot;</Data></Cell>
@@ -262,7 +262,7 @@
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">@REQ-KTK-201</Data></Cell>
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">Fail to create box when mandatory box name is empty</Data></Cell>
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">Negative Validation</Data></Cell>
-    <Cell ss:StyleID="DataCell"><Data ss:Type="String">P1 (Medium)</Data></Cell>
+    <Cell ss:StyleID="DataCell"><Data ss:Type="String">P1 (Regression)</Data></Cell>
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">Automated</Data></Cell>
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">@automated @negative @android</Data></Cell>
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">When the user taps the &quot;New box&quot; button | And the user leaves the box name empty | And the user taps the Create Box button | Then the user should remain on the &quot;New Box&quot; creation form</Data></Cell>
@@ -274,7 +274,7 @@
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">@REQ-KTK-201</Data></Cell>
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">Search with non-existent keyword shows empty results state</Data></Cell>
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">Negative Validation</Data></Cell>
-    <Cell ss:StyleID="DataCell"><Data ss:Type="String">P1 (Medium)</Data></Cell>
+    <Cell ss:StyleID="DataCell"><Data ss:Type="String">P1 (Regression)</Data></Cell>
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">Automated</Data></Cell>
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">@automated @negative @android</Data></Cell>
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">When the user searches for box with query &quot;xyz_nonexistent_item_999&quot; | Then the stash list should display the empty search result message</Data></Cell>
@@ -286,7 +286,7 @@
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">@REQ-KTK-201</Data></Cell>
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">Create a box with special characters and numerical identifiers</Data></Cell>
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">Positive Functional</Data></Cell>
-    <Cell ss:StyleID="DataCell"><Data ss:Type="String">P1 (Medium)</Data></Cell>
+    <Cell ss:StyleID="DataCell"><Data ss:Type="String">P1 (Regression)</Data></Cell>
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">Automated</Data></Cell>
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">@automated @edge-case @android</Data></Cell>
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">When the user taps the &quot;New box&quot; button | And the user enters box name &quot;Box #101 [Fragile] &amp; 100% Cotton&quot; and description &quot;High priority items&quot; | And the user selects box color &quot;Green&quot; and enters location &quot;Shelf B-2&quot; | And the user taps the Create Box button | Then the box &quot;Box #101 [Fragile] &amp; 100% Cotton&quot; should appear in the stash list</Data></Cell>
@@ -298,7 +298,7 @@
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">@REQ-KTK-201</Data></Cell>
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">Search box with special regex characters without application crash</Data></Cell>
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">Positive Functional</Data></Cell>
-    <Cell ss:StyleID="DataCell"><Data ss:Type="String">P1 (Medium)</Data></Cell>
+    <Cell ss:StyleID="DataCell"><Data ss:Type="String">P1 (Regression)</Data></Cell>
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">Automated</Data></Cell>
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">@automated @edge-case @regex @stress @android</Data></Cell>
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">When the user searches for box with query &quot;*?+[]%_&apos;&quot; | Then the stash list should handle the query without crashing</Data></Cell>
@@ -310,7 +310,7 @@
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">@REQ-KTK-201</Data></Cell>
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">Fail to create box when name contains only whitespace</Data></Cell>
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">Negative Validation</Data></Cell>
-    <Cell ss:StyleID="DataCell"><Data ss:Type="String">P1 (Medium)</Data></Cell>
+    <Cell ss:StyleID="DataCell"><Data ss:Type="String">P1 (Regression)</Data></Cell>
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">Automated</Data></Cell>
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">@p1 @automated @negative @boundary @AC-02 @android</Data></Cell>
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">When the user taps the &quot;New box&quot; button | And the user enters box name &quot;     &quot; and leaves optional fields blank | And the user taps the Create Box button | Then the user should remain on the &quot;New Box&quot; creation form</Data></Cell>
@@ -322,7 +322,7 @@
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">@REQ-KTK-201</Data></Cell>
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">Create a box with minimum boundary single-character name</Data></Cell>
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">Boundary Value Analysis</Data></Cell>
-    <Cell ss:StyleID="DataCell"><Data ss:Type="String">P2 (Edge Case)</Data></Cell>
+    <Cell ss:StyleID="DataCell"><Data ss:Type="String">P1 (Regression)</Data></Cell>
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">Automated</Data></Cell>
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">@p1 @automated @positive @boundary @AC-01 @android</Data></Cell>
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">When the user taps the &quot;New box&quot; button | And the user enters box name &quot;B&quot; and leaves optional fields blank | And the user taps the Create Box button | Then the box &quot;B&quot; should appear in the stash list</Data></Cell>
@@ -346,7 +346,7 @@
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">@REQ-KTK-201</Data></Cell>
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">Cancel box creation midway and verify draft is not saved to stash</Data></Cell>
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">Negative Validation</Data></Cell>
-    <Cell ss:StyleID="DataCell"><Data ss:Type="String">P1 (Medium)</Data></Cell>
+    <Cell ss:StyleID="DataCell"><Data ss:Type="String">P1 (Regression)</Data></Cell>
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">Automated</Data></Cell>
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">@p1 @automated @negative @lifecycle @cancel @AC-03 @android</Data></Cell>
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">When the user taps the &quot;New box&quot; button | And the user enters box name &quot;Abandoned Draft Box&quot; and leaves optional fields blank | And the user taps the Go back button from creation form | Then the user should be redirected to the &quot;My Stash&quot; dashboard | And the box &quot;Abandoned Draft Box&quot; should no longer appear in the stash list</Data></Cell>
@@ -358,7 +358,7 @@
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">@REQ-KTK-201</Data></Cell>
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">Preserve dashboard state when application is minimized to background</Data></Cell>
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">App Lifecycle</Data></Cell>
-    <Cell ss:StyleID="DataCell"><Data ss:Type="String">P1 (Medium)</Data></Cell>
+    <Cell ss:StyleID="DataCell"><Data ss:Type="String">P2 (Edge Case)</Data></Cell>
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">Automated</Data></Cell>
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">@p2 @automated @lifecycle @resilience @AC-04 @android</Data></Cell>
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">Given the user is on the &quot;My Stash&quot; dashboard | When the user minimizes the application to background for 2 seconds | Then the user should still see the &quot;My Stash&quot; dashboard without any application crash</Data></Cell>
@@ -370,7 +370,7 @@
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">@REQ-KTK-401</Data></Cell>
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">Add a new item with photo, title, description, and adjusted quantity</Data></Cell>
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">Security &amp; Sanitization</Data></Cell>
-    <Cell ss:StyleID="DataCell"><Data ss:Type="String">P0 (Critical / Smoke)</Data></Cell>
+    <Cell ss:StyleID="DataCell"><Data ss:Type="String">P0 (Smoke / Critical)</Data></Cell>
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">Automated</Data></Cell>
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">@feature-item @REQ-KTK-401 @automated @smoke @regression @android</Data></Cell>
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">When the user taps the &quot;Add new item&quot; button | And the user captures a photo and proceeds to item details | And the user enters item title &quot;Ceramic Mug&quot; and description &quot;Blue porcelain coffee mug&quot; | And the user increases the item quantity by 2 | And the user taps the Save Item button | Then the item &quot;Ceramic Mug&quot; should be listed inside the box</Data></Cell>
@@ -382,7 +382,7 @@
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">@REQ-KTK-401</Data></Cell>
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">Add an item with mandatory title only and default quantity</Data></Cell>
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">Positive Functional</Data></Cell>
-    <Cell ss:StyleID="DataCell"><Data ss:Type="String">P1 (Medium)</Data></Cell>
+    <Cell ss:StyleID="DataCell"><Data ss:Type="String">P1 (Regression)</Data></Cell>
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">Automated</Data></Cell>
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">@automated @functional @android</Data></Cell>
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">When the user taps the &quot;Add new item&quot; button | And the user captures a photo and proceeds to item details | And the user enters item title &quot;Spare Keys&quot; and leaves description blank | And the user taps the Save Item button | Then the item &quot;Spare Keys&quot; should be listed inside the box</Data></Cell>
@@ -394,7 +394,7 @@
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">@REQ-KTK-401</Data></Cell>
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">Adjust item quantity using increment and decrement controls</Data></Cell>
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">Positive Functional</Data></Cell>
-    <Cell ss:StyleID="DataCell"><Data ss:Type="String">P1 (Medium)</Data></Cell>
+    <Cell ss:StyleID="DataCell"><Data ss:Type="String">P1 (Regression)</Data></Cell>
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">Automated</Data></Cell>
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">@automated @functional @android</Data></Cell>
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">When the user taps the &quot;Add new item&quot; button | And the user captures a photo and proceeds to item details | And the user increases the item quantity by 3 | And the user decreases the item quantity by 1 | Then the item quantity indicator should display 3</Data></Cell>
@@ -418,7 +418,7 @@
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">@REQ-KTK-401</Data></Cell>
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">Fail to save item when mandatory title is empty</Data></Cell>
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">Negative Validation</Data></Cell>
-    <Cell ss:StyleID="DataCell"><Data ss:Type="String">P1 (Medium)</Data></Cell>
+    <Cell ss:StyleID="DataCell"><Data ss:Type="String">P1 (Regression)</Data></Cell>
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">Automated</Data></Cell>
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">@automated @negative @android</Data></Cell>
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">When the user taps the &quot;Add new item&quot; button | And the user captures a photo and proceeds to item details | And the user leaves the item title empty | And the user taps the Save Item button | Then the user should remain on the &quot;Add Item Details&quot; screen</Data></Cell>
@@ -430,7 +430,7 @@
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">@REQ-KTK-401</Data></Cell>
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">Fail to save item when title contains only whitespace</Data></Cell>
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">Negative Validation</Data></Cell>
-    <Cell ss:StyleID="DataCell"><Data ss:Type="String">P1 (Medium)</Data></Cell>
+    <Cell ss:StyleID="DataCell"><Data ss:Type="String">P1 (Regression)</Data></Cell>
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">Automated</Data></Cell>
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">@automated @negative @android</Data></Cell>
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">When the user taps the &quot;Add new item&quot; button | And the user captures a photo and proceeds to item details | And the user enters item title &quot;     &quot; and leaves description blank | And the user taps the Save Item button | Then the user should remain on the &quot;Add Item Details&quot; screen</Data></Cell>
@@ -442,7 +442,7 @@
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">@REQ-KTK-401</Data></Cell>
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">Cancel item creation and discard captured photo</Data></Cell>
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">Negative Validation</Data></Cell>
-    <Cell ss:StyleID="DataCell"><Data ss:Type="String">P1 (Medium)</Data></Cell>
+    <Cell ss:StyleID="DataCell"><Data ss:Type="String">P1 (Regression)</Data></Cell>
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">Automated</Data></Cell>
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">@automated @negative @android</Data></Cell>
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">When the user taps the &quot;Add new item&quot; button | And the user captures a photo and proceeds to item details | And the user taps the Cancel button | Then the user should be returned to the box detail screen without saving</Data></Cell>
@@ -454,7 +454,7 @@
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">@REQ-KTK-401</Data></Cell>
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">Add an item with special characters, punctuation, and emojis</Data></Cell>
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">Positive Functional</Data></Cell>
-    <Cell ss:StyleID="DataCell"><Data ss:Type="String">P1 (Medium)</Data></Cell>
+    <Cell ss:StyleID="DataCell"><Data ss:Type="String">P1 (Regression)</Data></Cell>
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">Automated</Data></Cell>
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">@automated @edge-case @regex @android</Data></Cell>
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">When the user taps the &quot;Add new item&quot; button | And the user captures a photo and proceeds to item details | And the user enters item title &quot;Item #42: [Vintage] &amp; &apos;Rare&apos; ⚡️ (50% Off)&quot; and description &quot;Punctuation &amp; symbols: @!$%^*()_+-=[]{}|;&apos;:,./&lt;&gt;?&quot; | And the user taps the Save Item button | Then the item &quot;Item #42: [Vintage] &amp; &apos;Rare&apos; ⚡️ (50% Off)&quot; should be listed inside the box</Data></Cell>
@@ -490,7 +490,7 @@
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">@REQ-KTK-401</Data></Cell>
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">Remove an attached photo before saving item</Data></Cell>
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">Positive Functional</Data></Cell>
-    <Cell ss:StyleID="DataCell"><Data ss:Type="String">P1 (Medium)</Data></Cell>
+    <Cell ss:StyleID="DataCell"><Data ss:Type="String">P1 (Regression)</Data></Cell>
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">Automated</Data></Cell>
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">@automated @edge-case @android</Data></Cell>
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">When the user taps the &quot;Add new item&quot; button | And the user captures a photo and proceeds to item details | And the user taps the Remove photo button | Then the photo should be removed from the item draft</Data></Cell>
@@ -502,7 +502,7 @@
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">@REQ-KTK-101</Data></Cell>
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">Complete full onboarding walkthrough to My Stash</Data></Cell>
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">Smoke / Critical Path</Data></Cell>
-    <Cell ss:StyleID="DataCell"><Data ss:Type="String">P0 (Critical / Smoke)</Data></Cell>
+    <Cell ss:StyleID="DataCell"><Data ss:Type="String">P0 (Smoke / Critical)</Data></Cell>
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">Automated</Data></Cell>
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">@feature-onboarding @REQ-KTK-101 @automated @smoke @android</Data></Cell>
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">Given the user opens the Kotakin app | When the user advances through all onboarding steps using the Next button | And the user taps the Got it button on the final step | Then the user should be redirected to the &quot;My Stash&quot; dashboard</Data></Cell>
@@ -514,7 +514,7 @@
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">@REQ-KTK-101</Data></Cell>
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">Skip onboarding from the initial welcome screen</Data></Cell>
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">Positive Functional</Data></Cell>
-    <Cell ss:StyleID="DataCell"><Data ss:Type="String">P1 (Medium)</Data></Cell>
+    <Cell ss:StyleID="DataCell"><Data ss:Type="String">P1 (Regression)</Data></Cell>
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">Automated</Data></Cell>
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">@automated @functional @android</Data></Cell>
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">Given the user opens the Kotakin app | When the user taps the Skip button on the current onboarding step | Then the user should be redirected to the &quot;My Stash&quot; dashboard</Data></Cell>
@@ -526,7 +526,7 @@
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">@REQ-KTK-101</Data></Cell>
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">Skip onboarding midway from step two</Data></Cell>
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">Positive Functional</Data></Cell>
-    <Cell ss:StyleID="DataCell"><Data ss:Type="String">P1 (Medium)</Data></Cell>
+    <Cell ss:StyleID="DataCell"><Data ss:Type="String">P1 (Regression)</Data></Cell>
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">Automated</Data></Cell>
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">@automated @functional @android</Data></Cell>
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">Given the user opens the Kotakin app | When the user advances one step forward using the Next button | And the user taps the Skip button on the current onboarding step | Then the user should be redirected to the &quot;My Stash&quot; dashboard</Data></Cell>
@@ -538,7 +538,7 @@
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">@REQ-KTK-101</Data></Cell>
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">Verify onboarding step headers correspond to expected feature guides</Data></Cell>
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">Positive Functional</Data></Cell>
-    <Cell ss:StyleID="DataCell"><Data ss:Type="String">P1 (Medium)</Data></Cell>
+    <Cell ss:StyleID="DataCell"><Data ss:Type="String">P1 (Regression)</Data></Cell>
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">Automated</Data></Cell>
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">@automated @edge-case @android</Data></Cell>
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">Given the user opens the Kotakin app | Then the onboarding header should display &quot;Welcome to Kotakin!&quot; | When the user advances one step forward using the Next button | Then the onboarding header should display &quot;Create Boxes&quot; | When the user advances one step forward using the Next button | Then the onboarding header should display &quot;Scan &amp; Share&quot; | When the user advances one step forward using the Next button | Then the onboarding header should display &quot;Search Everything&quot;</Data></Cell>
@@ -550,7 +550,7 @@
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">@REQ-KTK-501</Data></Cell>
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">Trigger QR code scanner from dashboard</Data></Cell>
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">Smoke / Critical Path</Data></Cell>
-    <Cell ss:StyleID="DataCell"><Data ss:Type="String">P0 (Critical / Smoke)</Data></Cell>
+    <Cell ss:StyleID="DataCell"><Data ss:Type="String">P0 (Smoke / Critical)</Data></Cell>
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">Automated</Data></Cell>
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">@feature-scanner @REQ-KTK-501 @automated @smoke @android</Data></Cell>
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">When the user taps the &quot;Scan&quot; button on the dashboard | Then the QR scanner view or permission prompt should be displayed</Data></Cell>
@@ -562,7 +562,7 @@
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">@REQ-KTK-501</Data></Cell>
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">Verify camera permission requirement message when scanner is launched</Data></Cell>
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">Negative Validation</Data></Cell>
-    <Cell ss:StyleID="DataCell"><Data ss:Type="String">P1 (Medium)</Data></Cell>
+    <Cell ss:StyleID="DataCell"><Data ss:Type="String">P1 (Regression)</Data></Cell>
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">Automated</Data></Cell>
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">@automated @negative @android @permission</Data></Cell>
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">When the user taps the &quot;Scan&quot; button on the dashboard | Then the app should display the permission prompt button &quot;Grant camera permission&quot;</Data></Cell>
@@ -574,7 +574,7 @@
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">@REQ-KTK-501</Data></Cell>
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">Return safely to My Stash after opening scanner</Data></Cell>
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">Positive Functional</Data></Cell>
-    <Cell ss:StyleID="DataCell"><Data ss:Type="String">P1 (Medium)</Data></Cell>
+    <Cell ss:StyleID="DataCell"><Data ss:Type="String">P1 (Regression)</Data></Cell>
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">Automated</Data></Cell>
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">@automated @edge-case @android</Data></Cell>
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">When the user taps the &quot;Scan&quot; button on the dashboard | And the user dismisses the scanner view | Then the user should be redirected to the &quot;My Stash&quot; dashboard</Data></Cell>
@@ -586,7 +586,7 @@
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">@REQ-KTK-301</Data></Cell>
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">Switch application language to Bahasa Indonesia</Data></Cell>
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">Smoke / Critical Path</Data></Cell>
-    <Cell ss:StyleID="DataCell"><Data ss:Type="String">P0 (Critical / Smoke)</Data></Cell>
+    <Cell ss:StyleID="DataCell"><Data ss:Type="String">P0 (Smoke / Critical)</Data></Cell>
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">Automated</Data></Cell>
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">@feature-settings @REQ-KTK-301 @automated @smoke @android</Data></Cell>
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">When the user opens the Settings screen | And the user selects the language option &quot;Bahasa Indonesia&quot; | Then the language option &quot;Bahasa Indonesia&quot; should be selected</Data></Cell>
@@ -598,7 +598,7 @@
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">@REQ-KTK-301</Data></Cell>
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">Switch application language back to English</Data></Cell>
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">Positive Functional</Data></Cell>
-    <Cell ss:StyleID="DataCell"><Data ss:Type="String">P1 (Medium)</Data></Cell>
+    <Cell ss:StyleID="DataCell"><Data ss:Type="String">P1 (Regression)</Data></Cell>
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">Automated</Data></Cell>
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">@automated @functional @android</Data></Cell>
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">When the user opens the Settings screen | And the user selects the language option &quot;English&quot; | Then the language option &quot;English&quot; should be selected</Data></Cell>
@@ -610,7 +610,7 @@
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">@REQ-KTK-301</Data></Cell>
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">Navigate to About Kotakin screen and verify app version</Data></Cell>
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">Positive Functional</Data></Cell>
-    <Cell ss:StyleID="DataCell"><Data ss:Type="String">P1 (Medium)</Data></Cell>
+    <Cell ss:StyleID="DataCell"><Data ss:Type="String">P1 (Regression)</Data></Cell>
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">Automated</Data></Cell>
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">@automated @functional @android</Data></Cell>
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">When the user opens the Settings screen | And the user taps the &quot;About Kotakin&quot; button | Then the About screen should display the app version details | When the user taps the Go back button | Then the user should see the Settings screen header</Data></Cell>
@@ -622,7 +622,7 @@
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">@REQ-KTK-301</Data></Cell>
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">Navigate back to My Stash from Settings screen</Data></Cell>
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">Positive Functional</Data></Cell>
-    <Cell ss:StyleID="DataCell"><Data ss:Type="String">P1 (Medium)</Data></Cell>
+    <Cell ss:StyleID="DataCell"><Data ss:Type="String">P1 (Regression)</Data></Cell>
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">Automated</Data></Cell>
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">@automated @functional @android</Data></Cell>
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">When the user opens the Settings screen | And the user taps the Go back button | Then the user should be redirected to the &quot;My Stash&quot; dashboard</Data></Cell>
@@ -634,7 +634,7 @@
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">@REQ-KTK-301</Data></Cell>
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">Verify Backup and Restore action buttons are accessible</Data></Cell>
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">Positive Functional</Data></Cell>
-    <Cell ss:StyleID="DataCell"><Data ss:Type="String">P1 (Medium)</Data></Cell>
+    <Cell ss:StyleID="DataCell"><Data ss:Type="String">P1 (Regression)</Data></Cell>
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">Automated</Data></Cell>
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">@automated @edge-case @android</Data></Cell>
     <Cell ss:StyleID="DataCell"><Data ss:Type="String">When the user opens the Settings screen | Then the backup action button &quot;Create zip backup&quot; should be displayed | And the restore action button &quot;Restore from zip backup&quot; should be displayed</Data></Cell>

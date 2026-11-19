@@ -25,57 +25,57 @@
 
 ## 2. Requirements Traceability Matrix (RTM)
 
-| Requirement ID | Module | Test Case ID | Scenario Title | Test Category | Priority |
-| :--- | :--- | :--- | :--- | :--- | :---: |
-| `@REQ-KTK-201` | Box Creation & Management | `TC-KTK-001` | Create a new box with all fields populated | Smoke / Critical Path | P0 |
-| `@REQ-KTK-201` | Box Creation & Management | `TC-KTK-002` | Create a new box with only mandatory name field | Positive Functional | P1 |
-| `@REQ-KTK-201` | Box Creation & Management | `TC-KTK-003` | View box detail and verify action buttons | Positive Functional | P1 |
-| `@REQ-KTK-201` | Box Creation & Management | `TC-KTK-004` | Add a box to favorites | Positive Functional | P1 |
-| `@REQ-KTK-201` | Box Creation & Management | `TC-KTK-005` | Remove a box from favorites | Positive Functional | P1 |
-| `@REQ-KTK-201` | Box Creation & Management | `TC-KTK-006` | Edit existing box details and save changes successfully | Positive Functional | P1 |
-| `@REQ-KTK-201` | Box Creation & Management | `TC-KTK-007` | Fail to save box edits when box name is cleared | Negative Validation | P1 |
-| `@REQ-KTK-201` | Box Creation & Management | `TC-KTK-008` | Cancel box editing and verify original details remain unchanged | Positive Functional | P1 |
-| `@REQ-KTK-201` | Box Creation & Management | `TC-KTK-009` | Cancel box deletion and verify box is preserved in stash | Positive Functional | P1 |
-| `@REQ-KTK-201` | Box Creation & Management | `TC-KTK-010` | Delete a box permanently and verify removal from stash dashboard | Positive Functional | P1 |
-| `@REQ-KTK-201` | Box Creation & Management | `TC-KTK-011` | Allow creation of duplicate box names and update total box counter | Positive Functional | P1 |
-| `@REQ-KTK-201` | Box Creation & Management | `TC-KTK-012` | Search for an existing box by name | Positive Functional | P1 |
-| `@REQ-KTK-201` | Box Creation & Management | `TC-KTK-013` | Clear search query and restore full box list | Positive Functional | P1 |
-| `@REQ-KTK-201` | Box Creation & Management | `TC-KTK-014` | Search box with case-insensitive query | Positive Functional | P1 |
-| `@REQ-KTK-201` | Box Creation & Management | `TC-KTK-015` | Search box using partial substring matching | Positive Functional | P1 |
-| `@REQ-KTK-201` | Box Creation & Management | `TC-KTK-016` | Search box with leading and trailing whitespace query | Positive Functional | P1 |
-| `@REQ-KTK-201` | Box Creation & Management | `TC-KTK-017` | Search for a box by the name of an item stored inside it | Positive Functional | P1 |
-| `@REQ-KTK-201` | Box Creation & Management | `TC-KTK-018` | Fail to create box when mandatory box name is empty | Negative Validation | P1 |
-| `@REQ-KTK-201` | Box Creation & Management | `TC-KTK-019` | Search with non-existent keyword shows empty results state | Negative Validation | P1 |
-| `@REQ-KTK-201` | Box Creation & Management | `TC-KTK-020` | Create a box with special characters and numerical identifiers | Positive Functional | P1 |
-| `@REQ-KTK-201` | Box Creation & Management | `TC-KTK-021` | Search box with special regex characters without application crash | Positive Functional | P1 |
-| `@REQ-KTK-201` | Box Creation & Management | `TC-KTK-022` | Fail to create box when name contains only whitespace | Negative Validation | P1 |
-| `@REQ-KTK-201` | Box Creation & Management | `TC-KTK-023` | Create a box with minimum boundary single-character name | Boundary Value Analysis | P2 |
-| `@REQ-KTK-201` | Box Creation & Management | `TC-KTK-024` | Create a box with script injection tags and verify literal text rendering | Security & Sanitization | P2 |
-| `@REQ-KTK-201` | Box Creation & Management | `TC-KTK-025` | Cancel box creation midway and verify draft is not saved to stash | Negative Validation | P1 |
-| `@REQ-KTK-201` | Box Creation & Management | `TC-KTK-026` | Preserve dashboard state when application is minimized to background | App Lifecycle | P1 |
-| `@REQ-KTK-401` | Item Management Inside Box | `TC-KTK-027` | Add a new item with photo, title, description, and adjusted quantity | Security & Sanitization | P0 |
-| `@REQ-KTK-401` | Item Management Inside Box | `TC-KTK-028` | Add an item with mandatory title only and default quantity | Positive Functional | P1 |
-| `@REQ-KTK-401` | Item Management Inside Box | `TC-KTK-029` | Adjust item quantity using increment and decrement controls | Positive Functional | P1 |
-| `@REQ-KTK-401` | Item Management Inside Box | `TC-KTK-030` | Add an item with minimum boundary single-character title | Boundary Value Analysis | P2 |
-| `@REQ-KTK-401` | Item Management Inside Box | `TC-KTK-031` | Fail to save item when mandatory title is empty | Negative Validation | P1 |
-| `@REQ-KTK-401` | Item Management Inside Box | `TC-KTK-032` | Fail to save item when title contains only whitespace | Negative Validation | P1 |
-| `@REQ-KTK-401` | Item Management Inside Box | `TC-KTK-033` | Cancel item creation and discard captured photo | Negative Validation | P1 |
-| `@REQ-KTK-401` | Item Management Inside Box | `TC-KTK-034` | Add an item with special characters, punctuation, and emojis | Positive Functional | P1 |
-| `@REQ-KTK-401` | Item Management Inside Box | `TC-KTK-035` | Add an item with maximum length boundary title and long description | Security & Sanitization | P2 |
-| `@REQ-KTK-401` | Item Management Inside Box | `TC-KTK-036` | Add an item with script injection tags and verify literal text rendering | Security & Sanitization | P2 |
-| `@REQ-KTK-401` | Item Management Inside Box | `TC-KTK-037` | Remove an attached photo before saving item | Positive Functional | P1 |
-| `@REQ-KTK-101` | Onboarding & Walkthrough | `TC-KTK-038` | Complete full onboarding walkthrough to My Stash | Smoke / Critical Path | P0 |
-| `@REQ-KTK-101` | Onboarding & Walkthrough | `TC-KTK-039` | Skip onboarding from the initial welcome screen | Positive Functional | P1 |
-| `@REQ-KTK-101` | Onboarding & Walkthrough | `TC-KTK-040` | Skip onboarding midway from step two | Positive Functional | P1 |
-| `@REQ-KTK-101` | Onboarding & Walkthrough | `TC-KTK-041` | Verify onboarding step headers correspond to expected feature guides | Positive Functional | P1 |
-| `@REQ-KTK-501` | Physical QR Code Scanner | `TC-KTK-042` | Trigger QR code scanner from dashboard | Smoke / Critical Path | P0 |
-| `@REQ-KTK-501` | Physical QR Code Scanner | `TC-KTK-043` | Verify camera permission requirement message when scanner is launched | Negative Validation | P1 |
-| `@REQ-KTK-501` | Physical QR Code Scanner | `TC-KTK-044` | Return safely to My Stash after opening scanner | Positive Functional | P1 |
-| `@REQ-KTK-301` | Application Settings & Localization | `TC-KTK-045` | Switch application language to Bahasa Indonesia | Smoke / Critical Path | P0 |
-| `@REQ-KTK-301` | Application Settings & Localization | `TC-KTK-046` | Switch application language back to English | Positive Functional | P1 |
-| `@REQ-KTK-301` | Application Settings & Localization | `TC-KTK-047` | Navigate to About Kotakin screen and verify app version | Positive Functional | P1 |
-| `@REQ-KTK-301` | Application Settings & Localization | `TC-KTK-048` | Navigate back to My Stash from Settings screen | Positive Functional | P1 |
-| `@REQ-KTK-301` | Application Settings & Localization | `TC-KTK-049` | Verify Backup and Restore action buttons are accessible | Positive Functional | P1 |
+| Requirement / Jira | AC Mapping | Module | Test Case ID | Scenario Title | Test Category | Priority |
+| :--- | :--- | :--- | :--- | :--- | :--- | :---: |
+| `@REQ-KTK-201` | - | Box Creation & Management | `TC-KTK-001` | Create a new box with all fields populated | Smoke / Critical Path | P0 |
+| `@REQ-KTK-201` | - | Box Creation & Management | `TC-KTK-002` | Create a new box with only mandatory name field | Positive Functional | P1 |
+| `@REQ-KTK-201` | - | Box Creation & Management | `TC-KTK-003` | View box detail and verify action buttons | Positive Functional | P1 |
+| `@REQ-KTK-201` | - | Box Creation & Management | `TC-KTK-004` | Add a box to favorites | Positive Functional | P1 |
+| `@REQ-KTK-201` | - | Box Creation & Management | `TC-KTK-005` | Remove a box from favorites | Positive Functional | P1 |
+| `@REQ-KTK-201` | - | Box Creation & Management | `TC-KTK-006` | Edit existing box details and save changes successfully | Positive Functional | P1 |
+| `@REQ-KTK-201` | - | Box Creation & Management | `TC-KTK-007` | Fail to save box edits when box name is cleared | Negative Validation | P1 |
+| `@REQ-KTK-201` | - | Box Creation & Management | `TC-KTK-008` | Cancel box editing and verify original details remain unchanged | Positive Functional | P1 |
+| `@REQ-KTK-201` | - | Box Creation & Management | `TC-KTK-009` | Cancel box deletion and verify box is preserved in stash | Positive Functional | P1 |
+| `@REQ-KTK-201` | - | Box Creation & Management | `TC-KTK-010` | Delete a box permanently and verify removal from stash dashboard | Positive Functional | P1 |
+| `@REQ-KTK-201` | - | Box Creation & Management | `TC-KTK-011` | Allow creation of duplicate box names and update total box counter | Positive Functional | P1 |
+| `@REQ-KTK-201` | - | Box Creation & Management | `TC-KTK-012` | Search for an existing box by name | Positive Functional | P1 |
+| `@REQ-KTK-201` | - | Box Creation & Management | `TC-KTK-013` | Clear search query and restore full box list | Positive Functional | P1 |
+| `@REQ-KTK-201` | - | Box Creation & Management | `TC-KTK-014` | Search box with case-insensitive query | Positive Functional | P1 |
+| `@REQ-KTK-201` | - | Box Creation & Management | `TC-KTK-015` | Search box using partial substring matching | Positive Functional | P1 |
+| `@REQ-KTK-201` | - | Box Creation & Management | `TC-KTK-016` | Search box with leading and trailing whitespace query | Positive Functional | P1 |
+| `@REQ-KTK-201` | - | Box Creation & Management | `TC-KTK-017` | Search for a box by the name of an item stored inside it | Positive Functional | P1 |
+| `@REQ-KTK-201` | - | Box Creation & Management | `TC-KTK-018` | Fail to create box when mandatory box name is empty | Negative Validation | P1 |
+| `@REQ-KTK-201` | - | Box Creation & Management | `TC-KTK-019` | Search with non-existent keyword shows empty results state | Negative Validation | P1 |
+| `@REQ-KTK-201` | - | Box Creation & Management | `TC-KTK-020` | Create a box with special characters and numerical identifiers | Positive Functional | P1 |
+| `@REQ-KTK-201` | - | Box Creation & Management | `TC-KTK-021` | Search box with special regex characters without application crash | Positive Functional | P1 |
+| `@REQ-KTK-201` | `@AC-02` | Box Creation & Management | `TC-KTK-022` | Fail to create box when name contains only whitespace | Negative Validation | P1 |
+| `@REQ-KTK-201` | `@AC-01` | Box Creation & Management | `TC-KTK-023` | Create a box with minimum boundary single-character name | Boundary Value Analysis | P1 |
+| `@REQ-KTK-201` | `@AC-01` | Box Creation & Management | `TC-KTK-024` | Create a box with script injection tags and verify literal text rendering | Security & Sanitization | P2 |
+| `@REQ-KTK-201` | `@AC-03` | Box Creation & Management | `TC-KTK-025` | Cancel box creation midway and verify draft is not saved to stash | Negative Validation | P1 |
+| `@REQ-KTK-201` | `@AC-04` | Box Creation & Management | `TC-KTK-026` | Preserve dashboard state when application is minimized to background | App Lifecycle | P2 |
+| `@REQ-KTK-401` | - | Item Management Inside Box | `TC-KTK-027` | Add a new item with photo, title, description, and adjusted quantity | Security & Sanitization | P0 |
+| `@REQ-KTK-401` | - | Item Management Inside Box | `TC-KTK-028` | Add an item with mandatory title only and default quantity | Positive Functional | P1 |
+| `@REQ-KTK-401` | - | Item Management Inside Box | `TC-KTK-029` | Adjust item quantity using increment and decrement controls | Positive Functional | P1 |
+| `@REQ-KTK-401` | - | Item Management Inside Box | `TC-KTK-030` | Add an item with minimum boundary single-character title | Boundary Value Analysis | P2 |
+| `@REQ-KTK-401` | - | Item Management Inside Box | `TC-KTK-031` | Fail to save item when mandatory title is empty | Negative Validation | P1 |
+| `@REQ-KTK-401` | - | Item Management Inside Box | `TC-KTK-032` | Fail to save item when title contains only whitespace | Negative Validation | P1 |
+| `@REQ-KTK-401` | - | Item Management Inside Box | `TC-KTK-033` | Cancel item creation and discard captured photo | Negative Validation | P1 |
+| `@REQ-KTK-401` | - | Item Management Inside Box | `TC-KTK-034` | Add an item with special characters, punctuation, and emojis | Positive Functional | P1 |
+| `@REQ-KTK-401` | - | Item Management Inside Box | `TC-KTK-035` | Add an item with maximum length boundary title and long description | Security & Sanitization | P2 |
+| `@REQ-KTK-401` | - | Item Management Inside Box | `TC-KTK-036` | Add an item with script injection tags and verify literal text rendering | Security & Sanitization | P2 |
+| `@REQ-KTK-401` | - | Item Management Inside Box | `TC-KTK-037` | Remove an attached photo before saving item | Positive Functional | P1 |
+| `@REQ-KTK-101` | - | Onboarding & Walkthrough | `TC-KTK-038` | Complete full onboarding walkthrough to My Stash | Smoke / Critical Path | P0 |
+| `@REQ-KTK-101` | - | Onboarding & Walkthrough | `TC-KTK-039` | Skip onboarding from the initial welcome screen | Positive Functional | P1 |
+| `@REQ-KTK-101` | - | Onboarding & Walkthrough | `TC-KTK-040` | Skip onboarding midway from step two | Positive Functional | P1 |
+| `@REQ-KTK-101` | - | Onboarding & Walkthrough | `TC-KTK-041` | Verify onboarding step headers correspond to expected feature guides | Positive Functional | P1 |
+| `@REQ-KTK-501` | - | Physical QR Code Scanner | `TC-KTK-042` | Trigger QR code scanner from dashboard | Smoke / Critical Path | P0 |
+| `@REQ-KTK-501` | - | Physical QR Code Scanner | `TC-KTK-043` | Verify camera permission requirement message when scanner is launched | Negative Validation | P1 |
+| `@REQ-KTK-501` | - | Physical QR Code Scanner | `TC-KTK-044` | Return safely to My Stash after opening scanner | Positive Functional | P1 |
+| `@REQ-KTK-301` | - | Application Settings & Localization | `TC-KTK-045` | Switch application language to Bahasa Indonesia | Smoke / Critical Path | P0 |
+| `@REQ-KTK-301` | - | Application Settings & Localization | `TC-KTK-046` | Switch application language back to English | Positive Functional | P1 |
+| `@REQ-KTK-301` | - | Application Settings & Localization | `TC-KTK-047` | Navigate to About Kotakin screen and verify app version | Positive Functional | P1 |
+| `@REQ-KTK-301` | - | Application Settings & Localization | `TC-KTK-048` | Navigate back to My Stash from Settings screen | Positive Functional | P1 |
+| `@REQ-KTK-301` | - | Application Settings & Localization | `TC-KTK-049` | Verify Backup and Restore action buttons are accessible | Positive Functional | P1 |
 
 ---
 
@@ -86,7 +86,7 @@
 #### [TC-KTK-001] Create a new box with all fields populated
 - **Requirement:** `@REQ-KTK-201`
 - **Category:** Smoke / Critical Path
-- **Priority:** P0 (Critical / Smoke)
+- **Priority:** P0 (Smoke / Critical)
 - **Tags:** `@feature-box @REQ-KTK-201 @automated @smoke @regression @android`
 - **Test Steps (Gherkin):**
   `When the user taps the "New box" button`  
@@ -99,7 +99,7 @@
 #### [TC-KTK-002] Create a new box with only mandatory name field
 - **Requirement:** `@REQ-KTK-201`
 - **Category:** Positive Functional
-- **Priority:** P1 (Medium)
+- **Priority:** P1 (Regression)
 - **Tags:** `@automated @functional @android`
 - **Test Steps (Gherkin):**
   `When the user taps the "New box" button`  
@@ -111,7 +111,7 @@
 #### [TC-KTK-003] View box detail and verify action buttons
 - **Requirement:** `@REQ-KTK-201`
 - **Category:** Positive Functional
-- **Priority:** P1 (Medium)
+- **Priority:** P1 (Regression)
 - **Tags:** `@automated @e2e @regression @android`
 - **Test Steps (Gherkin):**
   `When the user taps on the box "Kitchenware"`  
@@ -121,7 +121,7 @@
 #### [TC-KTK-004] Add a box to favorites
 - **Requirement:** `@REQ-KTK-201`
 - **Category:** Positive Functional
-- **Priority:** P1 (Medium)
+- **Priority:** P1 (Regression)
 - **Tags:** `@automated @functional @favorite @android`
 - **Test Steps (Gherkin):**
   `Given the user has opened the detail of box "Kitchenware"`  
@@ -133,7 +133,7 @@
 #### [TC-KTK-005] Remove a box from favorites
 - **Requirement:** `@REQ-KTK-201`
 - **Category:** Positive Functional
-- **Priority:** P1 (Medium)
+- **Priority:** P1 (Regression)
 - **Tags:** `@automated @functional @favorite @android`
 - **Test Steps (Gherkin):**
   `Given the user has opened the detail of box "Kitchenware"`  
@@ -145,7 +145,7 @@
 #### [TC-KTK-006] Edit existing box details and save changes successfully
 - **Requirement:** `@REQ-KTK-201`
 - **Category:** Positive Functional
-- **Priority:** P1 (Medium)
+- **Priority:** P1 (Regression)
 - **Tags:** `@automated @functional @edit @android`
 - **Test Steps (Gherkin):**
   `Given the user has opened the detail of box "Kitchenware"`  
@@ -159,7 +159,7 @@
 #### [TC-KTK-007] Fail to save box edits when box name is cleared
 - **Requirement:** `@REQ-KTK-201`
 - **Category:** Negative Validation
-- **Priority:** P1 (Medium)
+- **Priority:** P1 (Regression)
 - **Tags:** `@automated @negative @edit @android`
 - **Test Steps (Gherkin):**
   `Given the user has opened the detail of box "Kitchenware Updated"`  
@@ -173,7 +173,7 @@
 #### [TC-KTK-008] Cancel box editing and verify original details remain unchanged
 - **Requirement:** `@REQ-KTK-201`
 - **Category:** Positive Functional
-- **Priority:** P1 (Medium)
+- **Priority:** P1 (Regression)
 - **Tags:** `@automated @functional @edit @cancel @android`
 - **Test Steps (Gherkin):**
   `Given the user has opened the detail of box "Kitchenware Updated"`  
@@ -187,7 +187,7 @@
 #### [TC-KTK-009] Cancel box deletion and verify box is preserved in stash
 - **Requirement:** `@REQ-KTK-201`
 - **Category:** Positive Functional
-- **Priority:** P1 (Medium)
+- **Priority:** P1 (Regression)
 - **Tags:** `@automated @functional @delete @cancel @android`
 - **Test Steps (Gherkin):**
   `Given the user has opened the detail of box "Kitchenware Updated"`  
@@ -201,7 +201,7 @@
 #### [TC-KTK-010] Delete a box permanently and verify removal from stash dashboard
 - **Requirement:** `@REQ-KTK-201`
 - **Category:** Positive Functional
-- **Priority:** P1 (Medium)
+- **Priority:** P1 (Regression)
 - **Tags:** `@automated @functional @delete @android`
 - **Test Steps (Gherkin):**
   `Given the user has opened the detail of box "Kitchenware Updated"`  
@@ -216,7 +216,7 @@
 #### [TC-KTK-011] Allow creation of duplicate box names and update total box counter
 - **Requirement:** `@REQ-KTK-201`
 - **Category:** Positive Functional
-- **Priority:** P1 (Medium)
+- **Priority:** P1 (Regression)
 - **Tags:** `@automated @functional @duplicate @android`
 - **Test Steps (Gherkin):**
   `When the user taps the "New box" button`  
@@ -228,7 +228,7 @@
 #### [TC-KTK-012] Search for an existing box by name
 - **Requirement:** `@REQ-KTK-201`
 - **Category:** Positive Functional
-- **Priority:** P1 (Medium)
+- **Priority:** P1 (Regression)
 - **Tags:** `@automated @functional @android`
 - **Test Steps (Gherkin):**
   `When the user searches for box with query "Garage Tools"`  
@@ -238,7 +238,7 @@
 #### [TC-KTK-013] Clear search query and restore full box list
 - **Requirement:** `@REQ-KTK-201`
 - **Category:** Positive Functional
-- **Priority:** P1 (Medium)
+- **Priority:** P1 (Regression)
 - **Tags:** `@automated @functional @android`
 - **Test Steps (Gherkin):**
   `Given the user searches for box with query "Garage Tools"`  
@@ -249,7 +249,7 @@
 #### [TC-KTK-014] Search box with case-insensitive query
 - **Requirement:** `@REQ-KTK-201`
 - **Category:** Positive Functional
-- **Priority:** P1 (Medium)
+- **Priority:** P1 (Regression)
 - **Tags:** `@automated @functional @regex @android`
 - **Test Steps (Gherkin):**
   `When the user searches for box with query "garage tools"`  
@@ -259,7 +259,7 @@
 #### [TC-KTK-015] Search box using partial substring matching
 - **Requirement:** `@REQ-KTK-201`
 - **Category:** Positive Functional
-- **Priority:** P1 (Medium)
+- **Priority:** P1 (Regression)
 - **Tags:** `@automated @functional @regex @android`
 - **Test Steps (Gherkin):**
   `When the user searches for box with query "Tools"`  
@@ -269,7 +269,7 @@
 #### [TC-KTK-016] Search box with leading and trailing whitespace query
 - **Requirement:** `@REQ-KTK-201`
 - **Category:** Positive Functional
-- **Priority:** P1 (Medium)
+- **Priority:** P1 (Regression)
 - **Tags:** `@automated @functional @sanitization @android`
 - **Test Steps (Gherkin):**
   `When the user searches for box with query "  Garage Tools  "`  
@@ -279,7 +279,7 @@
 #### [TC-KTK-017] Search for a box by the name of an item stored inside it
 - **Requirement:** `@REQ-KTK-201`
 - **Category:** Positive Functional
-- **Priority:** P1 (Medium)
+- **Priority:** P1 (Regression)
 - **Tags:** `@automated @functional @cross-search @android`
 - **Test Steps (Gherkin):**
   `When the user searches for box with query "Ceramic Mug"`  
@@ -289,7 +289,7 @@
 #### [TC-KTK-018] Fail to create box when mandatory box name is empty
 - **Requirement:** `@REQ-KTK-201`
 - **Category:** Negative Validation
-- **Priority:** P1 (Medium)
+- **Priority:** P1 (Regression)
 - **Tags:** `@automated @negative @android`
 - **Test Steps (Gherkin):**
   `When the user taps the "New box" button`  
@@ -301,7 +301,7 @@
 #### [TC-KTK-019] Search with non-existent keyword shows empty results state
 - **Requirement:** `@REQ-KTK-201`
 - **Category:** Negative Validation
-- **Priority:** P1 (Medium)
+- **Priority:** P1 (Regression)
 - **Tags:** `@automated @negative @android`
 - **Test Steps (Gherkin):**
   `When the user searches for box with query "xyz_nonexistent_item_999"`  
@@ -311,7 +311,7 @@
 #### [TC-KTK-020] Create a box with special characters and numerical identifiers
 - **Requirement:** `@REQ-KTK-201`
 - **Category:** Positive Functional
-- **Priority:** P1 (Medium)
+- **Priority:** P1 (Regression)
 - **Tags:** `@automated @edge-case @android`
 - **Test Steps (Gherkin):**
   `When the user taps the "New box" button`  
@@ -324,7 +324,7 @@
 #### [TC-KTK-021] Search box with special regex characters without application crash
 - **Requirement:** `@REQ-KTK-201`
 - **Category:** Positive Functional
-- **Priority:** P1 (Medium)
+- **Priority:** P1 (Regression)
 - **Tags:** `@automated @edge-case @regex @stress @android`
 - **Test Steps (Gherkin):**
   `When the user searches for box with query "*?+[]%_'"`  
@@ -334,7 +334,7 @@
 #### [TC-KTK-022] Fail to create box when name contains only whitespace
 - **Requirement:** `@REQ-KTK-201`
 - **Category:** Negative Validation
-- **Priority:** P1 (Medium)
+- **Priority:** P1 (Regression)
 - **Tags:** `@p1 @automated @negative @boundary @AC-02 @android`
 - **Test Steps (Gherkin):**
   `When the user taps the "New box" button`  
@@ -346,7 +346,7 @@
 #### [TC-KTK-023] Create a box with minimum boundary single-character name
 - **Requirement:** `@REQ-KTK-201`
 - **Category:** Boundary Value Analysis
-- **Priority:** P2 (Edge Case)
+- **Priority:** P1 (Regression)
 - **Tags:** `@p1 @automated @positive @boundary @AC-01 @android`
 - **Test Steps (Gherkin):**
   `When the user taps the "New box" button`  
@@ -370,7 +370,7 @@
 #### [TC-KTK-025] Cancel box creation midway and verify draft is not saved to stash
 - **Requirement:** `@REQ-KTK-201`
 - **Category:** Negative Validation
-- **Priority:** P1 (Medium)
+- **Priority:** P1 (Regression)
 - **Tags:** `@p1 @automated @negative @lifecycle @cancel @AC-03 @android`
 - **Test Steps (Gherkin):**
   `When the user taps the "New box" button`  
@@ -383,7 +383,7 @@
 #### [TC-KTK-026] Preserve dashboard state when application is minimized to background
 - **Requirement:** `@REQ-KTK-201`
 - **Category:** App Lifecycle
-- **Priority:** P1 (Medium)
+- **Priority:** P2 (Edge Case)
 - **Tags:** `@p2 @automated @lifecycle @resilience @AC-04 @android`
 - **Test Steps (Gherkin):**
   `Given the user is on the "My Stash" dashboard`  
@@ -396,7 +396,7 @@
 #### [TC-KTK-027] Add a new item with photo, title, description, and adjusted quantity
 - **Requirement:** `@REQ-KTK-401`
 - **Category:** Security & Sanitization
-- **Priority:** P0 (Critical / Smoke)
+- **Priority:** P0 (Smoke / Critical)
 - **Tags:** `@feature-item @REQ-KTK-401 @automated @smoke @regression @android`
 - **Test Steps (Gherkin):**
   `When the user taps the "Add new item" button`  
@@ -410,7 +410,7 @@
 #### [TC-KTK-028] Add an item with mandatory title only and default quantity
 - **Requirement:** `@REQ-KTK-401`
 - **Category:** Positive Functional
-- **Priority:** P1 (Medium)
+- **Priority:** P1 (Regression)
 - **Tags:** `@automated @functional @android`
 - **Test Steps (Gherkin):**
   `When the user taps the "Add new item" button`  
@@ -423,7 +423,7 @@
 #### [TC-KTK-029] Adjust item quantity using increment and decrement controls
 - **Requirement:** `@REQ-KTK-401`
 - **Category:** Positive Functional
-- **Priority:** P1 (Medium)
+- **Priority:** P1 (Regression)
 - **Tags:** `@automated @functional @android`
 - **Test Steps (Gherkin):**
   `When the user taps the "Add new item" button`  
@@ -449,7 +449,7 @@
 #### [TC-KTK-031] Fail to save item when mandatory title is empty
 - **Requirement:** `@REQ-KTK-401`
 - **Category:** Negative Validation
-- **Priority:** P1 (Medium)
+- **Priority:** P1 (Regression)
 - **Tags:** `@automated @negative @android`
 - **Test Steps (Gherkin):**
   `When the user taps the "Add new item" button`  
@@ -462,7 +462,7 @@
 #### [TC-KTK-032] Fail to save item when title contains only whitespace
 - **Requirement:** `@REQ-KTK-401`
 - **Category:** Negative Validation
-- **Priority:** P1 (Medium)
+- **Priority:** P1 (Regression)
 - **Tags:** `@automated @negative @android`
 - **Test Steps (Gherkin):**
   `When the user taps the "Add new item" button`  
@@ -475,7 +475,7 @@
 #### [TC-KTK-033] Cancel item creation and discard captured photo
 - **Requirement:** `@REQ-KTK-401`
 - **Category:** Negative Validation
-- **Priority:** P1 (Medium)
+- **Priority:** P1 (Regression)
 - **Tags:** `@automated @negative @android`
 - **Test Steps (Gherkin):**
   `When the user taps the "Add new item" button`  
@@ -487,7 +487,7 @@
 #### [TC-KTK-034] Add an item with special characters, punctuation, and emojis
 - **Requirement:** `@REQ-KTK-401`
 - **Category:** Positive Functional
-- **Priority:** P1 (Medium)
+- **Priority:** P1 (Regression)
 - **Tags:** `@automated @edge-case @regex @android`
 - **Test Steps (Gherkin):**
   `When the user taps the "Add new item" button`  
@@ -526,7 +526,7 @@
 #### [TC-KTK-037] Remove an attached photo before saving item
 - **Requirement:** `@REQ-KTK-401`
 - **Category:** Positive Functional
-- **Priority:** P1 (Medium)
+- **Priority:** P1 (Regression)
 - **Tags:** `@automated @edge-case @android`
 - **Test Steps (Gherkin):**
   `When the user taps the "Add new item" button`  
@@ -540,7 +540,7 @@
 #### [TC-KTK-038] Complete full onboarding walkthrough to My Stash
 - **Requirement:** `@REQ-KTK-101`
 - **Category:** Smoke / Critical Path
-- **Priority:** P0 (Critical / Smoke)
+- **Priority:** P0 (Smoke / Critical)
 - **Tags:** `@feature-onboarding @REQ-KTK-101 @automated @smoke @android`
 - **Test Steps (Gherkin):**
   `Given the user opens the Kotakin app`  
@@ -552,7 +552,7 @@
 #### [TC-KTK-039] Skip onboarding from the initial welcome screen
 - **Requirement:** `@REQ-KTK-101`
 - **Category:** Positive Functional
-- **Priority:** P1 (Medium)
+- **Priority:** P1 (Regression)
 - **Tags:** `@automated @functional @android`
 - **Test Steps (Gherkin):**
   `Given the user opens the Kotakin app`  
@@ -563,7 +563,7 @@
 #### [TC-KTK-040] Skip onboarding midway from step two
 - **Requirement:** `@REQ-KTK-101`
 - **Category:** Positive Functional
-- **Priority:** P1 (Medium)
+- **Priority:** P1 (Regression)
 - **Tags:** `@automated @functional @android`
 - **Test Steps (Gherkin):**
   `Given the user opens the Kotakin app`  
@@ -575,7 +575,7 @@
 #### [TC-KTK-041] Verify onboarding step headers correspond to expected feature guides
 - **Requirement:** `@REQ-KTK-101`
 - **Category:** Positive Functional
-- **Priority:** P1 (Medium)
+- **Priority:** P1 (Regression)
 - **Tags:** `@automated @edge-case @android`
 - **Test Steps (Gherkin):**
   `Given the user opens the Kotakin app`  
@@ -593,7 +593,7 @@
 #### [TC-KTK-042] Trigger QR code scanner from dashboard
 - **Requirement:** `@REQ-KTK-501`
 - **Category:** Smoke / Critical Path
-- **Priority:** P0 (Critical / Smoke)
+- **Priority:** P0 (Smoke / Critical)
 - **Tags:** `@feature-scanner @REQ-KTK-501 @automated @smoke @android`
 - **Test Steps (Gherkin):**
   `When the user taps the "Scan" button on the dashboard`  
@@ -603,7 +603,7 @@
 #### [TC-KTK-043] Verify camera permission requirement message when scanner is launched
 - **Requirement:** `@REQ-KTK-501`
 - **Category:** Negative Validation
-- **Priority:** P1 (Medium)
+- **Priority:** P1 (Regression)
 - **Tags:** `@automated @negative @android @permission`
 - **Test Steps (Gherkin):**
   `When the user taps the "Scan" button on the dashboard`  
@@ -613,7 +613,7 @@
 #### [TC-KTK-044] Return safely to My Stash after opening scanner
 - **Requirement:** `@REQ-KTK-501`
 - **Category:** Positive Functional
-- **Priority:** P1 (Medium)
+- **Priority:** P1 (Regression)
 - **Tags:** `@automated @edge-case @android`
 - **Test Steps (Gherkin):**
   `When the user taps the "Scan" button on the dashboard`  
@@ -626,7 +626,7 @@
 #### [TC-KTK-045] Switch application language to Bahasa Indonesia
 - **Requirement:** `@REQ-KTK-301`
 - **Category:** Smoke / Critical Path
-- **Priority:** P0 (Critical / Smoke)
+- **Priority:** P0 (Smoke / Critical)
 - **Tags:** `@feature-settings @REQ-KTK-301 @automated @smoke @android`
 - **Test Steps (Gherkin):**
   `When the user opens the Settings screen`  
@@ -637,7 +637,7 @@
 #### [TC-KTK-046] Switch application language back to English
 - **Requirement:** `@REQ-KTK-301`
 - **Category:** Positive Functional
-- **Priority:** P1 (Medium)
+- **Priority:** P1 (Regression)
 - **Tags:** `@automated @functional @android`
 - **Test Steps (Gherkin):**
   `When the user opens the Settings screen`  
@@ -648,7 +648,7 @@
 #### [TC-KTK-047] Navigate to About Kotakin screen and verify app version
 - **Requirement:** `@REQ-KTK-301`
 - **Category:** Positive Functional
-- **Priority:** P1 (Medium)
+- **Priority:** P1 (Regression)
 - **Tags:** `@automated @functional @android`
 - **Test Steps (Gherkin):**
   `When the user opens the Settings screen`  
@@ -661,7 +661,7 @@
 #### [TC-KTK-048] Navigate back to My Stash from Settings screen
 - **Requirement:** `@REQ-KTK-301`
 - **Category:** Positive Functional
-- **Priority:** P1 (Medium)
+- **Priority:** P1 (Regression)
 - **Tags:** `@automated @functional @android`
 - **Test Steps (Gherkin):**
   `When the user opens the Settings screen`  
@@ -672,7 +672,7 @@
 #### [TC-KTK-049] Verify Backup and Restore action buttons are accessible
 - **Requirement:** `@REQ-KTK-301`
 - **Category:** Positive Functional
-- **Priority:** P1 (Medium)
+- **Priority:** P1 (Regression)
 - **Tags:** `@automated @edge-case @android`
 - **Test Steps (Gherkin):**
   `When the user opens the Settings screen`  

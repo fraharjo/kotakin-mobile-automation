@@ -9,17 +9,18 @@ To prevent AI-generated artifacts from entering the main production test suite w
 ```text
 generated/<feature-name>/
 ├── test-matrix.md        # Coverage matrix, edge cases, assumptions & open questions
-├── <feature>.feature     # Draft BDD Gherkin scenarios with tags (@automated, @smoke, @p0, etc.)
+├── <feature>.feature     # Draft BDD Gherkin scenarios with tags (@automated, @smoke, @p0, @AC-xx, @JIRA-KEY, etc.)
 ├── <feature>.screen.ts   # Draft Screen Object (selector stubs)
 └── <feature>.steps.ts    # Draft Step Definitions
 ```
 
 ## 🚪 Promotion Rules to Production Suite (Human Gate):
 1. **Verify Assumptions:** QA Lead / SDET reviews the *Open Questions & Assumptions* section in `test-matrix.md`.
-2. **Validate Selectors:** Ensure selectors in the Screen Object match the actual application UI (`adb shell uiautomator dump` or Appium Inspector).
-3. **Check Step Reusability:** Ensure Gherkin steps do not duplicate existing steps in `shared/steps/` or other modules.
-4. **Promote Files:** Move the validated files to:
+2. **Validate Tags:** Each scenario has `@AC-xx`, `@JIRA-<KEY>`, `@feature-<module>`, a risk tag (`@p0/@p1/@p2`) with its paired runner tag (`@smoke`/`@regression`), and `@automated` or `@manual`.
+3. **Validate Selectors:** Ensure selectors in the Screen Object match the actual application UI (`adb shell uiautomator dump` or Appium Inspector).
+4. **Check Step Reusability:** Ensure Gherkin steps do not duplicate existing steps in `shared/steps/` or other modules.
+5. **Promote Files:** Move the validated files to:
    - `<feature>.feature` ➡️ `features/<feature>/features/`
    - `<feature>.screen.ts` ➡️ `features/<feature>/pages/`
    - `<feature>.steps.ts` ➡️ `features/<feature>/steps/`
-5. **Update Documentation:** Run `npm run docs:generate` to refresh the official test specifications and RTM.
+6. **Update Documentation:** Run `npm run docs:generate` to refresh the official test specifications and RTM.

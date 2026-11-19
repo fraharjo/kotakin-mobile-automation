@@ -35,6 +35,7 @@ npm run test:smoke
 
 ## 📑 Table of Contents
 1. [Architecture & Test Lifecycle (BDD + AI Skills)](#-architecture--test-lifecycle-bdd--ai-skills)
+   - [End-to-End Workflow: From Requirement to Running Test](#-end-to-end-workflow-from-requirement-to-running-test)
 2. [Test Suite Coverage](#-test-suite-coverage)
 3. [Test Tag Taxonomy](#-test-tag-taxonomy)
 4. [Project Directory Structure](#-project-directory-structure)
@@ -102,6 +103,32 @@ flowchart TD
 
 ---
 
+## 🧭 End-to-End Workflow: From Requirement to Running Test
+
+You have a Jira ticket, a Figma design, and (optionally) your own manual test cases in a doc/Excel sheet. Here is the path to automated tests:
+
+| # | Step | What you do | Output |
+| :-: | :--- | :--- | :--- |
+| 0 | **Setup (once)** | `npm install`, `cp .env.example .env`, put `kotakin.apk` in `apps/`, start an emulator (`adb devices`), run `npm run test:smoke` | Working environment |
+| 1 | **Gather inputs** | Copy the Jira description + ACs, export Figma frames as screenshots (or use a connector), export your manual test cases to CSV | Raw inputs |
+| 2 | **Write the requirement** | Copy [requirements/_template.md](requirements/_template.md) to `requirements/{feature}.md` and fill it in. Quote ACs verbatim, number them `AC-01...`. Put raw attachments (Jira text, Figma screenshots, manual test cases CSV) in `requirements/inputs/{feature}/` | PRD file |
+| 3 | **Prompt the agent** | Use the template in [docs/qa-prompt-guide.md](docs/qa-prompt-guide.md) (include your manual test cases for gap comparison) | Requirement analysis + open questions |
+| 4 | **Review the matrix** | Answer open questions, correct assumptions, approve the coverage matrix | Approved plan |
+| 5 | **Draft generated** | Agent writes `generated/{feature}/` (matrix, feature, screen, steps) | Draft files |
+| 6 | **Human gate** | Verify selectors against the real app (`adb shell uiautomator dump` or Appium Inspector), tags, step reuse | Validated draft |
+| 7 | **Promote** | Move files into `features/{feature}/`, fix imports, add `test:feature:{feature}` to `package.json` | Production suite |
+| 8 | **Run and report** | `npm run typecheck`, `npm run test:feature:{feature}`, `npm run test:smoke`, `npm run report` | Allure report |
+| 9 | **Sync docs** | `npm run docs:generate` | Updated spec, CSV and XLSX |
+| 10 | **UX audit (optional)** | Ask the agent to use `app-quality-advisor` with screenshots or Allure results | Findings, chat draft, Jira draft |
+
+> [!IMPORTANT]
+> Every scenario needs `@automated` (or `@manual`), `@feature-{module}`, and a runner tag (`@smoke` or `@regression`). A scenario missing any of them is silently skipped by the runner.
+
+> [!NOTE]
+> The agent cannot read Jira or Figma by itself unless a connector is installed. Paste the ticket text and attach Figma screenshots otherwise. It will not invent content from a ticket title.
+
+---
+
 ## 📊 Test Suite Coverage
 
 Total **49 fully automated BDD scenarios** across 5 modules of the Kotakin application:
@@ -125,8 +152,13 @@ Gherkin tags are used to organize traceability and test execution:
 | **Traceability** | `@REQ-KTK-xxx` | Maps scenarios directly to requirement documentation |
 | **Execution** | `@automated` | Scenarios ready for execution by the Appium test runner |
 | | `@manual` | Manual verification scenarios (automatically excluded by the test runner) |
+| **Traceability** | `@AC-xx` | Maps a scenario to an Acceptance Criterion (e.g. `@AC-01`) |
+| | `@JIRA-<KEY>` | Maps a scenario to its Jira issue (e.g. `@JIRA-KTK-101`) |
 | **Priority** | `@smoke` | P0 critical application path, must pass before any release |
 | | `@regression` | Full comprehensive regression test suite (P1) |
+| **Risk Level** | `@p0` | Critical path. Always paired with `@smoke` |
+| | `@p1` | Main regression flows. Always paired with `@regression` |
+| | `@p2` | Edge-case / stress. Always paired with `@regression` |
 | **Test Type** | `@functional` | Positive business logic verification and user interaction flows |
 | | `@negative` | Invalid input rejection and form validation checks |
 | | `@bva` | Boundary Value Analysis (minimum 1 character, maximum 50/250 characters) |
@@ -140,6 +172,8 @@ Gherkin tags are used to organize traceability and test execution:
 | | `@feature-onboarding` | Filter tests for Onboarding Walkthrough module |
 | | `@feature-scanner` | Filter tests for QR Code Scanner module |
 | **Platform** | `@android` | Designates tests targeting the Android platform |
+
+> **Note:** npm scripts filter on `@smoke`, `@regression`, `@automated`, `@manual` and `@feature-*`. `@p0/@p1/@p2` express risk and are not used in runner filters, so always add the paired runner tag (`@p0`→`@smoke`, `@p1`/`@p2`→`@regression`).
 
 ---
 
@@ -308,6 +342,8 @@ The [.agents/skills/](.agents/skills/) directory contains AI instructions design
 * **`nexus-test-generator`:** Generates Gherkin BDD scenarios, Screen Objects, and Step Definitions based on new specification documents in `requirements/`.
 * **`app-quality-advisor`:** Audits mobile UX flows, form validations, and heuristic usability pitfalls following test execution.
 
+See the [End-to-End Workflow](#-end-to-end-workflow-from-requirement-to-running-test) for the full step-by-step flow and [docs/qa-prompt-guide.md](docs/qa-prompt-guide.md) for ready-to-use prompts.
+
 For **Claude Code** users, the [.claude/skills/](.claude/skills/) directory is set up as a direct symbolic link (*symlink*) to `.agents/skills/`.  
 *(Windows note: ensure `git config core.symlinks true` or copy folder contents manually if symlinks are disabled on your OS).*
 
@@ -345,7 +381,7 @@ export JAVA_HOME=$(/usr/libexec/java_home -v 17)
 
 1. **Prepare Requirements:** Create a new requirement specification document in `requirements/{feature-name}.md`.
 2. **Use Authoring Skill:** Prompt the AI Agent to draft scenarios using `nexus-test-generator` into `generated/{feature-name}/`.
-3. **Review & Promote:** Validate against real UI selectors, then move the approved files into `features/{feature-name}/`.
+3. **Review & Promote:** Validate against real UI selectors, then move the approved files into `features/{feature-name}/` and add a `test:feature:{feature-name}` script to `package.json`.
 4. **Update Documentation:** Run `npm run docs:generate` to automatically synchronize test specifications and RTM.
 
 ---

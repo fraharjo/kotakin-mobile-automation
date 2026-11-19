@@ -1,51 +1,79 @@
-# QA Prompting Guide for AI (Nexus Test Generator)
+# QA Prompting Guide for AI (Nexus Automation)
 
-Use this prompt template whenever there is a new PRD, Jira ticket, or Figma design for your stream.
+Ready-to-use prompts for the AI skills in `.agents/skills/`. Replace the `[...]` placeholders. Tag rules follow the README taxonomy; priority is `@p0/@p1/@p2` with the paired runner tag `@smoke` / `@regression`.
+
+> The agent cannot read Jira or Figma unless a connector is installed. Paste the ticket text and attach Figma screenshots. If a source cannot be read, the skill will ask for an export instead of guessing.
 
 ---
 
-## 1. Prompt: Generate New BDD & Screen Object
+## 1. Design tests from a requirement (`nexus-test-generator`)
 
 ```text
-Hi, please create Cucumber BDD (.feature), TypeScript Screen Object, and Step Definition for Stream [STREAM_NAME, e.g., checkout] based on the following requirements:
+Use the nexus-test-generator skill for feature [FEATURE_NAME, e.g. box] on [Android / iOS / Web].
 
---- TICKET & DESIGN INFORMATION ---
-Jira Ticket: [e.g., JIRA-PAY-402]
-Figma Screen: [e.g., Screens/Payment/QRIS-v2]
-Testing Type: [e.g., Functional / Regression / E2E]
+--- SOURCES ---
+Jira: [KEY, e.g. KTK-201] (text pasted below)
+Figma: [frame names, screenshots attached]
+My manual test cases: [path to CSV, e.g. docs/my-cases.csv, or pasted table]
 
---- ACCEPTANCE CRITERIA / USER STORY ---
-[Paste User Story & Acceptance Criteria from Jira / PRD here]
+--- ACCEPTANCE CRITERIA (verbatim from Jira) ---
+[Paste description, AC field, and relevant comments]
 
---- FIGMA COMPONENTS / UI LOCATORS ---
-[Paste list of Figma layer/component names or selector IDs, e.g.:
-- Input QRIS Nominal: #input-nominal / ~input-nominal
-- Pay Now Button: #btn-pay / ~btn-pay
-- Status Dialog: #dialog-status / ~dialog-status]
+--- KNOWN CONSTRAINTS ---
+[Limits, supported languages, permissions, dependencies]
 
---- OUTPUT SPECIFICATIONS ---
-1. Apply standard tagging:
-   - Stream: @stream-[name]
-   - Eligibility: @automated or @manual
-   - Category: @smoke, @functional, @regression, or @e2e
-   - Platform: @web, @android, @ios
-2. Generate clean Gherkin .feature files (Given-When-Then).
-3. Generate Screen Object files extending BaseScreen with reserved locators for Web (#id/css) and Mobile (~accessibility-id).
-4. Generate TypeScript Step Definition files that call the Screen Object methods.
+--- WHAT I WANT ---
+1. Stop after the coverage matrix and open questions; do not write code until I approve.
+2. Compare my manual test cases with your scenario pool: which ones are covered, which are missing from mine, and which of mine have no AC.
+3. List conflicts between Jira and Figma.
+4. After approval, write drafts to generated/[feature]/ only.
 ```
 
----
-
-## 2. Prompt: Self-Healing & Fix Failing Tests
+## 2. Generate code after approving the matrix
 
 ```text
-Hi, the test scenario [@JIRA-xxx] in Stream [stream_name] is FAILING on the [Web / Android] platform.
+The matrix for [FEATURE_NAME] is approved with these changes: [corrections / answers to open questions].
+Generate test-matrix.md, [feature].feature, [feature].screen.ts and [feature].steps.ts in generated/[feature]/.
+Reuse existing steps from shared/steps and features/*/steps. Mark any unverified selector with a TODO.
+```
+
+## 3. Promote a reviewed draft
+
+```text
+The draft in generated/[feature]/ is reviewed. Promote it to features/[feature]/, fix imports,
+add the test:feature:[feature] script to package.json, run npm run typecheck and report errors.
+```
+
+## 4. Audit UX from evidence (`app-quality-advisor`)
+
+```text
+Use the app-quality-advisor skill. Evidence: [screenshots / Allure report / UI dump / description].
+Feature: [name]. Deliver: [findings table / issue drafts / chat draft / requirement suggestions].
+Mark anything you cannot see in the evidence as "Needs verification".
+```
+
+## 5. Self-healing: fix a failing test
+
+```text
+Scenario [@JIRA-KEY / @AC-xx] in feature [name] fails on [Android / Web].
 
 --- ALLURE ERROR LOG ---
-[Paste error log / stack trace from Allure Report here]
+[Paste error log or stack trace]
 
 --- RECENT UI / LOCATOR CHANGES ---
-[Mention any ID or page hierarchy changes from the Dev team]
+[Any id or screen hierarchy changes from the dev team]
 
-Please inspect the corresponding Screen Object and Step Definition files, and provide the fix so the test passes (GREEN) again.
+Inspect the Screen Object and step definitions, find the root cause (selector, timing, data, or real bug),
+and propose a fix. If it looks like a real app bug, say so instead of changing the test to pass.
 ```
+
+## Tag cheat sheet
+
+| Need | Tags |
+| :--- | :--- |
+| Traceability | `@AC-01`, `@JIRA-KTK-201` |
+| Module | `@feature-<module>` |
+| Priority + runner | `@p0 @smoke`, `@p1 @regression`, `@p2 @regression` |
+| Execution | `@automated` or `@manual` |
+| Platform | `@android`, `@ios`, `@web` |
+| Type | `@functional`, `@negative`, `@bva`, `@security`, `@permission`, `@lifecycle` |
